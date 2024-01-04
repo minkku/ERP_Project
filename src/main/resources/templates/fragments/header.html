@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>ERP Project</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css?after" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Nov 17 2023 with Bootstrap v5.3.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <style>
+        .pagetitle {
+            position: relative;
+            left: 10px;
+            top: -10px;
+            padding: 20px;
+            z-index: 1;
+            background-color: #f6f9ff;
+            display: flex; /* 추가된 부분 */
+        }
+        .pagetitle > div {
+            margin: 5px; /* 추가: 각 요소에 여백 부여 */
+            flex:1;
+            width:30%;
+            box-sizing: border-box;
+        }
+        .container {
+            position: fixed;
+            left: 230px;
+            max-width: calc(100% - 230px);
+        }
+        .pagetitle h1 {
+            width: 10%;
+        }
+        .pagetitle .btnGroup {
+            width: 80%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+        .pagetitle .btnGroup .row {
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(1) {
+            width: 20%;
+
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(1) .form-select {
+            width: 80%;
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(2) {
+            width: 25%;
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(3) {
+            width: 20%;
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(4) {
+            width: 6%;
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(5) {
+            width: 20%;
+        }
+        .pagetitle .btnGroup .row.mb-3:nth-child(6) {
+            width: 10%;
+        }
+        @media (min-width: 1400px)
+        .container {
+            max-width: 100%;
+        }
+    </style>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sidenav = document.getElementById('sidenav');
+            var sidebarToggleLink = document.getElementById('sidebar-toggle-link');
+
+            if (sidenav && sidebarToggleLink) {
+                // 페이지 로딩 시 sidenav를 숨김
+                sidenav.classList.add('hidden');
+
+                // sidebarToggleLink 클릭 이벤트 처리
+                sidebarToggleLink.addEventListener('click', function (event) {
+                    // th:href 속성이 있는지 확인
+                    if (sidebarToggleLink.getAttribute('th:href') !== null) {
+                        // th:href가 있으면 페이지 이동을 수행
+                        return;
+                    }
+
+                    // th:href가 없으면 sidenav를 토글
+                    event.preventDefault(); // 링크 이동 방지
+                    if (sidenav.classList.contains('hidden')) {
+                        sidenav.classList.remove('hidden');
+                    } else {
+                        sidenav.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body style="display: flex;">
+<!--<th:block th:replace="~{fragments/nav:: havFragment}"></th:block>-->
+<div style="display: flex;">
+<th:block th:replace="~{fragments/sidebar:: sidebarFragment}"></th:block>
+</div>
+<th:block th:replace="~{fragments/sidenav:: sidenavFragment}"></th:block>
+</th:block>

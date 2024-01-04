@@ -1,0 +1,75 @@
+// script for querydsl version
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.7'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'org.gagu'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(
+            // JPA
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6',
+            // define package of querydsl with 3.x version
+            'com.querydsl:querydsl-jpa:5.0.0:jakarta',
+            'org.webjars:bootstrap:5.3.0'
+    )
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    compileOnly 'org.projectlombok:lombok'
+    // MySQL
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
+
+    // define package of querydsl with 3.x version
+    annotationProcessor (
+            "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta",
+            "jakarta.annotation:jakarta.annotation-api",
+            "jakarta.persistence:jakarta.persistence-api",
+            'org.projectlombok:lombok'
+    )
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// add queryDSL : queryDSL build option
+// option for corporate
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
+}
+
+compileJava.dependsOn('clean')
