@@ -36,9 +36,17 @@ dependencies {
             'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6',
             // define package of querydsl with 3.x version
             'com.querydsl:querydsl-jpa:5.0.0:jakarta',
-            'org.webjars:bootstrap:5.3.0'
+            'org.webjars:bootstrap:5.3.0',
+            //Spring Security
+            'org.springframework.boot:spring-boot-starter-security',
+            'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     )
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation(
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.springframework.security:spring-security-test'
+    )
+
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
