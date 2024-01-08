@@ -16,7 +16,7 @@ public class ComponentOrderService {
     public ComponentOrderService(ComponentOrderRepository componentOrderRepository){
         this.componentOrderRepository = componentOrderRepository;
     }
-    public List<ComponentOrder> getAllComponentOrderVO(){
+    public List<ComponentOrder> getAllComponentOrder(){
         return componentOrderRepository.findAll();
     }
 }
