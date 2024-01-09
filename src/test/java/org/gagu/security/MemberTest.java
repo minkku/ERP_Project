@@ -24,7 +24,7 @@ public class MemberTest {
         Member member = Member.builder()
                 .memberName("관리자")
                 .userId("admin")
-                .password("admin1234")
+                .password(passwordEncoder().encode("admin1234"))
                 .department("물류")
                 .position("과장")
                 .regdate(LocalDateTime.now())
