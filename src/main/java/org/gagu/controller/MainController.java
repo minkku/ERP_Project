@@ -14,7 +14,7 @@ import java.util.List;
 @Log4j2
 public class MainController {
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String showIndexPage() {
         return "index";
     }

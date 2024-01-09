@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-    @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph, EntityGraphType.LOAD)
-    @Query("SELECT  FROM")
+//    @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph, EntityGraphType.LOAD)
+//    @Query("SELECT  FROM")
 }
