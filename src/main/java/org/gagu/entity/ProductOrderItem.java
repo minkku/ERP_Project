@@ -1,0 +1,43 @@
+package org.gagu.entity;
+
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Date;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "product_order_item")
+public class ProductOrderItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_order_item_id")
+    private Integer productOorderItemId;
+
+    @Column(name = "product_id")
+    private String productId;
+
+    @Column(name = "product_order_id")
+    private Integer productOrderId;
+
+    @Column(name = "product_order_item_quantity")
+    private Integer productOrderItemQuantity;
+
+    @Column(name = "productOrder_item_price")
+    private Integer productOrderItemPrice;
+
+    @Column(name = "product_order_item_totalprice")
+    private Integer productOrderItemTotalprice;
+
+    @Column(name = "product_order_item_totalpriceaddedtax")
+    private Integer productOrderItemTotalpriceaddedtax;
+
+    @Column(name = "product_order_item_note")
+    private String productOrderItemNote;
+}
