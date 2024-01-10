@@ -1,4 +1,4 @@
-package org.gagu.entity;
+package org.gagu.entity.member;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 @Builder

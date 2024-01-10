@@ -3,6 +3,7 @@ package org.gagu.config;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -31,14 +32,16 @@ public class SecurityConfig {
         log.info("------------------- filterChain -------------------");
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> {auth
-                        .requestMatchers("/main/**").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers("/main/**").hasRole("ADMIN")
-                        .anyRequest().denyAll();
-                })
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login").permitAll()
+                        .requestMatchers("/main").authenticated()
+                        .anyRequest().authenticated()
                 )
+                .formLogin(formLogin -> formLogin
+                        .defaultSuccessUrl("/main", true)
+                        .successForwardUrl("/main")
+                )
+                .logout(Customizer.withDefaults())
                 .build();
     }
 }

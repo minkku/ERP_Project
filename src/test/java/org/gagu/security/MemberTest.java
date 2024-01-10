@@ -1,7 +1,7 @@
 package org.gagu.security;
 
-import org.gagu.entity.Member;
-import org.gagu.repository.MemberRepository;
+import org.gagu.entity.member.Member;
+import org.gagu.repository.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
