@@ -14,7 +14,7 @@
                         <!-- Bordered Table -->
                         <table class="table table-bordered">
                             <thead>
-                            <tr>
+                            <tr style="text-align: center">
                                 <th class="table-active" scope="col">순차</th>
                                 <th class="table-active" scope="col">거래처</th>
                                 <th class="table-active" scope="col">주소</th>
@@ -25,12 +25,12 @@
                             <tbody>
 
                             <tr th:each="item : ${list}">
-                                <td th:text="${item.partnerId}"></td>
+                                <td th:text="${item.partnerId}" style="text-align: center"></td>
                                 <!-- 나머지 속성들에 대해서도 동일하게 처리 -->
-                                <td th:text="${item.bpName}"></td>
+                                <td th:text="${item.bpName}" style="text-align: center"></td>
                                 <td th:text="${item.address}"></td>
-                                <td th:text="${item.companyNumber}"></td>
-                                <td th:text="${item.phone}"></td>
+                                <td th:text="${item.companyNumber}" style="text-align: center"></td>
+                                <td th:text="${item.phone}" style="text-align: center"></td>
                             </tr>
                             </tbody>
                         </table>
