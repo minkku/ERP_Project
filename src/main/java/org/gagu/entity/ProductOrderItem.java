@@ -1,10 +1,7 @@
 package org.gagu.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
@@ -13,12 +10,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "product_order_item")
 public class ProductOrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_order_item_id")
-    private Integer productOorderItemId;
+    private Integer productOrderItemId;
 
     @Column(name = "product_id")
     private String productId;

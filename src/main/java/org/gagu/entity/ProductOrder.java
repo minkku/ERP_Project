@@ -1,10 +1,7 @@
 package org.gagu.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "product_order")
 public class ProductOrder {
     @Id

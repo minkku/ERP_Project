@@ -1,15 +1,13 @@
 package org.gagu.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "product_inventory")
 public class ProductInventory {
     @Id

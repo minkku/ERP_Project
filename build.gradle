@@ -7,8 +7,8 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.7'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'org.gagu'
@@ -73,13 +73,16 @@ tasks.named('test') {
 }
 
 // add queryDSL : queryDSL build option
-// option for corporate
+def querydslDir = "$buildDir/generated/querydsl"
+
 sourceSets {
-    main {
-        java {
-            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
-        }
-    }
+    main.java.srcDirs += [ querydslDir ]
 }
 
-compileJava.dependsOn('clean')
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+}
+
+clean.doLast {
+    file(querydslDir).deleteDir()
+}

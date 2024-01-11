@@ -26,14 +26,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="item, idx : ${items}">5</tr>
-                                <td th:text="${idx.index + 1}"></td>
-                                <td th:text="${item.product_order_number}"></td>
-                                <td th:text="${#dates.format(item.product_order_orderdate, 'yyyy-MM-dd')}"></td>
-                                <td th:text="${item.businessvender_name}"></td>
-                                <td th:text="${item.product_names}"></td>
-                                <td th:text="${item.product_order_price_amount}"></td>
-                                <td th:text="${item.product_order_id}">
+                            <tr th:each="item, stat : ${ProductOrderList}">
+                                <td th:text="${stat.index + 1}"></td>
+                                <td th:text="${item.productOrderNumber}"></td>
+                                <td th:text="${#temporals.format(item.productOrderOrderdate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${item.businessvenderName}"></td>
+                                <td th:utext="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></td>
+                                <td th:text="${item.productOrderPriceAmount}"></td>
+                                <td th:text="${item.productOrderStatus}"></td>
+                                <td th:text="${item.productOrderId}">
                                     <i class="ri-search-2-line">
                                         <a href="모달창떠야함"></a>
                                     </i>
