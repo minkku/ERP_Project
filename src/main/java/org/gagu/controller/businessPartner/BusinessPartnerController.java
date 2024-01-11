@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/partner")
 @RequiredArgsConstructor
 public class BusinessPartnerController {
     private final BusinessPartnerService businessPartnerService;
@@ -25,6 +24,6 @@ public class BusinessPartnerController {
 
         model.addAttribute("list", getPartnerList);
 
-        return "/partner/partnerList";
+        return "businessPartner";
     }
 }

@@ -14,8 +14,7 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
             "b.companyNumber, " +
             "b.phone, " +
             "b.address) " +
-            "FROM BusinessPartner b " +
-            "WHERE b.partnerId = :partnerId")
-    BusinessPartnerResponse findBy(@Param("partnerId") int partnerId);
+            "FROM BusinessPartner b ")
+    BusinessPartnerResponse findAll(@Param("partnerId") int partnerId);
 
 }
