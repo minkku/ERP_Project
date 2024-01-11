@@ -17,8 +17,8 @@ public class ComponentOrder {
     @Column(name = "component_order_id")
     private Integer componentOrderId;
 
-    @Column(name = "component_id")
-    private String componentId;
+    @Column(name = "member_id")
+    private Integer memberId;
 
     @Column(name = "component_order_vendorname")
     private String componentOrderVendorName;
