@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.business.BusinessPartnerResponse;
 import org.gagu.dto.business.RegisterResponse;
 import org.gagu.service.businessPartner.BusinessPartnerService;
+import org.gagu.service.businessPartner.PartnerService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Log4j2
 public class BusinessPartnerController {
     private final BusinessPartnerService businessPartnerService;
+    private final PartnerService partnerService;
 
     @GetMapping("/partnerList")
     public String getPartnerList(Model model,
@@ -33,12 +35,13 @@ public class BusinessPartnerController {
 
     @GetMapping("/register")
     public void getRegisterPage() {
-        log.info("--------------- Controller for register ---------------------");
+        log.info("--------------- Controller for GETMAPPING TO register ---------------------");
     }
 
     @PostMapping("/register")
     public String postRegister(RegisterResponse registerResponse) {
         log.info("---------- POST TO REGISTER ---------------");
+        partnerService.register(registerResponse);
 
         return "redirect:/partnerList";
     }
