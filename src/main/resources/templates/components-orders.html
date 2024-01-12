@@ -524,7 +524,7 @@
         </div>
         <div class="quotation-modal-submit-button">
           <a href="#" class="gradient-color-btn blue">등록</a>
-          <a href="#" class="gradient-color-btn blue js-hide-modal-login">취소</a>
+          <a href="#" class="gradient-color-btn blue js-hide-quotation-modal">취소</a>
         </div>
       </div>
 
@@ -540,7 +540,8 @@
         $('.js-quotation-modal').addClass('show-quotation-modal');
     });
 
-    $('.js-hide-modal-login').on('click',function(){
+    $('.js-hide-quotation-modal').on('click',function(){
+        $('.js-quotation-modal input').val('');
         $('.js-quotation-modal').removeClass('show-quotation-modal');
     });
 
@@ -582,10 +583,11 @@
       inputComma(inputBox);
     }
     function removeComma(targetElement){
+      if(targetElement.value != ''){
         const value = targetElement.value.replace(/,/g, '');
         targetElement.value = value;
-
-        return targetElement;
+      }
+      return targetElement;
     }
     function inputComma(targetElement){
         const value = targetElement.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -593,11 +595,18 @@
 
         return targetElement;
     }
+    function getRemoveCommaNumberValue(targetElement){
+      let value = 0;
+      if(targetElement.value != ''){
+        value = targetElement.value.replace(/,/g, '');
+      }
+      return Number(value);
+    }
     function setTotalSupplyValue(){
       const totalSupplyValue = document.getElementById("quotation-modal-input-total-supply-value");
       const inputElements = document.querySelectorAll('.quotation-modal-quotation-list-supply-value');
       const sum = sumQuerySelectorAll(inputElements)
-      totalSupplyValue.value = sum.toString();
+      totalSupplyValue.value = sum;
       calcTotalSubtotal();
       inputComma(totalSupplyValue);
     }
@@ -605,14 +614,18 @@
       const totalValueAddedTax = document.getElementById("quotation-modal-input-total-value-added-tax");
       const inputElements = document.querySelectorAll('.quotation-modal-quotation-list-value-added-tax');
       const sum = sumQuerySelectorAll(inputElements);
-      totalValueAddedTax.value = sum.toString();
+      totalValueAddedTax.value = sum;
       calcTotalSubtotal();
       inputComma(totalValueAddedTax);
     }
     function sumQuerySelectorAll(targetElements){
        const inputArray = Array.from(targetElements);
        const sum = inputArray.reduce((acc, inputElement) => {
-        return acc + Number(removeComma(inputElement).value);
+        if(inputElement.value != ''){
+          return acc + getRemoveCommaNumberValue(inputElement);
+        }else {
+          return acc;
+        }
       }, 0);
       return sum;
     }
@@ -620,7 +633,7 @@
       const totalSubtotal = document.getElementById("quotation-modal-input-total-subtotal");
       const totalSupplyValue = document.getElementById("quotation-modal-input-total-supply-value");
       const totalValueAddedTax = document.getElementById("quotation-modal-input-total-value-added-tax");
-      const sum = Number(removeComma(totalSupplyValue).value) + Number(removeComma(totalValueAddedTax).value);
+      const sum = getRemoveCommaNumberValue(totalSupplyValue) + getRemoveCommaNumberValue(totalValueAddedTax);
       totalSubtotal.value = sum;
       inputComma(totalSubtotal);
     }
