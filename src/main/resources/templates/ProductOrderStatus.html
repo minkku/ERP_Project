@@ -4,45 +4,6 @@
       layout:decorate="layout/default_layout">
 
 <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
-
-<div class="container">
-    <div class="pagetitle">
-        <h1>Test</h1>
-        <div class="btnGroup">
-            <div class="row mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>조건검색</option>
-                    <option value="1">발주번호</option>
-                    <option value="2">발주요청일자</option>
-                    <option value="3">거래처명</option>
-                </select>
-            </div>
-            <div class="row mb-3">
-                <form class="search-form d-flex align-items-center" method="POST" action="#">
-                    <input type="text" name="query" title="Enter search keyword">
-                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                </form>
-            </div>
-            <div class="row mb-3">
-                <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <span>~</span>
-            </div>
-            <div class="row mb-3">
-                <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                </div>
-            </div >
-            <div class="row mb-3">
-                <button type="submit" class="btn btn-primary">저장</button>
-            </div><!-- End Search Bar -->
-        </div>
-    </div><!-- End Page Title -->
-</div>
-
 <main id="main" class="main" style="width: 100%;">
     <section class="section">
         <div class="row">
@@ -81,9 +42,10 @@
                                     <span th:if="${item.productOrderStatus == 3}" th:text="진행중"></span>
                                     <span th:if="${item.productOrderStatus == 4}" th:text="종료"></span>
                                 </td>
-                                <td style="text-align: center" th:text="${item.productOrderId}">
+                                <td style="text-align: center">
+                                    <input type="hidden" name="productOrderId" value="${item.productOrderId}">
                                     <i class="ri-search-2-line">
-                                        <a href="모달창떠야함"></a>
+                                        <a href="/"></a>
                                     </i>
                                 </td>
                             </tr>
