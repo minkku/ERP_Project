@@ -43,10 +43,12 @@
                                     <span th:if="${item.productOrderStatus == 4}" th:text="종료"></span>
                                 </td>
                                 <td style="text-align: center">
-                                    <input type="hidden" name="productOrderId" value="${item.productOrderId}">
-                                    <i class="ri-search-2-line">
-                                        <a href="/"></a>
-                                    </i>
+                                    <div class="quotation-modal-submit-button">
+                                        <input type="hidden" name="productOrderId" value="${item.productOrderId}">
+                                        <i class="ri-search-2-line">
+                                            <a href="#" class="gradient-color-btn blue js-show-quotation-modal"></a>
+                                        </i>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -88,9 +90,210 @@
             </div>
         </div>
     </section>
+    <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
+    <div class="quotation-modal-container wrap-quotation-modal js-quotation-modal">
+        <div class="quotation-modal-title">
+            <span>견적서</span>
+        </div>
+        <div class="quotation-modal-main">
+            <div class="quotation-modal-recipient">
+                <div class="quotation-modal-recipient-title">
+                    <h5>공급 받는 자</h5>
+                </div>
+                <div class="quotation-modal-recipient-info">
 
+                    <ul>
+                        <li>
+                            <label for="quotation-modal-input-date">견적일</label>
+                            <input type="date" id="quotation-modal-input-date">
+                        </li>
+                        <li>
+                            <label for="quotation-modal-input-member">담당자</label>
+                            <input type="text" id="quotation-modal-input-member">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quotation-modal-supplier">
+                <div class="quotation-modal-supplier-title">
+                    <h5>공급자</h5>
+                </div>
+                <div class="quotation-modal-supplier-info">
+                    <ul>
+                        <li>
+                            <label for="quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="quotation-modal-input-supplier-company-number">
+                            <label for="quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="quotation-modal-input-supplier-company-name">
+                        </li>
+                        <li>
+                            <label for="quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="quotation-modal-input-supplier-company-address">
+                        </li>
+                        <li>
+                            <label for="quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="quotation-modal-input-supplier-sector">
+                            <label for="quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="quotation-modal-input-supplier-business-type">
+                        </li>
+                        <li>
+                            <label for="quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="quotation-modal-input-supplier-representative">
+                            <label for="quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="quotation-modal-input-supplier-phone">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quotation-modal-quotation-list" data-quotation-modal-quotation-list-top="0" data-quotation-modal-quotation-list-left="0">
+                <table class="quotation-modal-quotation-list-table">
+                    <colgroup>
+                        <col style="width: 20%">
+                        <col style="width: 12%">
+                        <col style="width: 16%">
+                        <col style="width: 16%">
+                        <col style="width: 16%">
+                        <col style="width: 20%">
+                    </colgroup>
+                    <tr>
+                        <td class="quotation-modal-quotation-list-top">항목</td>
+                        <td class="quotation-modal-quotation-list-top">수량</td>
+                        <td class="quotation-modal-quotation-list-top">단가</td>
+                        <td class="quotation-modal-quotation-list-top">공급가</td>
+                        <td class="quotation-modal-quotation-list-top">부가세</td>
+                        <td class="quotation-modal-quotation-list-top">비고</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="quotation-modal-summary">
+                <div class="quotation-modal-note">
+                    <textarea></textarea>
+                </div>
+                <div class="quotation-modal-total">
+                    <div class="quotation-modal-total-line">
+                        <label for="quotation-modal-input-total-supply-value">공급가</label>
+                        <input type="text" id="quotation-modal-input-total-supply-value" readonly>
+                    </div>
+                    <div class="quotation-modal-total-line">
+                        <label for="#quotation-modal-input-total-value-added-tax">부가세</label>
+                        <input type="text" id="#quotation-modal-input-total-value-added-tax" readonly>
+                    </div>
+                    <div class="quotation-modal-total-line">
+                        <label for="#quotation-modal-input-total-subtotal">소계</label>
+                        <input type="text" id="#quotation-modal-input-total-subtotal" readonly>
+                    </div>
+                </div>
+                <div class="quotation-modal-submit-button">
+                    <a href="#" class="quotation-modal-btn blue">등록</a>
+                    <a href="#" class="quotation-modal-btn blue">취소</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </main><!-- End #main -->
-<th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
-</body>
 
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    /*[ Show component-quotation modal ]*/
+$('.js-show-component-quotation-modal').on('click',function(e){
+    e.preventDefault();
+    $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+});
+
+$('.js-hide-component-quotation-modal').on('click',function(){
+    $('.js-component-quotation-modal input').val('');
+    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+});
+
+</script>
+</body>
 </html>
