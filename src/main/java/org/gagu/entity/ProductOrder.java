@@ -3,6 +3,7 @@ package org.gagu.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,13 +31,13 @@ public class ProductOrder {
     private String productOrderOrderform;
 
     @Column(name = "product_order_orderdate")
-    private Date productOrderOrderdate;
+    private Timestamp productOrderOrderdate;
 
     @Column(name = "product_order_deliverydate")
-    private Date productOrderDeliverydate;
+    private Timestamp productOrderDeliverydate;
 
     @Column(name = "product_order_modified_date")
-    private Date productOrderModifiedDate;
+    private Timestamp productOrderModifiedDate;
 
     @Column(name = "product_order_status")
     private Integer productOrderStatus;

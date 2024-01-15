@@ -4,6 +4,45 @@
       layout:decorate="layout/default_layout">
 
 <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="container">
+    <div class="pagetitle">
+        <h1>Test</h1>
+        <div class="btnGroup">
+            <div class="row mb-3">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>조건검색</option>
+                    <option value="1">발주번호</option>
+                    <option value="2">발주요청일자</option>
+                    <option value="3">거래처명</option>
+                </select>
+            </div>
+            <div class="row mb-3">
+                <form class="search-form d-flex align-items-center" method="POST" action="#">
+                    <input type="text" name="query" title="Enter search keyword">
+                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <span>~</span>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                </div>
+            </div >
+            <div class="row mb-3">
+                <button type="submit" class="btn btn-primary">저장</button>
+            </div><!-- End Search Bar -->
+        </div>
+    </div><!-- End Page Title -->
+</div>
+
 <main id="main" class="main" style="width: 100%;">
     <section class="section">
         <div class="row">
@@ -15,26 +54,34 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="table-active" scope="col"></th>
-                                <th class="table-active" scope="col">발주번호</th>
-                                <th class="table-active" scope="col">발주요청일자</th>
-                                <th class="table-active" scope="col">거래처명</th>
-                                <th class="table-active" scope="col">품목(외)</th>
-                                <th class="table-active" scope="col">합계금액</th>
-                                <th class="table-active" scope="col">상태</th>
-                                <th class="table-active" scope="col">조회(인쇄)</th>
+                                <th class="table-active" scope="col" style="text-align: center"></th>
+                                <th class="table-active" scope="col" style="text-align: center">발주번호</th>
+                                <th class="table-active" scope="col" style="text-align: center">발주요청일자</th>
+                                <th class="table-active" scope="col" style="text-align: center">거래처명</th>
+                                <th class="table-active" scope="col" style="text-align: center">품목(외)</th>
+                                <th class="table-active" scope="col" style="text-align: center">합계금액</th>
+                                <th class="table-active" scope="col" style="text-align: center">상태</th>
+                                <th class="table-active" scope="col" style="text-align: center">조회(인쇄)</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="item, stat : ${ProductOrderList}">
                                 <td th:text="${stat.index + 1}"></td>
                                 <td th:text="${item.productOrderNumber}"></td>
-                                <td th:text="${#temporals.format(item.productOrderOrderdate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#dates.format(item.productOrderOrderdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${item.businessvenderName}"></td>
-                                <td th:utext="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></td>
-                                <td th:text="${item.productOrderPriceAmount}"></td>
-                                <td th:text="${item.productOrderStatus}"></td>
-                                <td th:text="${item.productOrderId}">
+                                <td >
+                                    <span th:if="${item.productOrderItemQuantity == 0}" th:text="${item.productName}"></span>
+                                    <span th:if="${item.productOrderItemQuantity > 0}" th:text="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></span>
+                                </td>
+                                <td style="text-align: right" th:text="${item.productOrderPriceAmount}"></td>
+                                <td style="text-align: center">
+                                    <span th:if="${item.productOrderStatus == 1}" th:text="진행중"></span>
+                                    <span th:if="${item.productOrderStatus == 2}" th:text="진행중"></span>
+                                    <span th:if="${item.productOrderStatus == 3}" th:text="진행중"></span>
+                                    <span th:if="${item.productOrderStatus == 4}" th:text="종료"></span>
+                                </td>
+                                <td style="text-align: center" th:text="${item.productOrderId}">
                                     <i class="ri-search-2-line">
                                         <a href="모달창떠야함"></a>
                                     </i>
@@ -43,6 +90,35 @@
                             </tbody>
                         </table>
                         <!-- End Bordered Table -->
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=0)}" aria-label="First">
+                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage - 1})}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage ? 'page-item active' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage + 1})}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${totalPages - 1})}" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End Pagination -->
 
                     </div>
                 </div>

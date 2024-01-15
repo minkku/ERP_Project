@@ -6,6 +6,7 @@ import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.repository.ProductOrderRepository;
 import org.gagu.repository.ProductOrderRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,11 @@ public class ProductOrderService {
         this.productOrderRepository = productOrderRepository;
     }
 
-    public List<ProductOrderListDTO> getProductOrderList() {
-        return productOrderRepository.findProductOrderList();
+    public List<ProductOrderListDTO> getProductOrderList(Pageable pageable) {
+        return productOrderRepository.findProductOrderList(pageable);
+    }
+
+    public long getProductOrderListCount() {
+        return productOrderRepository.findProductOrderListCount();
     }
 }
