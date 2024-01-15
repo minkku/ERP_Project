@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,13 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Log4j2
 public class SecurityConfig {
-    private final String[] allowedUrls = {"/", "/login"};
+    private final String[] allowedUrls = {"/", "/login","/assets/**"};
     private final String[] needAuth = {"/main"};
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("------------------- filterChain -------------------");
