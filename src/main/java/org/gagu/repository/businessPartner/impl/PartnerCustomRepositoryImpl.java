@@ -32,7 +32,7 @@ public class PartnerCustomRepositoryImpl implements PartnerCustomRepository {
                         qBp.address
                 ))
                 .from(qBp)
-                .offset(size * page)
+                .offset((long) size * page)
                 .limit(size)
                 .fetchResults();
         // change result into instance

@@ -32,6 +32,29 @@
                                 <td th:text="${item.companyNumber}" style="text-align: center"></td>
                                 <td th:text="${item.phone}" style="text-align: center"></td>
                             </tr>
+
+                            <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+                                <ul class="pagination" style="justify-content: end;">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+                                        <a class="page-link pageA"
+                                           th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                                           th:href="@{'/partnerList?page=' + ${pageNumber - 1} + '&size=10'}"
+                                           th:text="${pageNumber}"></a>
+                                    </li>
+
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
                             </tbody>
                         </table>
                         <!-- End Bordered Table -->
@@ -93,15 +116,12 @@
                     <textarea placeholder="비고"></textarea>
                 </div>
                 <div class="quotation-modal-submit-button">
-                    <a href="#" class="gradient-color-btn blue">등록</a>
+                    <a href="#" class="gradient-color-btn blue" onclick="savePost()">등록</a>
                     <a href="#" class="gradient-color-btn blue js-hide-modal-login">취소</a>
                 </div>
             </div>
         </div>
-
     </div>
-    </div>
-
 </main><!-- End #main -->
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script>
@@ -114,6 +134,44 @@
     $('.js-hide-modal-login').on('click',function(){
         $('.js-quotation-modal').removeClass('show-quotation-modal');
     });
+
+    const savePost = async () => {
+        const companyNumber = document.getElementById('quotation-modal-input-supplier-company-number').value;
+        const bpName = document.getElementById('quotation-modal-input-supplier-company-name').value;
+        const address = document.getElementById('quotation-modal-input-supplier-company-address').value;
+        const type = document.getElementById('quotation-modal-input-supplier-sector').value;
+        const bigType = document.getElementById('quotation-modal-input-supplier-business-type').value;
+        const headName = document.getElementById('quotation-modal-input-supplier-representative').value;
+        const phone = document.getElementById('quotation-modal-input-supplier-phone').value;
+        const fax = document.getElementById('quotation-modal-input-partner-fax').value;
+        const smallType = document.getElementById('quotation-modal-input-partner-type').value;
+        const note = document.querySelector('.quotation-modal-note textarea').value;
+
+        try {
+            const response = await $.ajax({
+                type: 'POST',
+                url: '/register',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    companyNumber,
+                    bpName,
+                    address,
+                    type,
+                    bigType,
+                    headName,
+                    phone,
+                    fax,
+                    smallType,
+                    note,
+                }),
+            });
+
+            closeModal();
+            location.reload(); // 페이지 새로고침
+        } catch (error) {
+            console.error('Error saving post:', error);
+        }
+    };
 </script>
 </body>
 

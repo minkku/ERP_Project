@@ -18,17 +18,19 @@ public class PartnerServiceImpl implements PartnerService {
     private final MemberRepository memberRepository;
 
     @Override
-    public void register(RegisterResponse response) {
+    public RegisterResponse registerResponse(RegisterResponse response) {
         log.info("--------------- ServiceImpl Register --------------");
 
         // RegisterResponse를 BusinessPartner로 변환
-        BusinessPartner businessPartner = mapToEntity(response);
+        BusinessPartner businessPartner = convertToBusinessPartner(response);
 
         // BusinessPartner 저장
         partnerRepository.save(businessPartner);
+
+        return responseToRegisterResponse(businessPartner);
     }
 
-    private BusinessPartner mapToEntity(RegisterResponse response) {
+    private BusinessPartner convertToBusinessPartner(RegisterResponse response) {
         return BusinessPartner.builder()
                 .bpName(response.getBpName())
                 .companyNumber(response.getCompanyNumber())
@@ -40,6 +42,22 @@ public class PartnerServiceImpl implements PartnerService {
                 .note(response.getNote())
                 .bigType(response.getBigType())
                 .smallType(response.getSmallType())
+                .build();
+    }
+
+    private RegisterResponse responseToRegisterResponse(BusinessPartner businessPartner) {
+        return RegisterResponse.builder()
+                .partnerId(businessPartner.getPartnerId()) // 예상대로 ID를 설정해야 함
+                .bpName(businessPartner.getBpName())
+                .companyNumber(businessPartner.getCompanyNumber())
+                .phone(businessPartner.getPhone())
+                .fax(businessPartner.getFax())
+                .address(businessPartner.getAddress())
+                .headName(businessPartner.getHeadName())
+                .type(businessPartner.getType())
+                .note(businessPartner.getNote())
+                .bigType(businessPartner.getBigType())
+                .smallType(businessPartner.getSmallType())
                 .build();
     }
 }

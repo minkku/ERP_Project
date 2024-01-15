@@ -6,5 +6,5 @@ import org.gagu.entity.businessPartner.BusinessPartner;
 import java.util.List;
 
 public interface PartnerService {
-    void register(RegisterResponse response);
+    RegisterResponse registerResponse(RegisterResponse registerResponse);
 }

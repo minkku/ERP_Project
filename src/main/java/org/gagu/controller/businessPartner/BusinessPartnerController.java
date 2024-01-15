@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static org.gagu.entity.businessPartner.QBusinessPartner.businessPartner;
+
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -39,9 +41,13 @@ public class BusinessPartnerController {
     }
 
     @PostMapping("/register")
-    public String postRegister(RegisterResponse registerResponse) {
+    public String postRegister(RegisterResponse registerResponse, Model model) {
         log.info("---------- POST TO REGISTER ---------------");
-        partnerService.register(registerResponse);
+
+        log.info("Received RegisterResponse: {}", registerResponse);
+        RegisterResponse businessPartnerResponse = partnerService.registerResponse(registerResponse);
+
+        model.addAttribute("businessPartnerResponse", businessPartnerResponse);
 
         return "redirect:/partnerList";
     }
