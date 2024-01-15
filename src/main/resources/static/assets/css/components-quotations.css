@@ -1,5 +1,5 @@
 /*modal test*/
-.wrap-quotation-modal {
+.wrap-component-quotation-modal {
     position: fixed;
     margin: 0 auto;
     top: 100px;
@@ -9,27 +9,27 @@
     visibility: hidden;
     opacity: 0;
     }
-    .show-quotation-modal {
+    .show-component-quotation-modal {
       visibility: visible;
       opacity: 1;
     }
 /*modal test end*/
-    .components-orders-title-div {
+    .component-quotation-title-div {
         display: flex;
         margin-bottom: 5px;
     }
-    .components-orders-title-div i {
+    .component-quotation-title-div i {
         font-size: 20px;
         color: #170c53;
     }
-    .components-orders-title-div h5 {
+    .component-quotation-title-div h5 {
         padding-top: 4px;
         margin: 0 0 0 5px;
         color: #170c53;
         text-shadow: 0 1px 1px #9b88e5;
     }
-/*components-orders-search*/
-    .components-orders-search {
+/*component-quotation-search*/
+    .component-quotation-search {
         width: 1200px;
         height: 260px;
         display: flex;
@@ -40,24 +40,24 @@
         box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
         margin-bottom: 22px;
     }
-    .components-orders-search .components-orders-search-section ul {
+    .component-quotation-search .component-quotation-search-section ul {
         list-style: none;
     }
-    .components-orders-search .components-orders-search-section ul li{
+    .component-quotation-search .component-quotation-search-section ul li{
         margin: 20px;
     }
-    .components-orders-search .components-orders-search-section ul li label{
+    .component-quotation-search .component-quotation-search-section ul li label{
         color: #2b578f;
     }
-    .components-orders-search .components-orders-search-section ul li label:first-child{
+    .component-quotation-search .component-quotation-search-section ul li label:first-child{
         width: 80px;
         text-align: right;
         margin-right: 10px;
     }
-    .components-orders-search .components-orders-search-section ul li label:not(:first-child){
+    .component-quotation-search .component-quotation-search-section ul li label:not(:first-child){
         margin: 0 20px;
     }
-    .components-orders-search .components-orders-search-section ul li input{
+    .component-quotation-search .component-quotation-search-section ul li input{
         width: 200px;
         border-color: #2b578f;
         border-width: 0;
@@ -66,19 +66,19 @@
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
         text-align: center;
     }
-/*components-orders-search end*/
+/*component-quotation-search end*/
 
-/*components-orders-list*/
-.components-orders-container {
+/*component-quotation-list*/
+.component-quotation-container {
     margin-top: 80px;
     margin-left: 300px;
     padding: 20px 30px;
 }
-.components-orders-list-top {
+.component-quotation-list-top {
     background-color: #5a6fa3 !important;
     color: white;
 }
-.components-orders-list{
+.component-quotation-list{
     overflow: auto;
     box-sizing: border-box;
     border: 3px solid #cbd0e8;
@@ -86,24 +86,24 @@
     border-radius: 5px;
     padding: 0;
 }
-.components-orders-list::-webkit-scrollbar {
+.component-quotation-list::-webkit-scrollbar {
   width: 10px;
 }
-.components-orders-list::-webkit-scrollbar-thumb {
+.component-quotation-list::-webkit-scrollbar-thumb {
   background-color: #0b002e;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
-.components-orders-list::-webkit-scrollbar-thumb:hover {
+.component-quotation-list::-webkit-scrollbar-thumb:hover {
   background-color: #180063;
 }
-.components-orders-list::-webkit-scrollbar-track {
+.component-quotation-list::-webkit-scrollbar-track {
   background-color: #d4d4d4;
   border-radius: 5px;
   box-shadow: inset 0px 0px 5px white;
 }
-.components-orders-list > table{
+.component-quotation-list > table{
     table-layout: fixed;
     position: relative;
     border-collapse: separate !important;
@@ -115,72 +115,72 @@
     overflow: visible;
     background-color: #fff;
 }
-.components-orders-list td ,.components-orders-list th{
+.component-quotation-list td ,.component-quotation-list th{
     border-left: 1px solid rgba(171, 173, 186, 0.3);
     border-right: 1px solid rgba(171, 173, 186, 0.3);
     border-bottom: 1px solid rgba(171, 173, 186, 0.5);
     padding: .4rem;
 }
-.components-orders-list{
+.component-quotation-list{
     width:1200px;
     height:400px;
     margin:0 auto 15px auto;
 }
-.components-orders-list-top{
+.component-quotation-list-top{
     position: sticky;
     top:0;
     z-index: 20;
     text-align: center;
 }
-.components-orders-list .components-orders-list-table thead tr th {
+.component-quotation-list .component-quotation-list-table thead tr th {
     text-align: center;
 }
-.components-orders-list .components-orders-list-table tbody tr td {
+.component-quotation-list .component-quotation-list-table tbody tr td {
     text-align: center;
 }
-.components-orders-list .components-orders-list-table tbody tr td:last-child {
+.component-quotation-list .component-quotation-list-table tbody tr td:last-child {
     display: flex;
     justify-content: space-evenly;
 }
-.components-orders-registration-btn {
+.component-quotation-registration-btn {
     float: right;
     margin: auto 0 0 auto;
 }
-.components-orders-registration-btn a{
+.component-quotation-registration-btn a{
     margin: 0;
 }
-.components-orders-list-remove-btn {
+.component-quotation-list-remove-btn {
     float: right;
     margin-right: 10px;
 }
-.components-orders-list-remove-btn a{
+.component-quotation-list-remove-btn a{
     margin: 0;
 }
-/*components-orders-list end*/
+/*component-quotation-list end*/
 
-/*quotation modal*/
-.quotation-modal-container {
+/*component-quotation modal*/
+.component-quotation-modal-container {
     width: 1050px;
     height: 765px;
     border: 1px solid #000000;
     border-radius: 10px;
     background: #ecf7ff;
 }
-.quotation-modal-title{
+.component-quotation-modal-title{
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
     border-radius: 10px 10px 0px 0px;
     background: linear-gradient( to bottom, #1c329c 10%, #00188a 20%, #010c42 100%);
 }
-.quotation-modal-title span{
+.component-quotation-modal-title span{
     font-size: 15px;
     color: white;
 }
-.quotation-modal-main {
+.component-quotation-modal-main {
     padding: 0px 60px 40px 60px;
 }
-.quotation-modal-recipient {
+.component-quotation-modal-recipient {
     display: flex;
     height: 100px;
     background: #eef4fb;
@@ -191,7 +191,7 @@
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
-.quotation-modal-recipient-title {
+.component-quotation-modal-recipient-title {
     display: flex;
     width: 150px;
     padding-top: 5px;
@@ -199,30 +199,30 @@
     justify-content: center;
     border-right:1px solid rgba(171, 173, 186, 0.6);
 }
-.quotation-modal-recipient-info {
+.component-quotation-modal-recipient-info {
 
 }
-.quotation-modal-recipient-info ul{
+.component-quotation-modal-recipient-info ul{
     padding-left: 10px;
     list-style: none;
 }
-.quotation-modal-recipient-info ul li:not(:last-child){
+.component-quotation-modal-recipient-info ul li:not(:last-child){
     margin-bottom: 7px;
 }
-.quotation-modal-recipient-info ul li label {
+.component-quotation-modal-recipient-info ul li label {
     width: 120px;
     color: #2b578f;
     margin-right: 10px;
     text-align: right;
 }
-.quotation-modal-recipient-info ul li input {
+.component-quotation-modal-recipient-info ul li input {
     width: 200px;
     text-align: center;
     border: 1px solid #cacbd5;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-.quotation-modal-supplier {
+.component-quotation-modal-supplier {
     display: flex;
     height: 198px;
     background: #eef4fb;
@@ -233,7 +233,7 @@
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
-.quotation-modal-supplier-title {
+.component-quotation-modal-supplier-title {
     display: flex;
     width: 150px;
     padding-top: 5px;
@@ -241,36 +241,36 @@
     justify-content: center;
     border-right:1px solid rgba(171, 173, 186, 0.6);
 }
-.quotation-modal-supplier-info {
+.component-quotation-modal-supplier-info {
 }
-.quotation-modal-supplier-info ul{
+.component-quotation-modal-supplier-info ul{
     padding-left: 10px;
     list-style: none;
 }
-.quotation-modal-supplier-info ul li:not(:last-child) {
+.component-quotation-modal-supplier-info ul li:not(:last-child) {
     margin-bottom: 7px;
 }
-.quotation-modal-supplier-info ul li label {
+.component-quotation-modal-supplier-info ul li label {
     width: 120px;
     color: #2b578f;
     margin-right: 10px;
     text-align: right;
 }
-.quotation-modal-supplier-info ul li input {
+.component-quotation-modal-supplier-info ul li input {
     width: 200px;
     text-align: center;
     border: 1px solid #cacbd5;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-#quotation-modal-input-supplier-company-address {
+#component-quotation-modal-input-supplier-company-address {
     width: 540px;
 }
-.quotation-modal-quotation-list-top {
+.component-quotation-modal-component-quotation-list-top {
     background-color: #5a6fa3 !important;
     color: white;
 }
-.quotation-modal-quotation-list{
+.component-quotation-modal-component-quotation-list{
     overflow: auto;
     box-sizing: border-box;
     border: 3px solid #cbd0e8;
@@ -278,24 +278,24 @@
     border-radius: 5px;
     padding: 0;
 }
-.quotation-modal-quotation-list::-webkit-scrollbar {
+.component-quotation-modal-component-quotation-list::-webkit-scrollbar {
   width: 10px;
 }
-.quotation-modal-quotation-list::-webkit-scrollbar-thumb {
+.component-quotation-modal-component-quotation-list::-webkit-scrollbar-thumb {
   background-color: #0b002e;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
-.quotation-modal-quotation-list::-webkit-scrollbar-thumb:hover {
+.component-quotation-modal-component-quotation-list::-webkit-scrollbar-thumb:hover {
   background-color: #180063;
 }
-.quotation-modal-quotation-list::-webkit-scrollbar-track {
+.component-quotation-modal-component-quotation-list::-webkit-scrollbar-track {
   background-color: #d4d4d4;
   border-radius: 5px;
   box-shadow: inset 0px 0px 5px white;
 }
-.quotation-modal-quotation-list > table{
+.component-quotation-modal-component-quotation-list > table{
     table-layout: fixed;
     position: relative;
     border-collapse: separate !important;
@@ -307,73 +307,73 @@
     overflow: visible;
     background-color: #fff;
 }
-.quotation-modal-quotation-list td ,.quotation-modal-quotation-list th{
+.component-quotation-modal-component-quotation-list td ,.component-quotation-modal-component-quotation-list th{
     border-left: 1px solid rgba(171, 173, 186, 0.3);
     border-right: 1px solid rgba(171, 173, 186, 0.3);
     border-bottom: 1px solid rgba(171, 173, 186, 0.5);
     padding: .4rem;
 }
-.quotation-modal-quotation-list{
+.component-quotation-modal-component-quotation-list{
     width:928px;
     height:230px;
     margin:0 auto 15px auto;
 }
-.quotation-modal-quotation-list-top{
+.component-quotation-modal-component-quotation-list-top{
     position: sticky;
     top:0;
     z-index: 20;
     text-align: center;
 }
-.quotation-modal-quotation-list .quotation-modal-quotation-list-table tr:not(:first-child) td {
+.component-quotation-modal-component-quotation-list .component-quotation-modal-component-quotation-list-table tr:not(:first-child) td {
     text-align: center;
 }
-.quotation-modal-quotation-list .quotation-modal-quotation-list-table tr td input {
+.component-quotation-modal-component-quotation-list .component-quotation-modal-component-quotation-list-table tr td input {
     width: 90%;
     height: 90%;
     border-width: 0;
     text-align: center;
 }
-.quotation-modal-summary {
+.component-quotation-modal-summary {
     display: flex;
 }
-.quotation-modal-note {
+.component-quotation-modal-note {
     margin-right: 20px;
 }
-.quotation-modal-note textarea{
+.component-quotation-modal-note textarea{
     width: 500px;
     height: 100px;
     resize: none;
     border-radius: 5px;
 }
-.quotation-modal-total {
+.component-quotation-modal-total {
     display: flex;
     flex-direction: column;
 }
-.quotation-modal-total .quotation-modal-total-line{
+.component-quotation-modal-total .component-quotation-modal-total-line{
     margin-bottom: 3px;
 }
-.quotation-modal-total .quotation-modal-total-line label{
+.component-quotation-modal-total .component-quotation-modal-total-line label{
     width: 60px;
     margin-right: 10px;
     text-align: right;
 }
-.quotation-modal-total .quotation-modal-total-line input{
+.component-quotation-modal-total .component-quotation-modal-total-line input{
     border-width: 0;
     border-bottom-width: 1px;
 }
-.quotation-modal-submit-button {
+.component-quotation-modal-submit-button {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     margin: 0 10px 10px auto;
 }
-.quotation-modal-submit-button a {
+.component-quotation-modal-submit-button a {
     width: 80px;
     height: 30px;
     line-height: 20px;
     text-align: center;
 }
-/*quotation modal end*/
+/*component-quotation modal end*/
 /*gradient color botton*/
 .gradient-color-btn {
   text-decoration: none;
