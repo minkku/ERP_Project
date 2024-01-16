@@ -67,7 +67,7 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
     }
 
     @Override
-    public ProductOrder findByProductOrderId(int productOrderId) {
+    public ProductOrder findByProductOrderId(Integer productOrderId) {
         QProductOrder qProductOrder = QProductOrder.productOrder;
 
         ProductOrder result = jpaQueryFactory
@@ -80,7 +80,7 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
     }
 
     @Override
-    public List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(int productOrderId) {
+    public List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(Integer productOrderId) {
         QProduct qProduct = QProduct.product;
         QProductOrderItem qProductOrderItem = QProductOrderItem.productOrderItem;
 

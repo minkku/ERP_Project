@@ -2,6 +2,7 @@ package org.gagu.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderItemListDTO;
 import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.BusinessVender;
@@ -31,15 +32,27 @@ public class ProductOrderService {
         return productOrderRepository.findProductOrderListCount();
     }
 
-    public BusinessVender getBusinessVenderByProductOrderId(int productOrderId) {
+    public BusinessVender getBusinessVenderByProductOrderId(Integer productOrderId) {
         return businessVenderRepository.findBusinessVenderByProductOrderId(productOrderId);
     }
 
-    public List<ProductOrderItemListDTO> getProductOrderItemsByProductOrderId(int productOrderId) {
+    public List<ProductOrderItemListDTO> getProductOrderItemsByProductOrderId(Integer productOrderId) {
         return productOrderRepository.findProductOrderItemsByProductOrderId(productOrderId);
     }
 
-    public ProductOrder getProductOrderByProductOrderId(int productOrderId) {
+    public ProductOrder getProductOrderByProductOrderId(Integer productOrderId) {
         return productOrderRepository.findByProductOrderId(productOrderId);
+    }
+
+    public ProductOrderInfoDataDTO ProductOrderInfoData(Integer productOrderId) {
+        ProductOrder productOrder = productOrderRepository.findByProductOrderId(productOrderId);
+        List<ProductOrderItemListDTO> productOrderItems = productOrderRepository.findProductOrderItemsByProductOrderId(productOrderId);
+        BusinessVender businessVender = businessVenderRepository.findBusinessVenderByProductOrderId(productOrderId);
+
+        return ProductOrderInfoDataDTO.builder()
+                .productOrder(productOrder)
+                .productOrderItems(productOrderItems)
+                .businessVender(businessVender)
+                .build();
     }
 }

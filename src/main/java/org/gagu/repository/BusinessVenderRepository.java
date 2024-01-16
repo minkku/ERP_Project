@@ -16,5 +16,5 @@ public interface BusinessVenderRepository extends JpaRepository<BusinessVender, 
             "FROM BusinessVender bv " +
             "JOIN ProductOrder po ON bv.businessvenderId = po.businessvenderId " +
             "WHERE po.productOrderId = :productOrderId")
-    BusinessVender findBusinessVenderByProductOrderId(@Param("productOrderId") int productOrderId);
+    BusinessVender findBusinessVenderByProductOrderId(@Param("productOrderId") Integer productOrderId);
 }

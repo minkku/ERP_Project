@@ -45,7 +45,7 @@
                                 <td style="text-align: center">
                                     <div class="quotation-modal-submit-button" style="margin: -7px;">
                                         <input type="hidden" name="productOrderId" value="${item.productOrderId}">
-                                        <a href="#" class="gradient-color-btn blue js-show-quotation-modal">조회</a>
+                                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal">조회</a>
                                     </div>
                                 </td>
                             </tr>
@@ -180,116 +180,6 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                     </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
                 </table>
             </div>
             <div class="component-quotation-modal-summary">
@@ -311,7 +201,8 @@
                     </div>
                 </div>
                 <div class="component-quotation-modal-submit-button">
-                    <a href="#" class="gradient-color-btn blue">등록</a>
+                    <input type="hidden" id="modal-productOrderId" name="modal-productOrderId">
+                    <a href="#" class="gradient-color-btn blue">발주완료</a>
                     <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal">취소</a>
                 </div>
             </div>
@@ -324,16 +215,47 @@
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script>
     /*[ Show component-quotation modal ]*/
-$('.js-show-component-quotation-modal').on('click',function(e){
-    e.preventDefault();
-    $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
-});
+    $('.js-show-component-quotation-modal').on('click', function(e) {
+        e.preventDefault();
 
-$('.js-hide-component-quotation-modal').on('click',function(){
-    $('.js-component-quotation-modal input').val('');
-    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
-});
+        var productOrderId = $(this).closest('tr').find('[name="productOrderId"]').val();
+        $.ajax({
+            type: 'GET',
+            url: '/ProductOrderInfoModal',
+            data: {
+                productOrderId: productOrderId
+            },
+            success: function(response) {
+                updateModalContent(response);
+            },
+            error: function() {
+                console.error('Failed to fetch ProductOrderInfoDataDTO');
+            }
+        });
 
+        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+    });
+    function updateModalContent(data) {
+        $('#component-quotation-modal-input-component-quotation-date').val(data.productOrder.productOrderOrderdate);
+        $('#component-quotation-modal-input-member').val(data.productOrder.memberId);
+        $('#component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
+        $('#component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
+        $('#component-quotation-modal-input-supplier-company-address').val(data.businessVender.businessvenderAddress);
+        $('#component-quotation-modal-input-supplier-sector').val(data.businessVender.businessvenderSmalltype);
+        $('#component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
+        $('#component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
+        $('#component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
+        $('#component-quotation-modal-input-supplier-delivery-date').val(data.productOrder.productOrderDeliverydate);
+//       $('#component-quotation-modal-input-total-supply-value').val(data.orderDate);
+//       $('#component-quotation-modal-input-total-value-added-tax').val(data.orderDate);
+        $('#component-quotation-modal-input-total-subtotal').val(data.productOrder.productOrderPriceAmount);
+        $('#component-quotation-modal-note').val(data.productOrder.productOrderItemDetail);
+}
+
+    $('.js-hide-component-quotation-modal').on('click', function() {
+        $('.js-component-quotation-modal input').val('');
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
 </script>
 </body>
 </html>

@@ -16,7 +16,7 @@ public interface ProductOrderRepository {
 
     long findProductOrderListCount();
 
-    ProductOrder findByProductOrderId(int productOrderId);
+    ProductOrder findByProductOrderId(Integer productOrderId);
 
-    List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(int productOrderId);
+    List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(Integer productOrderId);
 }
