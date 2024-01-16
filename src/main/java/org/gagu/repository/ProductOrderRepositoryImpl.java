@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.log4j.Log4j2;
+import org.gagu.dto.ProductOrderItemListDTO;
 import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,48 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
     @Override
     public long findProductOrderListCount() {
         QProductOrder qProductOrder = QProductOrder.productOrder;
-        return jpaQueryFactory
+        long result = jpaQueryFactory
                 .selectFrom(qProductOrder)
                 .fetchCount();
+
+        log.info("ProductOrderListCount: {}", result);
+        return result;
+    }
+
+    @Override
+    public ProductOrder findByProductOrderId(int productOrderId) {
+        QProductOrder qProductOrder = QProductOrder.productOrder;
+
+        ProductOrder result = jpaQueryFactory
+                .selectFrom(qProductOrder)
+                .where(qProductOrder.productOrderId.eq(productOrderId))
+                .fetchOne();
+
+        log.info("ProductOrder: {}", result);
+        return result;
+    }
+
+    @Override
+    public List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(int productOrderId) {
+        QProduct qProduct = QProduct.product;
+        QProductOrderItem qProductOrderItem = QProductOrderItem.productOrderItem;
+
+        List<ProductOrderItemListDTO> result = jpaQueryFactory
+                .select(Projections.bean(ProductOrderItemListDTO.class,
+                        qProductOrderItem.productOrderItemId,
+                        qProduct.productId,
+                        qProductOrderItem.productOrderId,
+                        qProduct.productSpecification,
+                        qProductOrderItem.productOrderItemQuantity,
+                        qProductOrderItem.productOrderItemPrice,
+                        qProductOrderItem.productOrderItemTotalprice,
+                        qProductOrderItem.productOrderItemTotalpriceaddedtax,
+                        qProductOrderItem.productOrderItemNote))
+                .from(qProductOrderItem)
+                .join(qProduct).on(qProductOrderItem.productId.eq(qProduct.productId))
+                .where(qProductOrderItem.productOrderId.eq(productOrderId))
+                .fetch();
+
+        return result;
     }
 }

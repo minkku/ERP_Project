@@ -1,6 +1,5 @@
 package org.gagu.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.service.ProductOrderService;
@@ -10,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,11 +17,11 @@ import java.util.List;
 
 @Controller
 @Log4j2
-public class SaleController {
+public class ProductOrderController {
     private final ProductOrderService productOrderService;
 
     @Autowired
-    public SaleController(ProductOrderService productOrderService) {
+    public ProductOrderController(ProductOrderService productOrderService) {
         this.productOrderService = productOrderService;
     }
 
@@ -43,7 +43,6 @@ public class SaleController {
         return "ProductOrderStatus";
     }
     private int calculateTotalPages() {
-        // Implement logic to calculate total pages
-        return 10; // Replace with your actual calculation
+        return 10;
     }
 }

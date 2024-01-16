@@ -1,5 +1,6 @@
 package org.gagu.repository;
 
+import org.gagu.dto.ProductOrderItemListDTO;
 import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.ProductOrder;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,8 @@ public interface ProductOrderRepository {
     List<ProductOrderListDTO> findProductOrderList(Pageable pageable);
 
     long findProductOrderListCount();
+
+    ProductOrder findByProductOrderId(int productOrderId);
+
+    List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(int productOrderId);
 }
