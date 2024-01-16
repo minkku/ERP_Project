@@ -1,5 +1,5 @@
 /*modal test*/
-.wrap-component-quotation-modal {
+.wrap-component-receiving-management-modal {
     position: fixed;
     margin: 0 auto;
     top: 70px;
@@ -9,27 +9,27 @@
     visibility: hidden;
     opacity: 0;
     }
-    .show-component-quotation-modal {
+    .show-component-receiving-management-modal {
       visibility: visible;
       opacity: 1;
     }
 /*modal test end*/
-    .component-quotation-title-div {
+    .component-receiving-management-title-div {
         display: flex;
         margin-bottom: 5px;
     }
-    .component-quotation-title-div i {
+    .component-receiving-management-title-div i {
         font-size: 20px;
         color: #170c53;
     }
-    .component-quotation-title-div h5 {
+    .component-receiving-management-title-div h5 {
         padding-top: 4px;
         margin: 0 0 0 5px;
         color: #170c53;
         text-shadow: 0 1px 1px #9b88e5;
     }
-/*component-quotation-search*/
-    .component-quotation-search {
+/*component-receiving-management-search*/
+    .component-receiving-management-search {
         width: 1200px;
         height: 260px;
         display: flex;
@@ -40,24 +40,24 @@
         box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
         margin-bottom: 22px;
     }
-    .component-quotation-search .component-quotation-search-section ul {
+    .component-receiving-management-search .component-receiving-management-search-section ul {
         list-style: none;
     }
-    .component-quotation-search .component-quotation-search-section ul li{
+    .component-receiving-management-search .component-receiving-management-search-section ul li{
         margin: 20px;
     }
-    .component-quotation-search .component-quotation-search-section ul li label{
+    .component-receiving-management-search .component-receiving-management-search-section ul li label{
         color: #2b578f;
     }
-    .component-quotation-search .component-quotation-search-section ul li label:first-child{
+    .component-receiving-management-search .component-receiving-management-search-section ul li label:first-child{
         width: 80px;
         text-align: right;
         margin-right: 10px;
     }
-    .component-quotation-search .component-quotation-search-section ul li label:not(:first-child){
+    .component-receiving-management-search .component-receiving-management-search-section ul li label:not(:first-child){
         margin: 0 20px;
     }
-    .component-quotation-search .component-quotation-search-section ul li input{
+    .component-receiving-management-search .component-receiving-management-search-section ul li input{
         width: 200px;
         border-color: #2b578f;
         border-width: 0;
@@ -66,19 +66,19 @@
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
         text-align: center;
     }
-/*component-quotation-search end*/
+/*component-receiving-management-search end*/
 
-/*component-quotation-list*/
-.component-quotation-container {
+/*component-receiving-management-list*/
+.component-receiving-management-container {
     margin-top: 80px;
     margin-left: 300px;
     padding: 20px 30px;
 }
-.component-quotation-list-top {
+.component-receiving-management-list-top {
     background-color: #5a6fa3 !important;
     color: white;
 }
-.component-quotation-list{
+.component-receiving-management-list{
     overflow: auto;
     box-sizing: border-box;
     border: 3px solid #cbd0e8;
@@ -86,24 +86,24 @@
     border-radius: 5px;
     padding: 0;
 }
-.component-quotation-list::-webkit-scrollbar {
+.component-receiving-management-list::-webkit-scrollbar {
   width: 10px;
 }
-.component-quotation-list::-webkit-scrollbar-thumb {
+.component-receiving-management-list::-webkit-scrollbar-thumb {
   background-color: #0b002e;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
-.component-quotation-list::-webkit-scrollbar-thumb:hover {
+.component-receiving-management-list::-webkit-scrollbar-thumb:hover {
   background-color: #180063;
 }
-.component-quotation-list::-webkit-scrollbar-track {
+.component-receiving-management-list::-webkit-scrollbar-track {
   background-color: #d4d4d4;
   border-radius: 5px;
   box-shadow: inset 0px 0px 5px white;
 }
-.component-quotation-list > table{
+.component-receiving-management-list > table{
     table-layout: fixed;
     position: relative;
     border-collapse: separate !important;
@@ -115,76 +115,72 @@
     overflow: visible;
     background-color: #fff;
 }
-.component-quotation-list td ,.component-quotation-list th{
+.component-receiving-management-list td ,.component-receiving-management-list th{
     border-left: 1px solid rgba(171, 173, 186, 0.3);
     border-right: 1px solid rgba(171, 173, 186, 0.3);
     border-bottom: 1px solid rgba(171, 173, 186, 0.5);
     padding: .4rem;
 }
-.component-quotation-list{
+.component-receiving-management-list{
     width:1200px;
     height:400px;
     margin:0 auto 15px auto;
 }
-.component-quotation-list-top{
+.component-receiving-management-list-top{
     position: sticky;
     top:0;
     z-index: 20;
     text-align: center;
 }
-.component-quotation-list .component-quotation-list-table thead tr th {
+.component-receiving-management-list .component-receiving-management-list-table thead tr th {
     text-align: center;
 }
-
-.component-quotation-list .component-quotation-list-table tbody tr td {
+.component-receiving-management-list .component-receiving-management-list-table tbody tr td {
     text-align: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 }
-component-quotation-list-table-file{
+.component-receiving-management-list .component-receiving-management-list-table tbody tr td:last-child {
     display: flex;
     justify-content: space-evenly;
 }
-.component-quotation-registration-btn {
+.component-receiving-management-registration-btn {
     float: right;
     margin: auto 0 0 auto;
 }
-.component-quotation-registration-btn a{
+.component-receiving-management-registration-btn a{
     margin: 0;
 }
-.component-quotation-list-remove-btn {
+.component-receiving-management-list-remove-btn {
     float: right;
     margin-right: 10px;
 }
-.component-quotation-list-remove-btn a{
+.component-receiving-management-list-remove-btn a{
     margin: 0;
 }
-/*component-quotation-list end*/
+/*component-receiving-management-list end*/
 
-/*component-quotation modal*/
-.component-quotation-modal-container {
+/*component-receiving-management modal*/
+.component-receiving-management-modal-container {
     width: 1050px;
     height: 765px;
     border: 1px solid #000000;
     border-radius: 10px;
     background: #ecf7ff;
 }
-.component-quotation-modal-title{
+.component-receiving-management-modal-title{
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
     border-radius: 10px 10px 0px 0px;
     background: linear-gradient( to bottom, #1c329c 10%, #00188a 20%, #010c42 100%);
 }
-.component-quotation-modal-title span{
+.component-receiving-management-modal-title span{
     font-size: 15px;
     color: white;
 }
-.component-quotation-modal-main {
+.component-receiving-management-modal-main {
     padding: 0px 60px 40px 60px;
 }
-.component-quotation-modal-recipient {
+.component-receiving-management-modal-recipient {
     display: flex;
     height: 100px;
     background: #eef4fb;
@@ -195,7 +191,7 @@ component-quotation-list-table-file{
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
-.component-quotation-modal-recipient-title {
+.component-receiving-management-modal-recipient-title {
     display: flex;
     width: 150px;
     padding-top: 5px;
@@ -203,30 +199,30 @@ component-quotation-list-table-file{
     justify-content: center;
     border-right:1px solid rgba(171, 173, 186, 0.6);
 }
-.component-quotation-modal-recipient-info {
+.component-receiving-management-modal-recipient-info {
 
 }
-.component-quotation-modal-recipient-info ul{
+.component-receiving-management-modal-recipient-info ul{
     padding-left: 10px;
     list-style: none;
 }
-.component-quotation-modal-recipient-info ul li:not(:last-child){
+.component-receiving-management-modal-recipient-info ul li:not(:last-child){
     margin-bottom: 7px;
 }
-.component-quotation-modal-recipient-info ul li label {
+.component-receiving-management-modal-recipient-info ul li label {
     width: 120px;
     color: #2b578f;
     margin-right: 10px;
     text-align: right;
 }
-.component-quotation-modal-recipient-info ul li input {
+.component-receiving-management-modal-recipient-info ul li input {
     width: 200px;
     text-align: center;
     border: 1px solid #cacbd5;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-.component-quotation-modal-supplier {
+.component-receiving-management-modal-supplier {
     display: flex;
     height: 198px;
     background: #eef4fb;
@@ -237,7 +233,7 @@ component-quotation-list-table-file{
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
-.component-quotation-modal-supplier-title {
+.component-receiving-management-modal-supplier-title {
     display: flex;
     width: 150px;
     padding-top: 5px;
@@ -245,36 +241,36 @@ component-quotation-list-table-file{
     justify-content: center;
     border-right:1px solid rgba(171, 173, 186, 0.6);
 }
-.component-quotation-modal-supplier-info {
+.component-receiving-management-modal-supplier-info {
 }
-.component-quotation-modal-supplier-info ul{
+.component-receiving-management-modal-supplier-info ul{
     padding-left: 10px;
     list-style: none;
 }
-.component-quotation-modal-supplier-info ul li:not(:last-child) {
+.component-receiving-management-modal-supplier-info ul li:not(:last-child) {
     margin-bottom: 7px;
 }
-.component-quotation-modal-supplier-info ul li label {
+.component-receiving-management-modal-supplier-info ul li label {
     width: 120px;
     color: #2b578f;
     margin-right: 10px;
     text-align: right;
 }
-.component-quotation-modal-supplier-info ul li input {
+.component-receiving-management-modal-supplier-info ul li input {
     width: 200px;
     text-align: center;
     border: 1px solid #cacbd5;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-#component-quotation-modal-input-supplier-company-address {
+#component-receiving-management-modal-input-supplier-company-address {
     width: 540px;
 }
-.component-quotation-modal-component-quotation-list-top {
+.component-receiving-management-modal-component-receiving-management-list-top {
     background-color: #5a6fa3 !important;
     color: white;
 }
-.component-quotation-modal-component-quotation-list{
+.component-receiving-management-modal-component-receiving-management-list{
     overflow: auto;
     box-sizing: border-box;
     border: 3px solid #cbd0e8;
@@ -282,24 +278,24 @@ component-quotation-list-table-file{
     border-radius: 5px;
     padding: 0;
 }
-.component-quotation-modal-component-quotation-list::-webkit-scrollbar {
+.component-receiving-management-modal-component-receiving-management-list::-webkit-scrollbar {
   width: 10px;
 }
-.component-quotation-modal-component-quotation-list::-webkit-scrollbar-thumb {
+.component-receiving-management-modal-component-receiving-management-list::-webkit-scrollbar-thumb {
   background-color: #0b002e;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
-.component-quotation-modal-component-quotation-list::-webkit-scrollbar-thumb:hover {
+.component-receiving-management-modal-component-receiving-management-list::-webkit-scrollbar-thumb:hover {
   background-color: #180063;
 }
-.component-quotation-modal-component-quotation-list::-webkit-scrollbar-track {
+.component-receiving-management-modal-component-receiving-management-list::-webkit-scrollbar-track {
   background-color: #d4d4d4;
   border-radius: 5px;
   box-shadow: inset 0px 0px 5px white;
 }
-.component-quotation-modal-component-quotation-list > table{
+.component-receiving-management-modal-component-receiving-management-list > table{
     table-layout: fixed;
     position: relative;
     border-collapse: separate !important;
@@ -311,73 +307,73 @@ component-quotation-list-table-file{
     overflow: visible;
     background-color: #fff;
 }
-.component-quotation-modal-component-quotation-list td ,.component-quotation-modal-component-quotation-list th{
+.component-receiving-management-modal-component-receiving-management-list td ,.component-receiving-management-modal-component-receiving-management-list th{
     border-left: 1px solid rgba(171, 173, 186, 0.3);
     border-right: 1px solid rgba(171, 173, 186, 0.3);
     border-bottom: 1px solid rgba(171, 173, 186, 0.5);
     padding: .4rem;
 }
-.component-quotation-modal-component-quotation-list{
+.component-receiving-management-modal-component-receiving-management-list{
     width:928px;
     height:230px;
     margin:0 auto 15px auto;
 }
-.component-quotation-modal-component-quotation-list-top{
+.component-receiving-management-modal-component-receiving-management-list-top{
     position: sticky;
     top:0;
     z-index: 20;
     text-align: center;
 }
-.component-quotation-modal-component-quotation-list .component-quotation-modal-component-quotation-list-table tr:not(:first-child) td {
+.component-receiving-management-modal-component-receiving-management-list .component-receiving-management-modal-component-receiving-management-list-table tr:not(:first-child) td {
     text-align: center;
 }
-.component-quotation-modal-component-quotation-list .component-quotation-modal-component-quotation-list-table tr td input {
+.component-receiving-management-modal-component-receiving-management-list .component-receiving-management-modal-component-receiving-management-list-table tr td input {
     width: 90%;
     height: 90%;
     border-width: 0;
     text-align: center;
 }
-.component-quotation-modal-summary {
+.component-receiving-management-modal-summary {
     display: flex;
 }
-.component-quotation-modal-note {
+.component-receiving-management-modal-note {
     margin-right: 20px;
 }
-.component-quotation-modal-note textarea{
+.component-receiving-management-modal-note textarea{
     width: 500px;
     height: 100px;
     resize: none;
     border-radius: 5px;
 }
-.component-quotation-modal-total {
+.component-receiving-management-modal-total {
     display: flex;
     flex-direction: column;
 }
-.component-quotation-modal-total .component-quotation-modal-total-line{
+.component-receiving-management-modal-total .component-receiving-management-modal-total-line{
     margin-bottom: 3px;
 }
-.component-quotation-modal-total .component-quotation-modal-total-line label{
+.component-receiving-management-modal-total .component-receiving-management-modal-total-line label{
     width: 60px;
     margin-right: 10px;
     text-align: right;
 }
-.component-quotation-modal-total .component-quotation-modal-total-line input{
+.component-receiving-management-modal-total .component-receiving-management-modal-total-line input{
     border-width: 0;
     border-bottom-width: 1px;
 }
-.component-quotation-modal-submit-button {
+.component-receiving-management-modal-submit-button {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     margin: 0 10px 10px auto;
 }
-.component-quotation-modal-submit-button a {
+.component-receiving-management-modal-submit-button a {
     width: 80px;
     height: 30px;
     line-height: 20px;
     text-align: center;
 }
-/*component-quotation modal end*/
+/*component-receiving-management modal end*/
 /*gradient color botton*/
 .gradient-color-btn {
   text-decoration: none;

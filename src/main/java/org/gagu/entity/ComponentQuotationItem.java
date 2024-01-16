@@ -16,7 +16,7 @@ public class ComponentQuotationItem {
     private Integer componentQuotationItemId;
 
     @Column(name = "component_id")
-    private String component_id;
+    private String componentId;
 
     @Column(name = "component_quotation_id")
     private Integer componentQuotationId;
