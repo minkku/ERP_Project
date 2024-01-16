@@ -1,0 +1,20 @@
+.resizableTable thead tr th,.resizableTable thead tr td {
+    position: relative;
+}
+.resizableTable thead tr th::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    cursor: col-resize;
+}
+.selectableTable-selected {
+    background: #a5d0f1;
+    color: white;
+}
+.selectableTable-hover {
+    background: #bcd9f0;
+    color: white;
+}
