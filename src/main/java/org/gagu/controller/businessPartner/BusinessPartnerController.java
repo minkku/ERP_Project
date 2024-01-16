@@ -4,15 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.business.BusinessPartnerResponse;
 import org.gagu.dto.business.RegisterResponse;
+import org.gagu.entity.businessPartner.BusinessPartner;
 import org.gagu.service.businessPartner.BusinessPartnerService;
 import org.gagu.service.businessPartner.PartnerService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import static org.gagu.entity.businessPartner.QBusinessPartner.businessPartner;
 
@@ -35,20 +33,9 @@ public class BusinessPartnerController {
         return "businessPartner";
     }
 
-    @GetMapping("/register")
-    public void getRegisterPage() {
-        log.info("--------------- Controller for GETMAPPING TO register ---------------------");
-    }
-
-    @PostMapping("/register")
-    public String postRegister(RegisterResponse registerResponse, Model model) {
+    @PostMapping("/businessPartner")
+    public BusinessPartner register(@RequestBody RegisterResponse responseDTO) {
         log.info("---------- POST TO REGISTER ---------------");
-
-        log.info("Received RegisterResponse: {}", registerResponse);
-        RegisterResponse businessPartnerResponse = partnerService.registerResponse(registerResponse);
-
-        model.addAttribute("businessPartnerResponse", businessPartnerResponse);
-
-        return "redirect:/partnerList";
+        return partnerService.registerResponse(responseDTO);
     }
 }

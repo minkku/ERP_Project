@@ -16,5 +16,4 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
             "b.address) " +
             "FROM BusinessPartner b ")
     BusinessPartnerResponse findAll(@Param("partnerId") int partnerId);
-
 }
