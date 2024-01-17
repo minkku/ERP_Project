@@ -9,9 +9,9 @@
             <div class="col-lg-12">
 
                 <div class="card">
-                    <div class="card-body" style="width:100%;">
+                    <div class="component-quotation-list" style="width:100%; height:550px;">
                         <!-- Bordered Table -->
-                        <table class="component-receiving-management-list-table" style="width:100%;">
+                        <table class="component-quotation-list-table" style="width:100%;">
                             <colgroup>
                                 <col style="width: 5%">
                                 <col style="width: 15%">
@@ -21,15 +21,15 @@
                             </colgroup>
                             <thead>
                             <tr>
-                                <th scope="col" class="component-receiving-management-list-top">No.</th>
-                                <th scope="col" class="component-receiving-management-list-top">거래처명</th>
-                                <th scope="col" class="component-receiving-management-list-top">주소</th>
-                                <th scope="col" class="component-receiving-management-list-top">사업자 번호</th>
-                                <th scope="col" class="component-receiving-management-list-top">전화번호</th>
+                                <th scope="col" class="component-quotation-list-top">No.</th>
+                                <th scope="col" class="component-quotation-list-top">거래처명</th>
+                                <th scope="col" class="component-quotation-list-top">주소</th>
+                                <th scope="col" class="component-quotation-list-top">사업자 번호</th>
+                                <th scope="col" class="component-quotation-list-top">전화번호</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="item : ${list}" style="cursor:pointer;" th:attr="onclick='data-target('+ ${item.partnerId} + ')'" id="detail-modal">
+                            <tr th:each="item : ${list}" style="cursor:pointer;">
                                 <td th:text="${item.partnerId}" style="text-align: center"><a href="#"></a></td>
                                 <td th:text="${item.bpName}" style="text-align: center"></td>
                                 <td th:text="${item.address}"></td>
@@ -65,9 +65,9 @@
                         <!-- End Bordered Table -->
                     </div>
 
-                    <div class="quotation-modal-submit-button">
-                        <a href="#" class="gradient-color-btn blue js-show-quotation-modal" style="width:100px">거래처 등록</a>
-                        <a href="#" class="gradient-color-btn blue">수정</a>
+                    <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
+                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
+                        <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal">수정</a>
                         <a href="#" class="gradient-color-btn blue">삭제</a>
                     </div>
                 </div>
@@ -76,55 +76,55 @@
         </div>
     <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
     <!-- Registration Modal -->
-    <div class="quotation-modal-container wrap-quotation-modal js-quotation-modal">
-        <div class="quotation-modal-title">
+    <div class="component-quotation-modal-container wrap-component-quotation-modal js-component-quotation-modal">
+        <div class="component-quotation-modal-title">
             <span>거래처 등록</span>
         </div>
-        <div class="quotation-modal-main">
-            <div class="quotation-modal-supplier">
-                <div class="quotation-modal-supplier-title">
+        <div class="component-quotation-modal-main">
+            <div class="component-quotation-modal-recipient" style="height:226px">
+                <div class="component-quotation-modal-recipient-title">
                     <h5>거래처</h5>
                 </div>
-                <div class="quotation-modal-supplier-info">
+                <div class="component-quotation-modal-recipient-info">
                     <ul>
                         <li>
-                            <label for="quotation-modal-input-supplier-company-number">사업자 등록번호</label>
-                            <input type="text" id="quotation-modal-input-supplier-company-number">
-                            <label for="quotation-modal-input-supplier-company-name">상호</label>
-                            <input type="text" id="quotation-modal-input-supplier-company-name">
+                            <label for="component-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-number">
+                            <label for="component-quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-name">
                         </li>
                         <li>
-                            <label for="quotation-modal-input-supplier-company-address">사업장 소재지</label>
-                            <input type="text" id="quotation-modal-input-supplier-company-address">
+                            <label for="component-quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-address">
                         </li>
                         <li>
-                            <label for="quotation-modal-input-supplier-sector">업태</label>
-                            <input type="text" id="quotation-modal-input-supplier-sector">
-                            <label for="quotation-modal-input-supplier-business-type">업종</label>
-                            <input type="text" id="quotation-modal-input-supplier-business-type">
+                            <label for="component-quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-sector">
+                            <label for="component-quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-business-type">
                         </li>
                         <li>
-                            <label for="quotation-modal-input-supplier-representative">대표자</label>
-                            <input type="text" id="quotation-modal-input-supplier-representative">
-                            <label for="quotation-modal-input-supplier-phone">연락처</label>
-                            <input type="text" id="quotation-modal-input-supplier-phone">
+                            <label for="component-quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-representative">
+                            <label for="component-quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-phone">
                         </li>
                         <li>
-                            <label for="quotation-modal-input-supplier-representative">Fax no.</label>
-                            <input type="text" id="quotation-modal-input-partner-fax">
-                            <label for="quotation-modal-input-supplier-phone">협력 종류</label>
-                            <input type="text" id="quotation-modal-input-partner-type">
+                            <label for="component-quotation-modal-input-supplier-fax">Fax no.</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-fax">
+                            <label for="component-quotation-modal-input-supplier-type">협력 종류</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-type">
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="quotation-modal-summary">
-                <div class="quotation-modal-note">
+            <div class="component-quotation-modal-summary">
+                <div class="component-quotation-modal-note">
                     <textarea placeholder="비고"></textarea>
                 </div>
-                <div class="quotation-modal-submit-button">
+                <div class="component-quotation-modal-submit-button">
                     <a href="#" class="gradient-color-btn blue" onclick="savePost()">등록</a>
-                    <a href="#" class="gradient-color-btn blue js-hide-modal-login">취소</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal">취소</a>
                 </div>
             </div>
         </div>
@@ -132,25 +132,84 @@
     <!-- End of Registration Modal -->
 
     <!-- [ Update && Delete ] Modal by partnerId -->
-
+    <div class="partner-quotation-modal-container wrap-partner-quotation-modal js-partner-quotation-modal">
+        <div class="partner-quotation-modal-title">
+            <span>거래처 수정</span>
+        </div>
+        <div class="partner-quotation-modal-main">
+            <div class="partner-quotation-modal-recipient" style="height:226px">
+                <div class="partner-quotation-modal-recipient-title">
+                    <h5>거래처</h5>
+                </div>
+                <div class="partner-quotation-modal-recipient-info">
+                    <ul>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-number">
+                            <label for="partner-quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-name">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-address">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-sector">
+                            <label for="partner-quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-business-type">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-representative">
+                            <label for="partner-quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-phone">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-fax">Fax no.</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-fax">
+                            <label for="partner-modal-input-supplier-type">협력 종류</label>
+                            <input type="text" id="partner-modal-input-supplier-type">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="partner-quotation-modal-summary">
+                <div class="partner-quotation-modal-note">
+                    <textarea placeholder="비고"></textarea>
+                </div>
+                <div class="partner-quotation-modal-submit-button">
+                    <a href="#" class="gradient-color-btn blue" onclick="savePost()">수정</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-partner-quotation-modal">취소</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End of modify modal -->
 
 </main><!-- End #main -->
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script>
     /*[ Show quotation modal ]*/
-    $(document).ready(function () {
-        $('.js-quotation-modal').removeClass('show-quotation-modal');
-    });
-
-    $('.js-show-quotation-modal').on('click',function(e){
+    $('.js-show-component-quotation-modal').on('click',function(e){
         e.preventDefault();
-        $('.js-quotation-modal').addClass('show-quotation-modal');
+        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
     });
 
-    $('.js-hide-modal-login').on('click',function(){
-        $('.js-component-order-modal input').val('');
-        $('.js-quotation-modal').removeClass('show-quotation-modal');
+    $('.js-hide-component-quotation-modal').on('click',function(){
+        $('.js-component-quotation-modal input').val('');
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
+
+    /*[ Show partner modal ]*/
+    $('.js-show-partner-quotation-modal').on('click',function(e){
+        e.preventDefault();
+        $('.js-partner-quotation-modal').addClass('show-partner-quotation-modal');
+    });
+
+    $('.js-hide-partner-quotation-modal').on('click',function(){
+        $('.js-partner-quotation-modal input').val('');
+        $('.js-partner-quotation-modal').removeClass('show-partner-quotation-modal');
     });
 
     const savePost = async () => {
@@ -192,5 +251,4 @@
     };
 </script>
 </body>
-
 </html>
