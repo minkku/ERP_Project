@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="component-order-container" >
+    <div class="component-order">
+        <div class="component-order-page-top">
+            <div class="component-order-title-div">
+                <i class="bi bi-card-checklist"></i>
+                <h5 class="component-order-list-title">상품 재고</h5>
+            </div>
+        </div>
+        <table class="component-order-list-table resizableTable selectableTable" style="width: 1700px">
+            <colgroup>
+                <col style="width: 20%">
+                <col style="width: 50%">
+                <col style="width: 15%">
+                <col style="width: 15%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th scope="col" class="product_id">상품코드</th>
+                <th scope="col" class="product_name">상품명</th>
+                <th scope="col" class="product_inventory_quantity">수량</th>
+                <th scope="col" class="product_inventory_stock">창고</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="productInventory  : ${products}">
+                <tr>
+                    <td th:text="${productInventory.product.productId}" class="product_id"></td>
+                    <td th:text="${productInventory.product.productName}" class="product_name"></td>
+                    <td th:text="${productInventory.product.productInventoryQuantity}" class="product_inventory_quantity"></td>
+                    <td th:text="${productInventory.product.productInventoryStock}" class="product_inventory_stock"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
