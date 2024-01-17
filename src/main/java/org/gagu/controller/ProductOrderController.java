@@ -3,6 +3,7 @@ package org.gagu.controller;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
+import org.gagu.service.ProductOrderDetailService;
 import org.gagu.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,10 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,10 +19,12 @@ import java.util.List;
 @Log4j2
 public class ProductOrderController {
     private final ProductOrderService productOrderService;
+    private final ProductOrderDetailService productOrderDetailService;
 
     @Autowired
-    public ProductOrderController(ProductOrderService productOrderService) {
+    public ProductOrderController(ProductOrderService productOrderService, ProductOrderDetailService productOrderDetailService) {
         this.productOrderService = productOrderService;
+        this.productOrderDetailService = productOrderDetailService;
     }
 
     @GetMapping("/ProductOrderStatus")
@@ -51,7 +51,10 @@ public class ProductOrderController {
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
 
-    private int calculateTotalPages() {
-        return 10;
+
+    @PostMapping("/ProductOrderInfoModal")
+    public String postModalData(@RequestParam("productOrderId") Integer productOrderId, @RequestParam("updateStatus") int updateStatus) {
+        productOrderDetailService.updateProductOrderStatus(productOrderId, updateStatus);
+        return null;
     }
 }

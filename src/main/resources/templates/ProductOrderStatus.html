@@ -22,7 +22,7 @@
                                 <th class="table-active" scope="col" style="text-align: center">품목(외)</th>
                                 <th class="table-active" scope="col" style="text-align: center">합계금액</th>
                                 <th class="table-active" scope="col" style="text-align: center">상태</th>
-                                <th class="table-active" scope="col" style="text-align: center">조회(인쇄)</th>
+                                <th class="table-active" scope="col" style="text-align: center">조회</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,7 +38,7 @@
                                 <td style="text-align: right" th:text="${item.productOrderPriceAmount}"></td>
                                 <td style="text-align: center">
                                     <span th:if="${item.productOrderStatus == 1}" th:text="진행중"></span>
-                                    <span th:if="${item.productOrderStatus == 2}" th:text="진행중"></span>
+                                    <span th:if="${item.productOrderStatus == 2}" th:text="출고대기"></span>
                                     <span th:if="${item.productOrderStatus == 3}" th:text="진행중"></span>
                                     <span th:if="${item.productOrderStatus == 4}" th:text="종료"></span>
                                 </td>
@@ -104,12 +104,16 @@
 
                     <ul>
                         <li>
-                            <label for="component-quotation-modal-input-component-quotation-date">발주일</label>
-                            <input type="date" id="component-quotation-modal-input-component-quotation-date">
+                            <label for="component-quotation-modal-input-order-number">발주번호</label>
+                            <input type="text" id="component-quotation-modal-input-order-number" readonly>
+                            <label for="component-quotation-modal-input-member">담당자</label>
+                            <input type="text" id="component-quotation-modal-input-member" readonly>
                         </li>
                         <li>
-                            <label for="component-quotation-modal-input-member">담당자</label>
-                            <input type="text" id="component-quotation-modal-input-member">
+                            <label for="component-quotation-modal-input-component-quotation-date">발주일</label>
+                            <input type="date" id="component-quotation-modal-input-component-quotation-date" readonly>
+                            <label for="component-quotation-modal-input-supplier-delivery-date">납기일</label>
+                            <input type="date" id="component-quotation-modal-input-supplier-delivery-date">
                         </li>
                     </ul>
                 </div>
@@ -122,29 +126,25 @@
                     <ul>
                         <li>
                             <label for="component-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-company-number">
+                            <input type="text" id="component-quotation-modal-input-supplier-company-number" readonly>
                             <label for="component-quotation-modal-input-supplier-company-name">상호</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-company-name">
+                            <input type="text" id="component-quotation-modal-input-supplier-company-name" readonly>
                         </li>
                         <li>
                             <label for="component-quotation-modal-input-supplier-company-address">사업장 소재지</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-company-address">
+                            <input type="text" id="component-quotation-modal-input-supplier-company-address" readonly>
                         </li>
                         <li>
                             <label for="component-quotation-modal-input-supplier-sector">업태</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-sector">
+                            <input type="text" id="component-quotation-modal-input-supplier-sector" readonly>
                             <label for="component-quotation-modal-input-supplier-business-type">업종</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-business-type">
+                            <input type="text" id="component-quotation-modal-input-supplier-business-type" readonly>
                         </li>
                         <li>
                             <label for="component-quotation-modal-input-supplier-representative">대표자</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-representative">
+                            <input type="text" id="component-quotation-modal-input-supplier-representative" readonly>
                             <label for="component-quotation-modal-input-supplier-phone">연락처</label>
-                            <input type="text" id="component-quotation-modal-input-supplier-phone">
-                        </li>
-                        <li>
-                            <label for="component-quotation-modal-input-supplier-delivery-date">납기일</label>
-                            <input type="date" id="component-quotation-modal-input-supplier-delivery-date">
+                            <input type="text" id="component-quotation-modal-input-supplier-phone" readonly>
                         </li>
                     </ul>
                 </div>
@@ -171,21 +171,11 @@
                         <td class="component-quotation-modal-component-quotation-list-top">부가세</td>
                         <td class="component-quotation-modal-component-quotation-list-top">비고</td>
                     </tr>
-                    <tr th:each="item : ${data.productOrderItems}">
-                        <td><input type="text" th:value="${item.productOrderId}" readonly></td>
-                        <td><input type="text" th:value="${item.productOrderItemQuantity}" readonly></td>
-                        <td><input type="text" th:value="${item.productSpecification}" readonly></td>
-                        <td><input type="text" th:value="${item.productOrderItemPrice}" readonly></td>
-                        <td><input type="text" th:value="KOR" readonly></td>
-                        <td><input type="text" th:value="${item.productOrderItemTotalprice}" readonly></td>
-                        <td><input type="text" th:value="${item.productOrderItemTotalpriceaddedtax}" readonly></td>
-                        <td><input type="text" th:value="${item.productOrderItemNote}" readonly></td>
-                    </tr>
                 </table>
             </div>
             <div class="component-quotation-modal-summary">
                 <div class="component-quotation-modal-note">
-                    <textarea></textarea>
+                    <textarea id="component-quotation-modal-total-note" readonly></textarea>
                 </div>
                 <div class="component-quotation-modal-total">
                     <div class="component-quotation-modal-total-line">
@@ -203,8 +193,8 @@
                 </div>
                 <div class="component-quotation-modal-submit-button">
                     <input type="hidden" id="modal-productOrderId" name="modal-productOrderId">
-                    <a href="#" class="gradient-color-btn blue">발주완료</a>
-                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal">취소</a>
+                    <a href="#" class="gradient-color-btn blue" style="width: 100px;">발주완료</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal" style="width: 100px;">취소</a>
                 </div>
             </div>
 
@@ -214,9 +204,9 @@
 </main><!-- End #main -->
 
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
-<script>
+<script th:inline="javascript">
     /*[ Show component-quotation modal ]*/
-    $('.js-show-component-quotation-modal').on('click', function(e) {
+    $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
         e.preventDefault();
 
         var productOrderId = $(this).data('product-order-id');
@@ -228,7 +218,8 @@
             },
             success: function(response) {
                 console.log('Success:', response);
-                updateModalContent(response);
+                updateProductOrderItems(response.productOrderItems);
+                updateModalContent(response, totalPrice);
             },
             error: function() {
                 console.error('Failed to fetch ProductOrderInfoDataDTO');
@@ -237,7 +228,9 @@
 
 
     });
-    function updateModalContent(data) {
+    var totalPrice = 0;
+
+    function updateModalContent(data, price) {
         // 날짜 형식 변환 함수
         function formatDate(dateString) {
             var date = new Date(dateString);
@@ -257,6 +250,7 @@
 
         // 나머지 데이터 갱신
         $('#component-quotation-modal-input-member').val(data.productOrder.memberId);
+        $('#component-quotation-modal-input-order-number').val(data.productOrder.productOrderNumber);
         $('#component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
         $('#component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
         $('#component-quotation-modal-input-supplier-company-address').val(data.businessVender.businessvenderAddress);
@@ -264,20 +258,42 @@
         $('#component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
         $('#component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
         $('#component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
-        // $('#component-quotation-modal-input-total-supply-value').val(data.orderDate);
-        // $('#component-quotation-modal-input-total-value-added-tax').val(data.orderDate);
+        $('#component-quotation-modal-input-total-supply-value').val(price);
+        $('#component-quotation-modal-input-total-value-added-tax').val(price * 0.1);
+        $('#component-quotation-modal-total-note').val(data.productOrder.productOrderItemDetail);
         $('#component-quotation-modal-input-total-subtotal').val(data.productOrder.productOrderPriceAmount);
         $('#component-quotation-modal-note').val(data.productOrder.productOrderItemDetail);
 
-        // 모달창을 보여주는 부분
         $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
-        }
-    $('.js-hide-component-quotation-modal').on('click', function() {
-        $('.js-component-quotation-modal input').val('');
-        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    }
+
+    function updateProductOrderItems(productOrderItems) {
+        var tableBody = $('.component-quotation-modal-component-quotation-list-table tbody');
+        tableBody.append();
+
+        $.each(productOrderItems, function(index, item) {
+            var row = $('<tr class="product-order-item"></tr>');
+            row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productSpecification + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemPrice + '" readonly></td>');
+            row.append('<td><input type="text" value="KOR"></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemTotalprice + '" readonly></td>');
+            row.append('<td><input type="text" value="' + (item.productOrderItemTotalprice * 0.1) + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemNote + '" readonly></td>');
+            totalPrice += item.productOrderItemTotalprice;
+            tableBody.append(row);
+        });
+    }
+    $('.js-component-quotation-modal .gradient-color-btn.blue').on('click', function() { // 발주완료
+
     });
 
-    $('.js-component-quotation-modal .gradient-color-btn.blue').on('click', function() {
+    $('.js-hide-component-quotation-modal').on('click', function() { // 취소
+        totalPrice = 0;
+        $('.js-component-quotation-modal input').val('');
+        $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
     });
 </script>
 </body>
