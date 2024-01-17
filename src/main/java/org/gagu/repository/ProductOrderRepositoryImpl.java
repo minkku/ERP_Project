@@ -87,7 +87,7 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
         List<ProductOrderItemListDTO> result = jpaQueryFactory
                 .select(Projections.bean(ProductOrderItemListDTO.class,
                         qProductOrderItem.productOrderItemId,
-                        qProduct.productId,
+                        qProductOrderItem.productId,
                         qProductOrderItem.productOrderId,
                         qProduct.productSpecification,
                         qProductOrderItem.productOrderItemQuantity,

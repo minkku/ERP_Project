@@ -45,7 +45,8 @@
                                 <td style="text-align: center">
                                     <div class="quotation-modal-submit-button" style="margin: -7px;">
                                         <input type="hidden" name="productOrderId" value="${item.productOrderId}">
-                                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal">조회</a>
+                                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal"
+                                           th:attr="data-product-order-id=${item.productOrderId}">조회</a>
                                     </div>
                                 </td>
                             </tr>
@@ -170,15 +171,15 @@
                         <td class="component-quotation-modal-component-quotation-list-top">부가세</td>
                         <td class="component-quotation-modal-component-quotation-list-top">비고</td>
                     </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                    <tr th:each="item : ${data.productOrderItems}">
+                        <td><input type="text" th:value="${item.productOrderId}" readonly></td>
+                        <td><input type="text" th:value="${item.productOrderItemQuantity}" readonly></td>
+                        <td><input type="text" th:value="${item.productSpecification}" readonly></td>
+                        <td><input type="text" th:value="${item.productOrderItemPrice}" readonly></td>
+                        <td><input type="text" th:value="KOR" readonly></td>
+                        <td><input type="text" th:value="${item.productOrderItemTotalprice}" readonly></td>
+                        <td><input type="text" th:value="${item.productOrderItemTotalpriceaddedtax}" readonly></td>
+                        <td><input type="text" th:value="${item.productOrderItemNote}" readonly></td>
                     </tr>
                 </table>
             </div>
@@ -218,7 +219,7 @@
     $('.js-show-component-quotation-modal').on('click', function(e) {
         e.preventDefault();
 
-        var productOrderId = $(this).closest('tr').find('[name="productOrderId"]').val();
+        var productOrderId = $(this).data('product-order-id');
         $.ajax({
             type: 'GET',
             url: '/ProductOrderInfoModal',
@@ -226,6 +227,7 @@
                 productOrderId: productOrderId
             },
             success: function(response) {
+                console.log('Success:', response);
                 updateModalContent(response);
             },
             error: function() {
@@ -233,10 +235,27 @@
             }
         });
 
-        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+
     });
     function updateModalContent(data) {
-        $('#component-quotation-modal-input-component-quotation-date').val(data.productOrder.productOrderOrderdate);
+        // 날짜 형식 변환 함수
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+    // 발주일 날짜 형식 변환
+        var orderDate = formatDate(data.productOrder.productOrderOrderdate);
+        $('#component-quotation-modal-input-component-quotation-date').val(orderDate);
+
+        // 납기일 날짜 형식 변환
+        var deliveryDate = formatDate(data.productOrder.productOrderDeliverydate);
+        $('#component-quotation-modal-input-supplier-delivery-date').val(deliveryDate);
+
+        // 나머지 데이터 갱신
         $('#component-quotation-modal-input-member').val(data.productOrder.memberId);
         $('#component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
         $('#component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
@@ -245,16 +264,20 @@
         $('#component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
         $('#component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
         $('#component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
-        $('#component-quotation-modal-input-supplier-delivery-date').val(data.productOrder.productOrderDeliverydate);
-//       $('#component-quotation-modal-input-total-supply-value').val(data.orderDate);
-//       $('#component-quotation-modal-input-total-value-added-tax').val(data.orderDate);
+        // $('#component-quotation-modal-input-total-supply-value').val(data.orderDate);
+        // $('#component-quotation-modal-input-total-value-added-tax').val(data.orderDate);
         $('#component-quotation-modal-input-total-subtotal').val(data.productOrder.productOrderPriceAmount);
         $('#component-quotation-modal-note').val(data.productOrder.productOrderItemDetail);
-}
 
+        // 모달창을 보여주는 부분
+        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+        }
     $('.js-hide-component-quotation-modal').on('click', function() {
         $('.js-component-quotation-modal input').val('');
         $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
+
+    $('.js-component-quotation-modal .gradient-color-btn.blue').on('click', function() {
     });
 </script>
 </body>
