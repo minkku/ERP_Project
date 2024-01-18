@@ -8,9 +8,13 @@ import org.gagu.entity.businessPartner.BusinessPartner;
 import org.gagu.service.businessPartner.BusinessPartnerService;
 import org.gagu.service.businessPartner.PartnerService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static org.gagu.entity.businessPartner.QBusinessPartner.businessPartner;
 
@@ -37,5 +41,18 @@ public class BusinessPartnerController {
     public BusinessPartner register(@RequestBody RegisterResponse responseDTO) {
         log.info("---------- POST TO REGISTER ---------------");
         return partnerService.registerResponse(responseDTO);
+    }
+
+
+    @PostMapping("/businessPartner/{partnerId}")
+    public ResponseEntity<BusinessPartner> updatePartner(@RequestParam int partnerId, @RequestBody RegisterResponse response) {
+        Optional<BusinessPartner> updatedPartner = partnerService.updatePartnerById(partnerId, response);
+
+        if (updatedPartner.isPresent()) {
+            return new ResponseEntity<>(updatedPartner.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }

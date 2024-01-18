@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface PartnerRepository extends JpaRepository<BusinessPartner, Integer>, PartnerCustomRepository {
     @Query("SELECT NEW org.gagu.dto.business.BusinessPartnerResponse(" +
                 "b.partnerId, " +
@@ -20,7 +22,7 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE " +
-                "businesspartner bp " +
+                "BusinessPartner bp " +
             "SET " +
                 "bp.bpName = :bpName, " +
                 "bp.companyNumber = :companyNumber, " +
@@ -34,5 +36,5 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
                 "bp.smallType = :smallType " +
             "WHERE " +
                 "bp.partnerId = :partnerId")
-    int updateByPartnerId(@Param("partnerId") int partnerId);
+    int updatePartnerById(@Param("partnerId") int partnerId);
 }

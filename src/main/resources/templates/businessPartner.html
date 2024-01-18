@@ -30,7 +30,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="item : ${list}" style="cursor:pointer;">
-                                <td th:text="${item.partnerId}" style="text-align: center"><a href="#"></a></td>
+                                <td th:text="${item.partnerId}" style="text-align: center"></td>
                                 <td th:text="${item.bpName}" style="text-align: center"></td>
                                 <td th:text="${item.address}"></td>
                                 <td th:text="${item.companyNumber}" style="text-align: center"></td>
@@ -144,42 +144,43 @@
                 <div class="partner-quotation-modal-recipient-info">
                     <ul>
                         <li>
+                            <input type="hidden" name="partnerId" th:value="${list.partnerId}">
                             <label for="partner-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-company-number">
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-number" th:value="${list.companyNumber}">
                             <label for="partner-quotation-modal-input-supplier-company-name">상호</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-company-name">
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-name" th:value="${list.bpName}">
                         </li>
                         <li>
                             <label for="partner-quotation-modal-input-supplier-company-address">사업장 소재지</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-company-address">
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-address" th:value="${list.address}">
                         </li>
                         <li>
                             <label for="partner-quotation-modal-input-supplier-sector">업태</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-sector">
+                            <input type="text" id="partner-quotation-modal-input-supplier-sector" th:value="${list.smallType}">
                             <label for="partner-quotation-modal-input-supplier-business-type">업종</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-business-type">
+                            <input type="text" id="partner-quotation-modal-input-supplier-business-type" th:value="${list.bigType}">
                         </li>
                         <li>
                             <label for="partner-quotation-modal-input-supplier-representative">대표자</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-representative">
+                            <input type="text" id="partner-quotation-modal-input-supplier-representative" th:value="${list.headName}">
                             <label for="partner-quotation-modal-input-supplier-phone">연락처</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-phone">
+                            <input type="text" id="partner-quotation-modal-input-supplier-phone" th:value="${list.phone}">
                         </li>
                         <li>
                             <label for="partner-quotation-modal-input-supplier-fax">Fax no.</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-fax">
-                            <label for="partner-modal-input-supplier-type">협력 종류</label>
-                            <input type="text" id="partner-modal-input-supplier-type">
+                            <input type="text" id="partner-quotation-modal-input-supplier-fax" th:value="${list.fax}">
+                            <label for="partner-modal-input-supplier-type">거래 종류</label>
+                            <input type="text" id="partner-modal-input-supplier-type" th:value="${list.type}">
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="partner-quotation-modal-summary">
                 <div class="partner-quotation-modal-note">
-                    <textarea placeholder="비고"></textarea>
+                    <textarea placeholder="비고" th:text="${list.note}"></textarea>
                 </div>
                 <div class="partner-quotation-modal-submit-button">
-                    <a href="#" class="gradient-color-btn blue" onclick="savePost()">수정</a>
+                    <a href="#" class="gradient-color-btn blue" onclick="updatePost()">수정</a>
                     <a href="#" class="gradient-color-btn blue js-hide-partner-quotation-modal">취소</a>
                 </div>
             </div>
@@ -189,7 +190,7 @@
 
 </main><!-- End #main -->
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
-<script>
+<script th:inline="javascript">
     /*[ Show quotation modal ]*/
     $('.js-show-component-quotation-modal').on('click',function(e){
         e.preventDefault();
@@ -247,6 +248,52 @@
             location.reload(); // 페이지 새로고침
         } catch (error) {
             console.error('Error saving post:', error);
+        }
+    };
+
+    const updatePost = async () => {
+        const companyNumber = document.getElementById('partner-quotation-modal-input-supplier-company-number').value;
+        const bpName = document.getElementById('partner-quotation-modal-input-supplier-company-name').value;
+        const address = document.getElementById('partner-quotation-modal-input-supplier-company-address').value;
+        const type = document.getElementById('partner-quotation-modal-input-supplier-sector').value;
+        const bigType = document.getElementById('partner-quotation-modal-input-supplier-business-type').value;
+        const headName = document.getElementById('partner-quotation-modal-input-supplier-representative').value;
+        const phone = document.getElementById('partner-quotation-modal-input-supplier-phone').value;
+        const fax = document.getElementById('partner-quotation-modal-input-partner-fax').value;
+        const smallType = document.getElementById('partner-quotation-modal-input-partner-type').value;
+        const note = document.querySelector('.partner-quotation-modal-note textarea').value;
+
+        console.log("------ updating -------");
+        try {
+            const id = '${partnerUpdate != null ? partnerUpdate.partnerId : 'null'}';
+            const response = await fetch('/update', {
+                method: 'POST',
+                headers: {
+                    'Content-type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    companyNumber,
+                    bpName,
+                    address,
+                    type,
+                    bigType,
+                    headName,
+                    phone,
+                    fax,
+                    smallType,
+                    note,
+                }),
+            });
+
+            if(!response.ok) {
+                throw new Error("Server is not response");
+            } else {
+                console.log("Success to updated a list");
+            }
+
+            location.href = "/businessPartner";
+        } catch(error)
+            console.log("commit error : " + error);
         }
     };
 </script>

@@ -10,6 +10,7 @@ import org.gagu.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -33,5 +34,11 @@ public class PartnerServiceImpl implements PartnerService {
                 .smallType(response.getSmallType())
                 .build();
         return partnerRepository.save(businessPartner);
+    }
+
+    @Transactional
+    @Override
+    public void updatePartnerList(int partnerId) {
+
     }
 }
