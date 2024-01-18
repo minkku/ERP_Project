@@ -28,8 +28,16 @@ public class ProductOrderService {
         return productOrderRepository.findProductOrderList(pageable);
     }
 
+    public List<ProductOrderListDTO> getProductOrderCheckoutList(Pageable pageable) {
+        return productOrderRepository.findProductOrderCheckoutList(pageable);
+    }
+
     public long getProductOrderListCount() {
         return productOrderRepository.findProductOrderListCount();
+    }
+
+    public long getProductOrderCheckoutListCount() {
+        return productOrderRepository.findProductOrderCheckoutListCount();
     }
 
     public BusinessVender getBusinessVenderByProductOrderId(Integer productOrderId) {

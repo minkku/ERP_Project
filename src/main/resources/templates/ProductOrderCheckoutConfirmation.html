@@ -21,12 +21,13 @@
                                 <th class="table-active" scope="col" style="text-align: center">거래처명</th>
                                 <th class="table-active" scope="col" style="text-align: center">품목(외)</th>
                                 <th class="table-active" scope="col" style="text-align: center">합계금액</th>
+                                <th class="table-active" scope="col" style="text-align: center">수정일</th>
                                 <th class="table-active" scope="col" style="text-align: center">상태</th>
                                 <th class="table-active" scope="col" style="text-align: center">조회</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="item, stat : ${ProductOrderList}">
+                            <tr th:each="item, stat : ${ProductOrderCheckoutList}">
                                 <td th:text="${stat.index + 1}"></td>
                                 <td th:text="${item.productOrderNumber}"></td>
                                 <td style="text-align: center" th:text="${#dates.format(item.productOrderOrderdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -36,6 +37,7 @@
                                     <span th:if="${item.productOrderItemQuantity > 0}" th:text="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></span>
                                 </td>
                                 <td style="text-align: right" th:text="${item.productOrderPriceAmount}"></td>
+                                <td style="text-align: center" th:text="${#dates.format(item.productOrderModifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td style="text-align: center">
                                     <span th:if="${item.productOrderStatus == 1}" th:text="진행중"></span>
                                     <span th:if="${item.productOrderStatus == 2}" th:text="발주확인"></span>
@@ -95,7 +97,7 @@
     <!-- registration modal -->
     <div class="component-quotation-modal-container wrap-component-quotation-modal js-component-quotation-modal">
         <div class="component-quotation-modal-title">
-            <span>발주서</span>
+            <span>발주확인</span>
         </div>
         <div class="component-quotation-modal-main">
             <div class="component-quotation-modal-recipient">
@@ -214,7 +216,7 @@
         var productOrderId = $(this).data('product-order-id');
         $.ajax({
             type: 'GET',
-            url: '/ProductOrderInfoModal',
+            url: '/ProductOrderCheckoutConfirmationModal',
             data: {
                 productOrderId: productOrderId
             },
@@ -296,7 +298,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ProductOrderInfoModal',
+                url: '/ProductOrderCheckoutConfirmationModal',
                 data: {
                     productOrderId: productOrderId,
                     updateStatus: statusValue

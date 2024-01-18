@@ -11,47 +11,49 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
 @Log4j2
-public class ProductOrderController {
+public class ProductOrderCheckoutConfirmationController {
     private final ProductOrderService productOrderService;
     private final ProductOrderInfoService productOrderInfoService;
 
     @Autowired
-    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService) {
+    public ProductOrderCheckoutConfirmationController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
     }
 
-    @GetMapping("/ProductOrderStatus")
-    public String getOrderStatus(@RequestParam(defaultValue = "0", required = false) int page,
-                                  @RequestParam(defaultValue = "10", required = false) int pageSize,
-                                  Model model) {
+    @GetMapping("/ProductOrderCheckoutConfirmation")
+    public String getOrderCheckoutConfirmation(@RequestParam(defaultValue = "0", required = false) int page,
+                                               @RequestParam(defaultValue = "10", required = false) int pageSize,
+                                               Model model) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        List<ProductOrderListDTO> productOrderList = productOrderService.getProductOrderList(pageable);
-        model.addAttribute("ProductOrderList", productOrderList);
+        List<ProductOrderListDTO> productOrderCheckoutList = productOrderService.getProductOrderCheckoutList(pageable);
+        model.addAttribute("ProductOrderCheckoutList", productOrderCheckoutList);
 
         // Calculate total pages dynamically based on total item count
-        long totalItems = productOrderService.getProductOrderListCount(); // You need to implement this method
+        long totalItems = productOrderService.getProductOrderCheckoutListCount(); // You need to implement this method
         int totalPages = (int) Math.max(1, Math.ceil((double) totalItems / pageSize));
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
 
-        return "ProductOrderStatus";
+        return "ProductOrderCheckoutConfirmation";
     }
 
-    @GetMapping("/ProductOrderInfoModal")
+    @GetMapping("/ProductOrderCheckoutConfirmationModal")
     public ResponseEntity<ProductOrderInfoDataDTO> getModalData(@RequestParam("productOrderId") Integer productOrderId) {
         ProductOrderInfoDataDTO modalData = productOrderService.ProductOrderInfoData(productOrderId);
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/ProductOrderInfoModal")
+    @PostMapping("/ProductOrderCheckoutConfirmationModal")
     public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
                                                          @RequestParam("updateStatus") int updateStatus) {
 

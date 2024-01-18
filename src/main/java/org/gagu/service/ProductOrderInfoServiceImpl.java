@@ -1,37 +1,37 @@
 package org.gagu.service;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.gagu.entity.Product;
 import org.gagu.entity.ProductOrder;
-import org.gagu.repository.ProductOrderDetailRepository;
-import org.gagu.repository.ProductOrderRepository;
+import org.gagu.repository.ProductOrderInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ProductOrderDetailServiceImpl implements ProductOrderDetailService {
+public class ProductOrderInfoServiceImpl implements ProductOrderInfoService {
     @Autowired
-    private final ProductOrderDetailRepository productOrderDetailRepository;
+    private final ProductOrderInfoRepository productOrderInfoRepository;
 
 
     @Override
     public boolean updateProductOrderStatus(Integer productOrderId, int productOrderStatus) {
-        Optional<ProductOrder> optionalProductOrder = productOrderDetailRepository.findById(productOrderId);
+        Optional<ProductOrder> optionalProductOrder = productOrderInfoRepository.findById(productOrderId);
 
         if (optionalProductOrder.isPresent()) {
             ProductOrder productOrder = optionalProductOrder.get();
 
             ProductOrder updatedProductOrder = productOrder.toBuilder()
                     .productOrderStatus(productOrderStatus)
+                    .productOrderModifiedDate(Timestamp.valueOf(LocalDateTime.now())) //이부분
                     .build();
 
-            productOrderDetailRepository.save(updatedProductOrder);
+            productOrderInfoRepository.save(updatedProductOrder);
 
             return true;
         } else {
