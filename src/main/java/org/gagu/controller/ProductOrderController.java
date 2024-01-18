@@ -51,10 +51,13 @@ public class ProductOrderController {
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
 
-
     @PostMapping("/ProductOrderInfoModal")
-    public String postModalData(@RequestParam("productOrderId") Integer productOrderId, @RequestParam("updateStatus") int updateStatus) {
+    public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
+                                                         @RequestParam("updateStatus") int updateStatus) {
+
         productOrderDetailService.updateProductOrderStatus(productOrderId, updateStatus);
-        return null;
+        log.info("productOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
+        log.info(productOrderDetailService.updateProductOrderStatus(productOrderId, updateStatus));
+        return ResponseEntity.noContent().build();
     }
 }

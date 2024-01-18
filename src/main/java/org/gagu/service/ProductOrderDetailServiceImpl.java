@@ -10,6 +10,8 @@ import org.gagu.repository.ProductOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,14 +22,17 @@ public class ProductOrderDetailServiceImpl implements ProductOrderDetailService 
 
     @Override
     public boolean updateProductOrderStatus(Integer productOrderId, int productOrderStatus) {
-        ProductOrder productOrder = productOrderDetailRepository.findById(productOrderId).orElse(null);
+        Optional<ProductOrder> optionalProductOrder = productOrderDetailRepository.findById(productOrderId);
 
-        if (productOrder != null) {
-            productOrder.builder()
-            .productOrderStatus(productOrderStatus)
-            .build();
+        if (optionalProductOrder.isPresent()) {
+            ProductOrder productOrder = optionalProductOrder.get();
 
-            productOrderDetailRepository.save(productOrder);
+            ProductOrder updatedProductOrder = productOrder.toBuilder()
+                    .productOrderStatus(productOrderStatus)
+                    .build();
+
+            productOrderDetailRepository.save(updatedProductOrder);
+
             return true;
         } else {
             return false;

@@ -45,6 +45,7 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
                 .join(qBusinessVender).on(qProductOrder.businessvenderId.eq(qBusinessVender.businessvenderId))
                 .join(qProductOrderItem).on(qProductOrder.productOrderId.eq(qProductOrderItem.productOrderId))
                 .join(qProduct).on(qProductOrderItem.productId.eq(qProduct.productId))
+                .where(qProductOrder.productOrderStatus.eq(1))
                 .groupBy(qProductOrder.productOrderId)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

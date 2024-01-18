@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "product_order")
 public class ProductOrder {
     @Id
