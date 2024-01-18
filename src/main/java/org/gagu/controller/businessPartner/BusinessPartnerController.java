@@ -42,17 +42,4 @@ public class BusinessPartnerController {
         log.info("---------- POST TO REGISTER ---------------");
         return partnerService.registerResponse(responseDTO);
     }
-
-
-    @PostMapping("/businessPartner/{partnerId}")
-    public ResponseEntity<BusinessPartner> updatePartner(@RequestParam int partnerId, @RequestBody RegisterResponse response) {
-        Optional<BusinessPartner> updatedPartner = partnerService.updatePartnerById(partnerId, response);
-
-        if (updatedPartner.isPresent()) {
-            return new ResponseEntity<>(updatedPartner.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
 }

@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.business.RegisterResponse;
+import org.gagu.dto.business.UpdateRequest;
 import org.gagu.entity.businessPartner.BusinessPartner;
 import org.gagu.repository.businessPartner.PartnerRepository;
 import org.gagu.repository.member.MemberRepository;
@@ -36,9 +37,12 @@ public class PartnerServiceImpl implements PartnerService {
         return partnerRepository.save(businessPartner);
     }
 
-    @Transactional
     @Override
-    public void updatePartnerList(int partnerId) {
+    @Transactional
+    public void updatePartner(int partnerId, UpdateRequest updateRequest) {
+        BusinessPartner partner = partnerRepository.findById(partnerId)
+                .orElseThrow(() -> new IllegalArgumentException("Can not find partnerId : " + partnerId));
+
 
     }
 }

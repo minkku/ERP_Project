@@ -20,21 +20,6 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
             "FROM BusinessPartner b ")
     BusinessPartnerResponse findAll(@Param("partnerId") int partnerId);
 
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE " +
-                "BusinessPartner bp " +
-            "SET " +
-                "bp.bpName = :bpName, " +
-                "bp.companyNumber = :companyNumber, " +
-                "bp.phone = :phone, " +
-                "bp.fax = :fax, " +
-                "bp.address = :address, " +
-                "bp.headName = :headName, " +
-                "bp.type = :type, " +
-                "bp.note = :note, " +
-                "bp.bigType = :bigType, " +
-                "bp.smallType = :smallType " +
-            "WHERE " +
-                "bp.partnerId = :partnerId")
-    int updatePartnerById(@Param("partnerId") int partnerId);
+    @Query("SELECT bp FROM BusinessPartner bp WHERE bp.partnerId = :partnerId")
+    Optional<BusinessPartner> findById(@Param("partnerId") int partnerId);
 }

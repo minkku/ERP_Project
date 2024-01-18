@@ -1,6 +1,7 @@
 package org.gagu.service.businessPartner;
 
 import org.gagu.dto.business.RegisterResponse;
+import org.gagu.dto.business.UpdateRequest;
 import org.gagu.entity.businessPartner.BusinessPartner;
 import org.gagu.repository.businessPartner.PartnerRepository;
 
@@ -11,5 +12,5 @@ public interface PartnerService {
     BusinessPartner registerResponse(RegisterResponse registerResponse);
 
     // Update BusinessPartner
-    public void updatePartnerList(int partnerId);
+    void updatePartner(int partnerId, UpdateRequest updateRequest);
 }
