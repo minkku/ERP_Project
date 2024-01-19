@@ -39,10 +39,7 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     @Transactional
-    public void updatePartner(int partnerId, UpdateRequest updateRequest) {
-        BusinessPartner partner = partnerRepository.findById(partnerId)
-                .orElseThrow(() -> new IllegalArgumentException("Can not find partnerId : " + partnerId));
-
-
+    public void updatePartner(int partnerId, UpdateRequest request) {
+        partnerRepository.updatePartner(partnerId, request);
     }
 }

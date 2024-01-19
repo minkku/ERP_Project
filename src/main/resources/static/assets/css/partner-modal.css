@@ -416,3 +416,7 @@ partner-quotation-list-table-file{
 }
 .gradient-color-btn.blue:active   {background: #3d70a0;}
 /*gradient color botton end*/
+
+input[type=checkbox] {
+   zoom: 1.5;
+}

@@ -12,5 +12,5 @@ public interface PartnerService {
     BusinessPartner registerResponse(RegisterResponse registerResponse);
 
     // Update BusinessPartner
-    void updatePartner(int partnerId, UpdateRequest updateRequest);
+    void updatePartner(int partnerId,UpdateRequest request);
 }
