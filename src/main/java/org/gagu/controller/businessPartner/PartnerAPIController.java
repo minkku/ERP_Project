@@ -5,7 +5,6 @@ import org.gagu.dto.business.BusinessPartnerDetailResponse;
 import org.gagu.dto.business.BusinessPartnerResponse;
 import org.gagu.dto.business.UpdateRequest;
 import org.gagu.service.businessPartner.PartnerService;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class PartnerAPIController {
         try {
             BusinessPartnerDetailResponse partnerDetailResponse = partnerService.getBusinessPartnerDetail(partnerId);
             return new ResponseEntity<>(partnerDetailResponse, HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException) {
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
