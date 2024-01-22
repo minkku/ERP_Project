@@ -3,6 +3,7 @@ package org.gagu.controller;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
+import org.gagu.service.ProductOrderCheckoutConfirmationService;
 import org.gagu.service.ProductOrderInfoService;
 import org.gagu.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ import java.util.List;
 public class ProductOrderController {
     private final ProductOrderService productOrderService;
     private final ProductOrderInfoService productOrderInfoService;
+    private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
 
     @Autowired
-    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService) {
+    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
+        this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
     }
 
     @GetMapping("/ProductOrderStatus")

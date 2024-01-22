@@ -15,6 +15,7 @@
     }
     .s-component-quotation-modal-title span{
         font-size: 15px;
+        font-size: 15px;
         color: white;
     }
     .s-component-quotation-modal-main {
@@ -151,10 +152,19 @@
         z-index: 20;
         text-align: center;
     }
-    .s-component-quotation-modal-quotation-list .s-component-quotation-modal-quotation-list-table tr:not(:first-child) td {
+    .s-component-quotation-modal-quotation-list .s-product-inventory-modal-quotation-list-table tr:not(:first-child) td {
         text-align: center;
     }
-    .s-component-quotation-modal-quotation-list .s-component-quotation-modal-quotation-list-table tr td input {
+    .s-component-quotation-modal-quotation-list .s-product-inventory-modal-quotation-list-table tr td input {
+        width: 90%;
+        height: 90%;
+        border-width: 0;
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-component-inventory-modal-quotation-list-table tr:not(:first-child) td {
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-component-inventory-modal-quotation-list-table tr td input {
         width: 90%;
         height: 90%;
         border-width: 0;
@@ -238,3 +248,47 @@
       color:white; text-decoration: none; border-bottom: 0px solid rgba(61,112,160,0.21);
     }
     .s-component-quotation-modal-btn.blue:active   {background: #3d70a0;}
+
+    .custom-button {
+      text-decoration: none;
+      color: white;
+      padding: 10px 30px;
+      margin: 5px;
+      display: inline-block;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.21);
+      border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+      border-radius: 4px;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+
+    .custom-button.blue {
+      background: #7ca5ce;
+      background: -moz-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #7ca5ce), color-stop(100%, #3d70a0));
+      background: -webkit-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -o-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -ms-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: linear-gradient(to bottom, #7ca5ce 0%, #3d70a0 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ca5ce', endColorstr='#3d70a0', GradientType=0 );
+    }
+
+    .custom-button.blue:hover {
+      background: #88b3db;
+      background: -moz-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #88b3db), color-stop(100%, #5a85ad));
+      background: -webkit-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -o-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -ms-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: linear-gradient(to bottom, #88b3db 0%, #5a85ad 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88b3db', endColorstr='#5a85ad', GradientType=0 );
+      color: white;
+      text-decoration: none;
+      border-bottom: 0px solid rgba(61, 112, 160, 0.21);
+    }
+
+    .custom-button.blue:active {
+      background: #3d70a0;
+    }

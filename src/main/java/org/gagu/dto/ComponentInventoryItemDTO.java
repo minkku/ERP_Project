@@ -9,13 +9,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ComponentInventoryItemDTO {
     String componentId;
-    Integer productNecessarycomponentaAount;
+    Integer productNecessarycomponentAmount;
     Integer componentInventoryQuantity;
 
-    public ComponentInventoryItemDTO(String componentId, Integer productNecessarycomponentaAount,
+    public ComponentInventoryItemDTO(String componentId, Integer productNecessarycomponentAmount,
                                    Integer componentInventoryQuantity) {
         this.componentId = componentId;
-        this.productNecessarycomponentaAount = productNecessarycomponentaAount;
+        this.productNecessarycomponentAmount = productNecessarycomponentAmount;
         this.componentInventoryQuantity = componentInventoryQuantity;
     }
 }

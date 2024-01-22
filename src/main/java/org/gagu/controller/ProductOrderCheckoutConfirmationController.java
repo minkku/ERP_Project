@@ -1,8 +1,11 @@
 package org.gagu.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.gagu.dto.ComponentInventoryItemDTO;
+import org.gagu.dto.ProductInventoryItemDTO;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
+import org.gagu.service.ProductOrderCheckoutConfirmationService;
 import org.gagu.service.ProductOrderInfoService;
 import org.gagu.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +25,13 @@ import java.util.List;
 public class ProductOrderCheckoutConfirmationController {
     private final ProductOrderService productOrderService;
     private final ProductOrderInfoService productOrderInfoService;
+    private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
 
     @Autowired
-    public ProductOrderCheckoutConfirmationController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService) {
+    public ProductOrderCheckoutConfirmationController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
+        this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
     }
 
     @GetMapping("/ProductOrderCheckoutConfirmation")
@@ -53,13 +58,27 @@ public class ProductOrderCheckoutConfirmationController {
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/ProductOrderCheckoutConfirmationModal")
-    public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
-                                                         @RequestParam("updateStatus") int updateStatus) {
-
-        productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus);
-        log.info("\nproductOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
-        log.info(productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus));
-        return ResponseEntity.noContent().build();
+    @GetMapping("/ProductInventoryItemModal")
+    public ResponseEntity<List<ProductInventoryItemDTO>> getProductInventoryItem(@RequestParam("productOrderId") Integer productOrderId) {
+        List<ProductInventoryItemDTO> modalData = productOrderCheckoutConfirmationService.getProductInventoryItemList(productOrderId);
+        log.info(modalData + "=  상품재고및 필요수량");
+        return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
+    @GetMapping("/ComponentInventoryItemModal")
+    public ResponseEntity<List<ComponentInventoryItemDTO>> getComponentInventoryItem(@RequestParam("productId") String productId,
+                                                                                     @RequestParam("productOrderId") Integer productOrderId) {
+        List<ComponentInventoryItemDTO> modalData = productOrderCheckoutConfirmationService.getComponentInventoryItemList(productId);
+        log.info(modalData + "=  부품재고및 필요수량");
+        return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
+    }
+
+//    @PostMapping("/ProductOrderCheckoutConfirmationModal")
+//    public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
+//                                                         @RequestParam("updateStatus") int updateStatus) {
+//
+//        productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus);
+//        log.info("\nproductOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
+//        log.info(productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus));
+//        return ResponseEntity.noContent().build();
+//    }
 }

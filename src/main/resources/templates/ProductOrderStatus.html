@@ -210,6 +210,7 @@
     /*[ Show component-quotation modal ]*/
     $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
         e.preventDefault();
+        deleteTableContent();
 
         var productOrderId = $(this).data('product-order-id');
         $.ajax({
@@ -317,10 +318,14 @@
 
     });
 
+    function deleteTableContent() {
+        $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+    }
+
     $('.js-hide-component-quotation-modal').on('click', function() { // 취소
         totalPrice = 0;
         $('.js-component-quotation-modal input').val('');
-        $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+        deleteTableContent();
         $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
     });
 </script>

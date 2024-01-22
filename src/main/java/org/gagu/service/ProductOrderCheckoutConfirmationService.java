@@ -15,10 +15,10 @@ import java.util.List;
 public class ProductOrderCheckoutConfirmationService {
     private final InventoryItemRepository inventoryItemRepository;
 
-    List<ProductInventoryItemDTO> getProductInventoryItemList(Integer productOrderId) {
+    public List<ProductInventoryItemDTO> getProductInventoryItemList(Integer productOrderId) {
         return inventoryItemRepository.findProductNecessaryInventoryByOProductOrderId(productOrderId);
     }
-    List<ComponentInventoryItemDTO> getComponentInventoryItemList(String productId) {
+    public List<ComponentInventoryItemDTO> getComponentInventoryItemList(String productId) {
         return inventoryItemRepository.findComponentNecessaryInventoryByProductId(productId);
     }
 }

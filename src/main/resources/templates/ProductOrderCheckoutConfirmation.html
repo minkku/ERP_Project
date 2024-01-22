@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="s-component-quotation-modal-quotation-list" data-s-component-quotation-modal-quotation-list-top="0" data-s-component-quotation-modal-quotation-list-left="0">
-                <table class="s-component-quotation-modal-quotation-list-table">
+                <table class="s-component-inventory-modal-quotation-list-table">
                     <colgroup>
                         <col style="width: 20%">
                         <col style="width: 12%">
@@ -162,44 +162,14 @@
                     </colgroup>
                     <tr>
                         <td class="s-component-quotation-modal-quotation-list-top">부품</td>
-                        <td class="s-component-quotation-modal-quotation-list-top">EA</td>
+                        <td class="s-component-quotation-modal-quotation-list-top">필요수량</td>
                         <td class="s-component-quotation-modal-quotation-list-top">재고</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
                     </tr>
                 </table>
             </div>
 
             <div class="s-component-quotation-modal-quotation-list" data-s-component-quotation-modal-quotation-list-top="0" data-s-component-quotation-modal-quotation-list-left="0">
-                <table class="s-component-quotation-modal-quotation-list-table">
+                <table class="s-product-inventory-modal-quotation-list-table">
                     <colgroup>
                         <col style="width: 20%">
                         <col style="width: 12%">
@@ -211,45 +181,6 @@
                         <td class="s-component-quotation-modal-quotation-list-top">주문수량</td>
                         <td class="s-component-quotation-modal-quotation-list-top">재고</td>
                         <td class="s-component-quotation-modal-quotation-list-top">상세</td>
-
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td>
-                            <a href="#" class="s-component-quotation-modal-btn blue">상세</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
                     </tr>
                 </table>
             </div>
@@ -273,6 +204,7 @@
     /*[ Show component-quotation modal ]*/
     $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
         e.preventDefault();
+        deleteTableContent();
 
         var productOrderId = $(this).data('product-order-id');
         $.ajax({
@@ -283,19 +215,38 @@
             },
             success: function(response) {
                 console.log('Success:', response);
-                updateProductOrderItems(response.productOrderItems);
-                updateModalContent(response, totalPrice);
+                updateModalContent(response);
             },
             error: function() {
                 console.error('Failed to fetch ProductOrderInfoDataDTO');
             }
         });
 
+        $.ajax({
+            type: 'GET',
+            url: '/ProductInventoryItemModal',
+            data: {
+                productOrderId: productOrderId
+            },
+            success: function(response) {
+                console.log('Success:', response);
+                updateProductInventoryItems(response);
+            },
+            error: function() {
+                console.error('Failed to fetch ProductInventory');
+            }
+        });
+
 
     });
+
+    function deleteTableContent() {
+        $('.s-product-inventory-modal-quotation-list-table tbody .s-product-inventory').remove();
+        $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
+    }
     var totalPrice = 0;
 
-    function updateModalContent(data, price) {
+    function updateModalContent(data) {
         // 날짜 형식 변환 함수
         function formatDate(dateString) {
             var date = new Date(dateString);
@@ -328,57 +279,58 @@
         $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
     }
 
-    function updateProductOrderItems(productOrderItems) {
-        var tableBody = $('.s-component-quotation-modal-component-quotation-list-table tbody');
+    function updateProductInventoryItems(productInventory) {
+        var tableBody = $('.s-product-inventory-modal-quotation-list-table tbody');
         tableBody.append();
 
-        $.each(productOrderItems, function(index, item) {
-            var row = $('<tr class="product-order-item"></tr>');
+        $.each(productInventory, function(index, item) {
+            var row = $('<tr class="s-product-inventory"></tr>');
             row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
             row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productSpecification + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productOrderItemPrice + '" readonly></td>');
-            row.append('<td><input type="text" value="KOR"></td>');
-            row.append('<td><input type="text" value="' + item.productOrderItemTotalprice + '" readonly></td>');
-            row.append('<td><input type="text" value="' + (item.productOrderItemTotalprice * 0.1) + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productOrderItemNote + '" readonly></td>');
-            totalPrice += item.productOrderItemTotalprice;
+            row.append('<td><input type="text" value="' + item.productInventoryQuantity + '" readonly></td>');
+            row.append('<td><button name="modal-productId" class="custom-button blue" value="' + item.productId + '">상세</button></td>');
             tableBody.append(row);
         });
     }
-    $('.js-component-quotation-modal .gradient-color-btn.blue').on('click', function(e) { // 발주완료
+
+    $('.s-product-inventory-modal-quotation-list-table').on('click', '.custom-button.blue', function(e) {
+        console.log('Button Clicked');
         e.preventDefault();
 
-            var productOrderId = $('#modal-productOrderId').val(); // 원하는 발주 번호로 수정
-            var statusValue = 2;
-
-            $.ajax({
-                type: 'POST',
-                url: '/ProductOrderCheckoutConfirmationModal',
+        var productOrderId = $('#modal-productOrderId').val();
+        var productId = $(this).val();
+        $.ajax({
+                type: 'GET',
+                url: '/ComponentInventoryItemModal',
                 data: {
                     productOrderId: productOrderId,
-                    updateStatus: statusValue
+                    productId: productId
                 },
-                success: function() {
-                    $('.js-s-component-quotation-modal input').val('');
-                    $('.s-component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
-                    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+                success: function(response) {
+                    $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
+                    updateComponentInventoryItems(response);
 
-                    alert('발주완료되었습니다. 출고확정을 해주세요.');
-
-                    location.reload();
                 },
                 error: function() {
-                    console.error('Failed to update status');
+                    console.error('Failed to update ComponentInventory');
                 }
-            });
-
+        });
     });
+    function updateComponentInventoryItems(componentInventory) {
+        var tableBody = $('.s-component-inventory-modal-quotation-list-table tbody');
+        tableBody.append();
 
+        $.each(componentInventory, function(index, item) {
+            var row = $('<tr class="s-component-inventory"></tr>');
+            row.append('<td><input type="text" value="' + item.componentId + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productNecessarycomponentAmount + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.componentInventoryQuantity + '" readonly></td>');
+            tableBody.append(row);
+        });
+    }
     $('.js-hide-component-quotation-modal').on('click', function() { // 취소
-        totalPrice = 0;
         $('.js-s-component-quotation-modal input').val('');
-        $('.s-component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+        deleteTableContent();
         $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
     });
 </script>
