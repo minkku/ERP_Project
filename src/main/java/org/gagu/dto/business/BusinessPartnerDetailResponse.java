@@ -1,10 +1,21 @@
 package org.gagu.dto.business;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@Builder
 public class BusinessPartnerDetailResponse {
-    private final int partnerId;
+    private int partnerId;
+    private String bpName;
+    private String companyNumber;
+    private String phone;
+    private String fax;
+    private String address;
+    private String headName;
+    private String type;
+    private String note;
+    private String bigType;
+    private String smallType;
 }

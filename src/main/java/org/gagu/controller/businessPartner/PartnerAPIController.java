@@ -7,6 +7,7 @@ import org.gagu.dto.business.UpdateRequest;
 import org.gagu.service.businessPartner.PartnerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +17,11 @@ public class PartnerAPIController {
     private final PartnerService partnerService;
 
     @GetMapping("detail/{partnerId}")
-    public ResponseEntity<BusinessPartnerResponse> getBusinessPartnerDetail(@PathVariable int partnerId) {
-        try {
-            BusinessPartnerDetailResponse partnerDetailResponse = partnerService.getBusinessPartnerDetail(partnerId);
-            return new ResponseEntity<>(partnerDetailResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public String detail(@PathVariable("partnerId") int partnerId, Model model) {
+        BusinessPartnerDetailResponse businessPartnerDetailResponse = partnerService.getDetail(partnerId);
+
+        model.addAttribute("DetailRes", businessPartnerDetailResponse);
+        return "businessPartner";
     }
 
     @PutMapping("/updating")
