@@ -2,6 +2,7 @@ package org.gagu.controller.businessPartner;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.gagu.dto.business.BusinessPartnerDetailResponse;
 import org.gagu.dto.business.BusinessPartnerResponse;
 import org.gagu.dto.business.RegisterResponse;
 import org.gagu.entity.businessPartner.BusinessPartner;
@@ -41,5 +42,13 @@ public class BusinessPartnerController {
     public BusinessPartner register(@RequestBody RegisterResponse responseDTO) {
         log.info("---------- POST TO REGISTER ---------------");
         return partnerService.registerResponse(responseDTO);
+    }
+
+    @GetMapping("/updatePartner")
+    public ResponseEntity<BusinessPartner> getUpdatePartner(@RequestParam("partnerId") int partnerId) {
+        log.info("0-0-0-0-00-0");
+        BusinessPartner result = partnerService.getPartner(partnerId);
+        log.info("sdasdasdasdasd" + result);
+        return  result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
 }

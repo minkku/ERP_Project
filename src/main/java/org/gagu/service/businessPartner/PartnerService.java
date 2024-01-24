@@ -14,6 +14,7 @@ public interface PartnerService {
 
     public BusinessPartnerDetailResponse getDetail(int partnerId);
 
+    public BusinessPartner getPartner(int partnerId);
     // Update BusinessPartner
     void updatePartner(int partnerId,UpdateRequest request);
 }

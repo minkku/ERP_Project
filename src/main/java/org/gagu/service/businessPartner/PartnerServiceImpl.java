@@ -7,6 +7,7 @@ import org.gagu.dto.business.BusinessPartnerDetailResponse;
 import org.gagu.dto.business.RegisterResponse;
 import org.gagu.dto.business.UpdateRequest;
 import org.gagu.entity.businessPartner.BusinessPartner;
+import org.gagu.repository.businessPartner.PartnerInfoRepository;
 import org.gagu.repository.businessPartner.PartnerRepository;
 import org.gagu.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,13 @@ import java.util.Optional;
 public class PartnerServiceImpl implements PartnerService {
     private final PartnerRepository partnerRepository;
     private final MemberRepository memberRepository;
+    private final PartnerInfoRepository partnerInfoRepository;
+
 
     @Override
     @Transactional
     public BusinessPartnerDetailResponse getDetail(int partnerId) {
-        Optional<BusinessPartner> b = partnerRepository.findById(partnerId);
+        Optional<BusinessPartner> b = partnerInfoRepository.findById(partnerId);
         BusinessPartner businessPartner = b.get();
 
         BusinessPartnerDetailResponse businessPartnerDetailResponse = BusinessPartnerDetailResponse.builder()
@@ -41,6 +44,12 @@ public class PartnerServiceImpl implements PartnerService {
                 .smallType(businessPartner.getSmallType())
                 .build();
         return businessPartnerDetailResponse;
+    }
+
+    @Override
+    public BusinessPartner getPartner(int partnerId) {
+        log.info("service impl --------------------------------------------" + partnerInfoRepository.findByPartnerId(partnerId));
+        return partnerInfoRepository.findByPartnerId(partnerId);
     }
 
     @Override
