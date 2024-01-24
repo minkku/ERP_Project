@@ -187,10 +187,10 @@
             <div class="s-component-quotation-modal-summary">
                 <div class="s-component-quotation-modal-submit-button">
                     <input type="hidden" id="modal-productOrderId" name="modal-productOrderId">
-                    <a href="#" class="s-component-quotation-modal-btn blue" style="width: 100px;">등록</a>
+                    <a href="#" class="gradient-color-btn blue js-complete-order" style="width: 100px;">확정</a>
                     <a href="#" class="s-component-quotation-modal-btn blue" style="width: 100px;">취소</a>
                     <a href="#" class="s-component-quotation-modal-btn blue" style="width: 100px;">취소</a>
-                    <a href="#" class="s-component-quotation-modal-btn blue" style="width: 100px;">취소</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal" style="width: 100px;">취소</a>
                 </div>
             </div>
 
@@ -285,10 +285,13 @@
 
         $.each(productInventory, function(index, item) {
             var row = $('<tr class="s-product-inventory"></tr>');
+            var buttonText = (item.productOrderItemQuantity <= item.productInventoryQuantity) ?
+            '<td>출고가능</td>' : '<td><button name="modal-productId" class="custom-button blue" value="' + item.productId + '">상세</button></td>';
+
             row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
             row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
             row.append('<td><input type="text" value="' + item.productInventoryQuantity + '" readonly></td>');
-            row.append('<td><button name="modal-productId" class="custom-button blue" value="' + item.productId + '">상세</button></td>');
+            row.append(buttonText);
             tableBody.append(row);
         });
     }
@@ -328,6 +331,36 @@
             tableBody.append(row);
         });
     }
+
+    $('.gradient-color-btn.blue.js-complete-order').on('click', function(e) { // 확정
+        e.preventDefault();
+
+            var productOrderId = $('#modal-productOrderId').val();
+            var statusValue = 3;
+
+            $.ajax({
+                type: 'POST',
+                url: '/ProductOrderCheckoutConfirmationModal',
+                data: {
+                    productOrderId: productOrderId,
+                    updateStatus: statusValue
+                },
+                success: function() {
+                    $('.js-s-component-quotation-modal input').val('');
+                    deleteTableContent();
+                    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+
+                    alert('출고완료되었습니다.');
+
+                    location.reload();
+                },
+                error: function() {
+                    console.error('Failed to update status');
+                }
+            });
+
+    });
+
     $('.js-hide-component-quotation-modal').on('click', function() { // 취소
         $('.js-s-component-quotation-modal input').val('');
         deleteTableContent();

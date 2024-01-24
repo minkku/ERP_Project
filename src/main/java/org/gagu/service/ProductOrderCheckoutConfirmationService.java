@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.gagu.dto.ComponentInventoryItemDTO;
 import org.gagu.dto.ProductInventoryItemDTO;
+import org.gagu.entity.ProductInventory;
 import org.gagu.repository.InventoryItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,5 @@ public class ProductOrderCheckoutConfirmationService {
     public List<ComponentInventoryItemDTO> getComponentInventoryItemList(String productId) {
         return inventoryItemRepository.findComponentNecessaryInventoryByProductId(productId);
     }
+
 }

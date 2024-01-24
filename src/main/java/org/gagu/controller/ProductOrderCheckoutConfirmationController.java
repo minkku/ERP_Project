@@ -5,6 +5,7 @@ import org.gagu.dto.ComponentInventoryItemDTO;
 import org.gagu.dto.ProductInventoryItemDTO;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
+import org.gagu.service.ProductInventoryService;
 import org.gagu.service.ProductOrderCheckoutConfirmationService;
 import org.gagu.service.ProductOrderInfoService;
 import org.gagu.service.ProductOrderService;
@@ -27,11 +28,14 @@ public class ProductOrderCheckoutConfirmationController {
     private final ProductOrderInfoService productOrderInfoService;
     private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
 
+    private final ProductInventoryService productInventoryService;
+
     @Autowired
-    public ProductOrderCheckoutConfirmationController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
+    public ProductOrderCheckoutConfirmationController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService, ProductInventoryService productInventoryService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
         this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
+        this.productInventoryService = productInventoryService;
     }
 
     @GetMapping("/ProductOrderCheckoutConfirmation")
@@ -72,13 +76,14 @@ public class ProductOrderCheckoutConfirmationController {
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
 
-//    @PostMapping("/ProductOrderCheckoutConfirmationModal")
-//    public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
-//                                                         @RequestParam("updateStatus") int updateStatus) {
-//
-//        productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus);
-//        log.info("\nproductOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
-//        log.info(productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus));
-//        return ResponseEntity.noContent().build();
-//    }
+    @PostMapping("/ProductOrderCheckoutConfirmationModal")
+    public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
+                                                         @RequestParam("updateStatus") int updateStatus) {
+        log.info("출고확정컨트롤러");
+        productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus);
+        log.info("\nproductOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
+        productInventoryService.updateProductInventory(productOrderId);
+        log.info(productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus));
+        return ResponseEntity.noContent().build();
+    }
 }
