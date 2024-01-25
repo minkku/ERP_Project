@@ -90,6 +90,37 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
     }
 
     @Override
+    public List<ProductOrderListDTO> findProductOrderAllList(Pageable pageable) {
+        QProduct qProduct = QProduct.product;
+        QProductOrder qProductOrder = QProductOrder.productOrder;
+        QProductOrderItem qProductOrderItem = QProductOrderItem.productOrderItem;
+        QBusinessVender qBusinessVender = QBusinessVender.businessVender;
+
+        List<ProductOrderListDTO> result = jpaQueryFactory
+                .select(Projections.bean(ProductOrderListDTO.class,
+                        qProductOrder.productOrderNumber,
+                        qProductOrder.productOrderOrderdate.max().as("productOrderOrderdate"),
+                        qProductOrder.productOrderModifiedDate.max().as("productOrderModifiedDate"),
+                        qBusinessVender.businessvenderName,
+                        qProduct.productId.max().as("productName"),
+                        qProductOrderItem.productOrderItemId.count().intValue().as("productOrderItemQuantity"),
+                        qProductOrder.productOrderPriceAmount.max().as("productOrderPriceAmount"),
+                        qProductOrder.productOrderStatus.max().as("productOrderStatus"),
+                        qProductOrder.productOrderId))
+                .from(qProductOrder)
+                .join(qBusinessVender).on(qProductOrder.businessvenderId.eq(qBusinessVender.businessvenderId))
+                .join(qProductOrderItem).on(qProductOrder.productOrderId.eq(qProductOrderItem.productOrderId))
+                .join(qProduct).on(qProductOrderItem.productId.eq(qProduct.productId))
+                .groupBy(qProductOrder.productOrderId)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+        for (ProductOrderListDTO dto : result) {
+            log.info("ProductOrderCheckoutListDTO: {}", dto);
+        }
+        return result;
+    }
+    @Override
     public long findProductOrderListCount() {
         QProductOrder qProductOrder = QProductOrder.productOrder;
         long result = jpaQueryFactory

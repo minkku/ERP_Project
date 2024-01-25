@@ -32,6 +32,10 @@ public class ProductOrderService {
         return productOrderRepository.findProductOrderCheckoutList(pageable);
     }
 
+    public List<ProductOrderListDTO> getProductOrderAllList(Pageable pageable) {
+        return productOrderRepository.findProductOrderAllList(pageable);
+    }
+
     public long getProductOrderListCount() {
         return productOrderRepository.findProductOrderListCount();
     }
