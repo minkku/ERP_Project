@@ -21,7 +21,7 @@ public class VenderController {
                                 @RequestParam(value = "size", defaultValue = "10") int size,
                                 @RequestParam(value = "page", defaultValue = "0")int page)
     {
-        Page<Vender> getVenderList = VenderService.getVenderList(size, page);
+        Page<Vender> getVenderList = venderService.getVenderList(size, page);
 
         model.addAttribute("list", getVenderList);
 
