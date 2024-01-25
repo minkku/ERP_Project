@@ -73,7 +73,6 @@
 
                     <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
                         <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
-                        <a href="#" class="gradient-color-btn blue">삭제</a>
                     </div>
                 </div>
 
@@ -186,6 +185,7 @@
                 </div>
                 <div class="partner-quotation-modal-submit-button">
                     <a href="#" class="gradient-color-btn blue" onclick="updatePost()">수정</a>
+                    <a href="#" class="gradient-color-btn blue" onclick="deletePost()">삭제</a>
                     <a href="#" class="gradient-color-btn blue js-hide-partner-quotation-modal">취소</a>
                 </div>
             </div>
@@ -240,8 +240,13 @@
                 }),
             });
 
-            closeModal();
-            location.reload(); // 페이지 새로고침
+            if(!response) {
+                console.log("Failed registration for businessPartner");
+            } else {
+                console.log("Success to registration for businessPartner");
+            }
+
+            location.href = "/partnerList";
         } catch (error) {
             console.error('Error saving post:', error);
         }
@@ -275,7 +280,7 @@
         $('#partner-quotation-modal-input-supplier-phone').val(data.phone);
         $('#partner-quotation-modal-input-supplier-fax').val(data.fax);
         $('#partner-modal-input-supplier-type').val(data.type);
-        $('#note').val(data.note);
+        $('#note-for-update').val(data.note);
         $('#modal-getPartnerId').val(data.partnerId);
 
         $('.js-partner-quotation-modal').addClass('show-partner-quotation-modal');
@@ -295,13 +300,12 @@
         const bigType = document.getElementById('partner-quotation-modal-input-supplier-business-type').value;
         const headName = document.getElementById('partner-quotation-modal-input-supplier-representative').value;
         const phone = document.getElementById('partner-quotation-modal-input-supplier-phone').value;
-        const fax = document.getElementById('partner-quotation-modal-input-partner-fax').value;
-        const smallType = document.getElementById('partner-quotation-modal-input-partner-type').value;
-        const note = document.querySelector('note-for-update').value;
+        const fax = document.getElementById('partner-quotation-modal-input-supplier-fax').value;
+        const smallType = document.getElementById('partner-modal-input-supplier-type').value;
+        const note = document.getElementById('note-for-update').value;
 
         console.log("------ updating -------");
         try {
-            const partnerId = $(this).data('id');
             const response = await fetch('/api/updating?partnerId=' + partnerId , {
                 method: 'PUT',
                 headers: {
@@ -317,7 +321,7 @@
                     phone,
                     fax,
                     smallType,
-                    note,
+                    note
                 }),
             });
 
@@ -327,7 +331,7 @@
                 console.log("Success to updated a list");
             }
 
-            location.href = "/businessPartner";
+            location.href = "/partnerList";
         } catch(error) {
             console.log("commit error : " + error);
         }

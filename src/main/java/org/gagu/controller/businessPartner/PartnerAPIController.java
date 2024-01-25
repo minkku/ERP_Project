@@ -1,6 +1,7 @@
 package org.gagu.controller.businessPartner;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.business.BusinessPartnerDetailResponse;
 import org.gagu.dto.business.BusinessPartnerResponse;
 import org.gagu.dto.business.UpdateRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Log4j2
 public class PartnerAPIController {
     private final PartnerService partnerService;
 
@@ -25,9 +27,10 @@ public class PartnerAPIController {
     }
 
     @PutMapping("/updating")
-    public ResponseEntity<String> updatePartner(@RequestParam int partnerId,@RequestBody UpdateRequest request) {
+    public ResponseEntity<String> updatePartner(@RequestParam("partnerId") int partnerId, @RequestBody UpdateRequest request) {
+        log.info("putmapping---------------------------------");
         try {
-            partnerService.updatePartner(partnerId,request);
+            partnerService.updatePartner(partnerId, request);
             return ResponseEntity.ok("Success to update : " + partnerId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Fail to update : " + e.getMessage());
