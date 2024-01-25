@@ -11,4 +11,6 @@ public interface InventoryItemRepository {
     List<ProductInventoryItemDTO> findProductNecessaryInventoryByOProductOrderId(Integer productOrderId);
 
     List<ComponentInventoryItemDTO> findComponentNecessaryInventoryByProductId(String productId);
+
+    ProductInventoryItemDTO findProductInventoryByProductId(String productId, Integer productOrderId);
 }

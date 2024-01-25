@@ -1,5 +1,6 @@
 package org.gagu.repository;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.log4j.Log4j2;
@@ -66,6 +67,30 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
         for (ComponentInventoryItemDTO dto : result) {
             log.info("ComponentInventoryItemDTO: {}", dto);
         }
+        return result;
+    }
+
+    @Override
+    public ProductInventoryItemDTO findProductInventoryByProductId(String productId, Integer productOrderId) {
+        QProduct qProduct = QProduct.product;
+        QProductOrder qProductOrder = QProductOrder.productOrder;
+        QProductOrderItem qProductOrderItem = QProductOrderItem.productOrderItem;
+        QProductInventory qProductInventory = QProductInventory.productInventory;
+
+        ProductInventoryItemDTO result = jpaQueryFactory
+                .select(Projections.bean(ProductInventoryItemDTO.class,
+                        qProduct.productId,
+                        qProductOrderItem.productOrderItemQuantity,
+                        qProductInventory.productInventoryQuantity))
+                .from(qProductOrderItem)
+                .join(qProduct).on(qProductOrderItem.productId.eq(qProduct.productId))
+                .join(qProductOrder).on(qProductOrderItem.productOrderId.eq(qProductOrder.productOrderId))
+                .join(qProductInventory).on(qProductOrderItem.productId.eq(qProductInventory.productId))
+                .where(new BooleanBuilder()
+                        .and(qProductOrderItem.productOrderId.eq(productOrderId))
+                        .and(qProduct.productId.eq(productId)))
+                .fetchOne();
+        log.info("ProductInventoryItemDTO: {}", result);
         return result;
     }
 }

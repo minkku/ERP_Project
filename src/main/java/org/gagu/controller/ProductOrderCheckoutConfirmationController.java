@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -69,11 +71,16 @@ public class ProductOrderCheckoutConfirmationController {
         return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
     }
     @GetMapping("/ComponentInventoryItemModal")
-    public ResponseEntity<List<ComponentInventoryItemDTO>> getComponentInventoryItem(@RequestParam("productId") String productId,
-                                                                                     @RequestParam("productOrderId") Integer productOrderId) {
-        List<ComponentInventoryItemDTO> modalData = productOrderCheckoutConfirmationService.getComponentInventoryItemList(productId);
-        log.info(modalData + "=  부품재고및 필요수량");
-        return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
+    public ResponseEntity<Map<String, Object>> getComponentInventoryItem(@RequestParam("productId") String productId,
+                                                          @RequestParam("productOrderId") Integer productOrderId) {
+        List<ComponentInventoryItemDTO> componentInventoryItemList = productOrderCheckoutConfirmationService.getComponentInventoryItemList(productId);
+        ProductInventoryItemDTO productInventoryItem = productOrderCheckoutConfirmationService.getProductInventoryItem(productId, productOrderId);
+
+        Map<String, Object> modalData = new HashMap<>();
+        modalData.put("component", componentInventoryItemList);
+        modalData.put("product", productInventoryItem);
+        log.info(modalData + "=  상품,부품재고및 필요수량");
+        return ResponseEntity.ok(modalData);
     }
 
     @PostMapping("/ProductOrderCheckoutConfirmationModal")

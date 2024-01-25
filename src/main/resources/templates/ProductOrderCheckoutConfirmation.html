@@ -201,170 +201,188 @@
 
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script th:inline="javascript">
-    /*[ Show component-quotation modal ]*/
-    $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
-        e.preventDefault();
-        deleteTableContent();
+    $(document).ready(function() {
+        var isAnyAvailable = 0;
+        var itemQuantity = 0;
+        /*[ Show component-quotation modal ]*/
+        $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
+            e.preventDefault();
+            deleteTableContent();
+            resetAnyAvailable();
 
-        var productOrderId = $(this).data('product-order-id');
-        $.ajax({
-            type: 'GET',
-            url: '/ProductOrderCheckoutConfirmationModal',
-            data: {
-                productOrderId: productOrderId
-            },
-            success: function(response) {
-                console.log('Success:', response);
-                updateModalContent(response);
-            },
-            error: function() {
-                console.error('Failed to fetch ProductOrderInfoDataDTO');
-            }
-        });
-
-        $.ajax({
-            type: 'GET',
-            url: '/ProductInventoryItemModal',
-            data: {
-                productOrderId: productOrderId
-            },
-            success: function(response) {
-                console.log('Success:', response);
-                updateProductInventoryItems(response);
-            },
-            error: function() {
-                console.error('Failed to fetch ProductInventory');
-            }
-        });
-
-
-    });
-
-    function deleteTableContent() {
-        $('.s-product-inventory-modal-quotation-list-table tbody .s-product-inventory').remove();
-        $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
-    }
-    var totalPrice = 0;
-
-    function updateModalContent(data) {
-        // 날짜 형식 변환 함수
-        function formatDate(dateString) {
-            var date = new Date(dateString);
-            var year = date.getFullYear();
-            var month = (date.getMonth() + 1).toString().padStart(2, '0');
-            var day = date.getDate().toString().padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-    // 발주일 날짜 형식 변환
-        var orderDate = formatDate(data.productOrder.productOrderOrderdate);
-        $('#s-component-quotation-modal-input-component-quotation-date').val(orderDate);
-
-        // 납기일 날짜 형식 변환
-        var deliveryDate = formatDate(data.productOrder.productOrderDeliverydate);
-        $('#s-component-quotation-modal-input-supplier-delivery-date').val(deliveryDate);
-
-        // 나머지 데이터 갱신
-        $('#s-component-quotation-modal-input-member').val(data.productOrder.memberId);
-        $('#s-component-quotation-modal-input-order-number').val(data.productOrder.productOrderNumber);
-        $('#s-component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
-        $('#s-component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
-        $('#s-component-quotation-modal-input-supplier-company-address').val(data.businessVender.businessvenderAddress);
-        $('#s-component-quotation-modal-input-supplier-sector').val(data.businessVender.businessvenderSmalltype);
-        $('#s-component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
-        $('#s-component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
-        $('#s-component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
-        $('#modal-productOrderId').val(data.productOrder.productOrderId);
-
-        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
-    }
-
-    function updateProductInventoryItems(productInventory) {
-        var tableBody = $('.s-product-inventory-modal-quotation-list-table tbody');
-        tableBody.append();
-
-        $.each(productInventory, function(index, item) {
-            var row = $('<tr class="s-product-inventory"></tr>');
-            var buttonText = (item.productOrderItemQuantity <= item.productInventoryQuantity) ?
-            '<td>출고가능</td>' : '<td><button name="modal-productId" class="custom-button blue" value="' + item.productId + '">상세</button></td>';
-
-            row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productInventoryQuantity + '" readonly></td>');
-            row.append(buttonText);
-            tableBody.append(row);
-        });
-    }
-
-    $('.s-product-inventory-modal-quotation-list-table').on('click', '.custom-button.blue', function(e) {
-        console.log('Button Clicked');
-        e.preventDefault();
-
-        var productOrderId = $('#modal-productOrderId').val();
-        var productId = $(this).val();
-        $.ajax({
+            var productOrderId = $(this).data('product-order-id');
+            $.ajax({
                 type: 'GET',
-                url: '/ComponentInventoryItemModal',
+                url: '/ProductOrderCheckoutConfirmationModal',
                 data: {
-                    productOrderId: productOrderId,
-                    productId: productId
+                    productOrderId: productOrderId
                 },
                 success: function(response) {
-                    $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
-                    updateComponentInventoryItems(response);
-
+                    console.log('Success:', response);
+                    updateModalContent(response);
                 },
                 error: function() {
-                    console.error('Failed to update ComponentInventory');
+                    console.error('Failed to fetch ProductOrderInfoDataDTO');
                 }
-        });
-    });
-    function updateComponentInventoryItems(componentInventory) {
-        var tableBody = $('.s-component-inventory-modal-quotation-list-table tbody');
-        tableBody.append();
+            });
 
-        $.each(componentInventory, function(index, item) {
-            var row = $('<tr class="s-component-inventory"></tr>');
-            row.append('<td><input type="text" value="' + item.componentId + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.productNecessarycomponentAmount + '" readonly></td>');
-            row.append('<td><input type="text" value="' + item.componentInventoryQuantity + '" readonly></td>');
-            tableBody.append(row);
-        });
-    }
+            $.ajax({
+                type: 'GET',
+                url: '/ProductInventoryItemModal',
+                data: {
+                    productOrderId: productOrderId
+                },
+                success: function(response) {
+                    console.log('Success:', response);
+                    updateProductInventoryItems(response);
+                },
+                error: function() {
+                    console.error('Failed to fetch ProductInventory');
+                }
+            });
 
-    $('.gradient-color-btn.blue.js-complete-order').on('click', function(e) { // 확정
-        e.preventDefault();
+
+        });
+
+        function deleteTableContent() {
+            $('.s-product-inventory-modal-quotation-list-table tbody .s-product-inventory').remove();
+            $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
+        }
+        var totalPrice = 0;
+
+        function updateModalContent(data) {
+            // 날짜 형식 변환 함수
+            function formatDate(dateString) {
+                var date = new Date(dateString);
+                var year = date.getFullYear();
+                var month = (date.getMonth() + 1).toString().padStart(2, '0');
+                var day = date.getDate().toString().padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+        // 발주일 날짜 형식 변환
+            var orderDate = formatDate(data.productOrder.productOrderOrderdate);
+            $('#s-component-quotation-modal-input-component-quotation-date').val(orderDate);
+
+            // 납기일 날짜 형식 변환
+            var deliveryDate = formatDate(data.productOrder.productOrderDeliverydate);
+            $('#s-component-quotation-modal-input-supplier-delivery-date').val(deliveryDate);
+
+            // 나머지 데이터 갱신
+            $('#s-component-quotation-modal-input-member').val(data.productOrder.memberId);
+            $('#s-component-quotation-modal-input-order-number').val(data.productOrder.productOrderNumber);
+            $('#s-component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
+            $('#s-component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
+            $('#s-component-quotation-modal-input-supplier-company-address').val(data.businessVender.businessvenderAddress);
+            $('#s-component-quotation-modal-input-supplier-sector').val(data.businessVender.businessvenderSmalltype);
+            $('#s-component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
+            $('#s-component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
+            $('#s-component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
+            $('#modal-productOrderId').val(data.productOrder.productOrderId);
+
+            $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+        }
+
+        function updateProductInventoryItems(productInventory) {
+            var tableBody = $('.s-product-inventory-modal-quotation-list-table tbody');
+            tableBody.append();
+
+            $.each(productInventory, function(index, item) {
+                itemQuantity += 1;
+                var row = $('<tr class="s-product-inventory"></tr>');
+                var buttonText = (item.productOrderItemQuantity <= item.productInventoryQuantity) ?
+                '<td>출고가능</td>' : '<td><button name="modal-productId" class="custom-button blue" value="' + item.productId + '">상세</button></td>';
+                if (buttonText === '<td>출고가능</td>') {
+                    isAnyAvailable += 1;
+                }
+                row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
+                row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
+                row.append('<td><input type="text" value="' + item.productInventoryQuantity + '" readonly></td>');
+                row.append(buttonText);
+                tableBody.append(row);
+            });
+        }
+
+        $('.s-product-inventory-modal-quotation-list-table').on('click', '.custom-button.blue', function(e) {
+            console.log('Button Clicked');
+            e.preventDefault();
+
+            var productOrderId = $('#modal-productOrderId').val();
+            var productId = $(this).val();
+            $.ajax({
+                    type: 'GET',
+                    url: '/ComponentInventoryItemModal',
+                    data: {
+                        productOrderId: productOrderId,
+                        productId: productId
+                    },
+                    success: function(data) {
+                        $('.s-component-inventory-modal-quotation-list-table tbody .s-component-inventory').remove();
+                        updateComponentInventoryItems(data);
+
+                    },
+                    error: function() {
+                        console.error('Failed to update ComponentInventory');
+                    }
+            });
+        });
+        function updateComponentInventoryItems(data) {
+            var tableBody = $('.s-component-inventory-modal-quotation-list-table tbody');
+            tableBody.append();
+
+            $.each(data.component, function(index, item) {
+                var productNecessaryAmount = data.product.productOrderItemQuantity - data.product.productInventoryQuantity;
+                var productNecessarycomponentAmount = productNecessaryAmount * item.productNecessarycomponentAmount;
+                var row = $('<tr class="s-component-inventory"></tr>');
+                row.append('<td><input type="text" value="' + item.componentId + '" readonly></td>');
+                row.append('<td><input type="text" value="' + productNecessarycomponentAmount + '" readonly></td>');
+                row.append('<td><input type="text" value="' + item.componentInventoryQuantity + '" readonly></td>');
+                tableBody.append(row);
+            });
+        }
+        function resetAnyAvailable() {
+            isAnyAvailable = 0;
+            itemQuantity = 0;
+        }
+        $('.gradient-color-btn.blue.js-complete-order').on('click', function(e) { // 확정
+            e.preventDefault();
 
             var productOrderId = $('#modal-productOrderId').val();
             var statusValue = 3;
 
-            $.ajax({
-                type: 'POST',
-                url: '/ProductOrderCheckoutConfirmationModal',
-                data: {
-                    productOrderId: productOrderId,
-                    updateStatus: statusValue
-                },
-                success: function() {
-                    $('.js-s-component-quotation-modal input').val('');
-                    deleteTableContent();
-                    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
 
-                    alert('출고완료되었습니다.');
+            if (isAnyAvailable !== itemQuantity) {
+                alert('재고가 부족합니다.');
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ProductOrderCheckoutConfirmationModal',
+                    data: {
+                        productOrderId: productOrderId,
+                        updateStatus: 3
+                    },
+                    success: function() {
+                        alert('출고완료되었습니다.');
+                        deleteTableContent();
+                        $('.js-s-component-quotation-modal input').val('');
+                        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
 
-                    location.reload();
-                },
-                error: function() {
-                    console.error('Failed to update status');
-                }
-            });
 
-    });
+                        location.reload();
+                    },
+                    error: function() {
+                        console.error('Failed to update status');
+                    }
+                });
+            }
+        });
 
-    $('.js-hide-component-quotation-modal').on('click', function() { // 취소
-        $('.js-s-component-quotation-modal input').val('');
-        deleteTableContent();
-        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+        $('.js-hide-component-quotation-modal').on('click', function() { // 취소
+            $('.js-s-component-quotation-modal input').val('');
+            deleteTableContent();
+            resetAnyAvailable();
+            $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+        });
     });
 </script>
 </body>
