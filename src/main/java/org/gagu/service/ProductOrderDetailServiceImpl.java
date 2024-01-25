@@ -1,9 +1,9 @@
-package org.gagu.service.sale;
+package org.gagu.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.gagu.entity.ProductOrder;
-import org.gagu.repository.sale.ProductOrderDetailRepository;
+import org.gagu.repository.ProductOrderDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.gagu.repository.sale;
+package org.gagu.repository;
 
 import org.gagu.entity.BusinessVender;
 import org.gagu.entity.ComponentQuotation;

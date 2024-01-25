@@ -1,14 +1,15 @@
-package org.gagu.service.sale;
+package org.gagu.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.gagu.dto.sale.ProductOrderInfoDataDTO;
-import org.gagu.dto.sale.ProductOrderItemListDTO;
-import org.gagu.dto.sale.ProductOrderListDTO;
+
+import org.gagu.dto.ProductOrderInfoDataDTO;
+import org.gagu.dto.ProductOrderItemListDTO;
+import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.BusinessVender;
 import org.gagu.entity.ProductOrder;
-import org.gagu.repository.sale.BusinessVenderRepository;
-import org.gagu.repository.sale.ProductOrderRepository;
+import org.gagu.repository.BusinessVenderRepository;
+import org.gagu.repository.ProductOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

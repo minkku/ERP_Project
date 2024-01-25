@@ -1,7 +1,7 @@
-package org.gagu.repository.sale;
+package org.gagu.repository;
 
-import org.gagu.dto.sale.ProductOrderItemListDTO;
-import org.gagu.dto.sale.ProductOrderListDTO;
+import org.gagu.dto.ProductOrderItemListDTO;
+import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.ProductOrder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;

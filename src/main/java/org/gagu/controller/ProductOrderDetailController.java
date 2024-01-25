@@ -1,4 +1,4 @@
-package org.gagu.controller.sale;
+package org.gagu.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;

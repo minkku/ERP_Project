@@ -1,10 +1,11 @@
-package org.gagu.repository.sale;
+package org.gagu.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.log4j.Log4j2;
-import org.gagu.dto.sale.ProductOrderItemListDTO;
-import org.gagu.dto.sale.ProductOrderListDTO;
+
+import org.gagu.dto.ProductOrderItemListDTO;
+import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
