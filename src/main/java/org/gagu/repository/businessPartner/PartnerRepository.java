@@ -33,5 +33,5 @@ public interface PartnerRepository extends JpaRepository<BusinessPartner, Intege
             "bp.bigType = :#{#request.bigType}, " +
             "bp.smallType = :#{#request.smallType} " +
             "WHERE bp.partnerId = :partnerId")
-            void updatePartner(@Param("partnerId") int partnerId,@Param("request") UpdateRequest request);
+            void updatePartner(@Param("partnerId") int partnerId, @Param("request") UpdateRequest request);
 }
