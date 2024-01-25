@@ -16,6 +16,8 @@ public interface ProductOrderRepository {
 
     List<ProductOrderListDTO> findProductOrderCheckoutList(Pageable pageable);
 
+    List<ProductOrderListDTO> findProductOrderAllList(Pageable pageable);
+
     long findProductOrderListCount();
 
     long findProductOrderCheckoutListCount();
