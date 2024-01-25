@@ -182,7 +182,7 @@
             </div>
             <div class="partner-quotation-modal-summary">
                 <div class="partner-quotation-modal-note">
-                    <textarea placeholder="비고" id="note" name="note"></textarea>
+                    <textarea placeholder="비고" id="note-for-update" name="note"></textarea>
                 </div>
                 <div class="partner-quotation-modal-submit-button">
                     <a href="#" class="gradient-color-btn blue" onclick="updatePost()">수정</a>
@@ -260,7 +260,7 @@
                 updateModalContent(response);
             },
             error: function() {
-                console.error('Failed to fetch ProductOrderInfoDataDTO');
+                console.error('Can not resolve PartnerId or Wrong direction');
             }
         });
     });
@@ -285,5 +285,52 @@
         $('.js-partner-quotation-modal input').val('');
         $('.js-partner-quotation-modal').removeClass('show-partner-quotation-modal');
     });
+
+     const updatePost = async () => {
+        const partnerId = document.getElementById('modal-getPartnerId').value;
+        const companyNumber = document.getElementById('partner-quotation-modal-input-supplier-company-number').value;
+        const bpName = document.getElementById('partner-quotation-modal-input-supplier-company-name').value;
+        const address = document.getElementById('partner-quotation-modal-input-supplier-company-address').value;
+        const type = document.getElementById('partner-quotation-modal-input-supplier-sector').value;
+        const bigType = document.getElementById('partner-quotation-modal-input-supplier-business-type').value;
+        const headName = document.getElementById('partner-quotation-modal-input-supplier-representative').value;
+        const phone = document.getElementById('partner-quotation-modal-input-supplier-phone').value;
+        const fax = document.getElementById('partner-quotation-modal-input-partner-fax').value;
+        const smallType = document.getElementById('partner-quotation-modal-input-partner-type').value;
+        const note = document.querySelector('note-for-update').value;
+
+        console.log("------ updating -------");
+        try {
+            const partnerId = $(this).data('id');
+            const response = await fetch('/api/updating?partnerId=' + partnerId , {
+                method: 'PUT',
+                headers: {
+                    'Content-type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    companyNumber,
+                    bpName,
+                    address,
+                    type,
+                    bigType,
+                    headName,
+                    phone,
+                    fax,
+                    smallType,
+                    note,
+                }),
+            });
+
+            if(!response.ok) {
+                throw new Error("Server is not response");
+            } else {
+                console.log("Success to updated a list");
+            }
+
+            location.href = "/businessPartner";
+        } catch(error) {
+            console.log("commit error : " + error);
+        }
+    };
 </script>
 </html>

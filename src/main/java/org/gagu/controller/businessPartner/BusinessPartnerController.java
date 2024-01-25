@@ -46,9 +46,8 @@ public class BusinessPartnerController {
 
     @GetMapping("/updatePartner")
     public ResponseEntity<BusinessPartner> getUpdatePartner(@RequestParam("partnerId") int partnerId) {
-        log.info("0-0-0-0-00-0");
         BusinessPartner result = partnerService.getPartner(partnerId);
-        log.info("sdasdasdasdasd" + result);
+        log.info("GetMapping for update list by partnerId");
         return  result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
 }
