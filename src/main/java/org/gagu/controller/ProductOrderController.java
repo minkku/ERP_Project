@@ -3,7 +3,8 @@ package org.gagu.controller;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
-import org.gagu.service.ProductOrderDetailService;
+import org.gagu.service.ProductOrderCheckoutConfirmationService;
+import org.gagu.service.ProductOrderInfoService;
 import org.gagu.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -19,12 +20,14 @@ import java.util.List;
 @Log4j2
 public class ProductOrderController {
     private final ProductOrderService productOrderService;
-    private final ProductOrderDetailService productOrderDetailService;
+    private final ProductOrderInfoService productOrderInfoService;
+    private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
 
     @Autowired
-    public ProductOrderController(ProductOrderService productOrderService, ProductOrderDetailService productOrderDetailService) {
+    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
         this.productOrderService = productOrderService;
-        this.productOrderDetailService = productOrderDetailService;
+        this.productOrderInfoService = productOrderDetailService;
+        this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
     }
 
     @GetMapping("/ProductOrderStatus")
@@ -37,7 +40,7 @@ public class ProductOrderController {
 
         // Calculate total pages dynamically based on total item count
         long totalItems = productOrderService.getProductOrderListCount(); // You need to implement this method
-        int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+        int totalPages = (int) Math.max(1, Math.ceil((double) totalItems / pageSize));
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
@@ -55,9 +58,9 @@ public class ProductOrderController {
     public ResponseEntity<Void> updateProductOrderStatus(@RequestParam("productOrderId") Integer productOrderId,
                                                          @RequestParam("updateStatus") int updateStatus) {
 
-        productOrderDetailService.updateProductOrderStatus(productOrderId, updateStatus);
-        log.info("productOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
-        log.info(productOrderDetailService.updateProductOrderStatus(productOrderId, updateStatus));
+        productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus);
+        log.info("\nproductOrderId = " + productOrderId + "\nupdateStatus = " + updateStatus);
+        log.info(productOrderInfoService.updateProductOrderStatus(productOrderId, updateStatus));
         return ResponseEntity.noContent().build();
     }
 }

@@ -14,7 +14,11 @@ import java.util.List;
 public interface ProductOrderRepository {
     List<ProductOrderListDTO> findProductOrderList(Pageable pageable);
 
+    List<ProductOrderListDTO> findProductOrderCheckoutList(Pageable pageable);
+
     long findProductOrderListCount();
+
+    long findProductOrderCheckoutListCount();
 
     ProductOrder findByProductOrderId(Integer productOrderId);
 
