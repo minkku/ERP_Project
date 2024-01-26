@@ -5,79 +5,73 @@
 
 <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
 <main id="main" class="main" style="width: 100%;">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="component-quotation-list" style="width:1200px; height:500px;">
+                <!-- Bordered Table -->
+                <table class="component-quotation-list-table" style="width:100%;">
+                    <colgroup>
+                        <col style="width: 5%">
+                        <col style="width: 15%">
+                        <col style="width: 45%">
+                        <col style="width: 18%">
+                        <col style="width: 18%">
+                        <col style="width: 8%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="component-quotation-list-top">No.</th>
+                        <th scope="col" class="component-quotation-list-top">거래처명</th>
+                        <th scope="col" class="component-quotation-list-top">주소</th>
+                        <th scope="col" class="component-quotation-list-top">사업자 번호</th>
+                        <th scope="col" class="component-quotation-list-top">전화번호</th>
+                        <th scope="col" class="component-quotation-list-top"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${list}" style="cursor:pointer;">
+                        <td th:text="${item.partnerId}" class="partnerId" style="text-align: center"></td>
+                        <td th:text="${item.bpName}" style="text-align: center"></td>
+                        <td th:text="${item.address}"></td>
+                        <td th:text="${item.companyNumber}" style="text-align: center"></td>
+                        <td th:text="${item.phone}" style="text-align: center"></td>
+                        <td>
+                            <input type="hidden" name="partnerId" value="{item.partnerId}">
+                            <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.partnerId}" >수정</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Bordered Table -->
+                <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+                    <ul class="pagination" style="justify-content: end;">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+                            <a class="page-link pageA"
+                               th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                               th:href="@{'/partnerList?page=' + ${pageNumber - 1} + '&size=10'}"
+                               th:text="${pageNumber}">
+                            </a>
+                        </li>
 
-                <div class="card">
-                    <div class="component-quotation-list" style="width:100%; height:585px;">
-                        <!-- Bordered Table -->
-                        <table class="component-quotation-list-table" style="width:100%;">
-                            <colgroup>
-                                <col style="width: 5%">
-                                <col style="width: 15%">
-                                <col style="width: 45%">
-                                <col style="width: 18%">
-                                <col style="width: 18%">
-                                <col style="width: 5%">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th scope="col" class="component-quotation-list-top">No.</th>
-                                <th scope="col" class="component-quotation-list-top">거래처명</th>
-                                <th scope="col" class="component-quotation-list-top">주소</th>
-                                <th scope="col" class="component-quotation-list-top">사업자 번호</th>
-                                <th scope="col" class="component-quotation-list-top">전화번호</th>
-                                <th scope="col" class="component-quotation-list-top"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="item : ${list}" style="cursor:pointer;">
-                                <td th:text="${item.partnerId}" class="partnerId" style="text-align: center"></td>
-                                <td th:text="${item.bpName}" style="text-align: center"></td>
-                                <td th:text="${item.address}"></td>
-                                <td th:text="${item.companyNumber}" style="text-align: center"></td>
-                                <td th:text="${item.phone}" style="text-align: center"></td>
-                                <td>
-                                    <input type="hidden" name="partnerId" value="{item.partnerId}">
-                                    <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.partnerId}" >수정</a>
-                                </td>
-                            </tr>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-                            <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
-                                <ul class="pagination" style="justify-content: end;">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
-                                        <a class="page-link pageA"
-                                           th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
-                                           th:href="@{'/partnerList?page=' + ${pageNumber - 1} + '&size=10'}"
-                                           th:text="${pageNumber}">
-                                        </a>
-                                    </li>
-
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-
-                            </tbody>
-                        </table>
-                        <!-- End Bordered Table -->
-                    </div>
-
-                    <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
-                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
-                    </div>
-                </div>
-
+            <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
+                <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
             </div>
         </div>
+    </div>
     <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
     <!-- Registration Modal -->
     <div class="component-quotation-modal-container wrap-component-quotation-modal js-component-quotation-modal">
@@ -220,13 +214,13 @@
             const smallType = document.getElementById('component-quotation-modal-input-supplier-type').value;
             const note = document.getElementById('note-for-reg').value;
 
-
         try {
-            const response = await $.ajax({
-                type: 'POST',
-                url: '/businessPartner',
-                contentType: 'application/json',
-                data: JSON.stringify({
+            const response = await fetch('/businessPartner', {
+                method: 'POST',
+                headers: {
+                    'Content-type' : 'application/json',
+                    },
+                body: JSON.stringify({
                     companyNumber,
                     bpName,
                     phone,
@@ -237,16 +231,19 @@
                     note,
                     bigType,
                     smallType
-                }),
-            });
+                })
+            })
 
-            if(!response) {
-                console.log("Failed registration for businessPartner");
-            } else {
-                console.log("Success to registration for businessPartner");
+            if(!response.ok) {
+                throw new Error("Server is not response");
+            } else if(response == null) {
+                alert("입력란을 채우주세요");
             }
+            else {
+                console.log("Success to updated a list");
+            }
+            location.href="/partnerList";
 
-            location.href = "/partnerList";
         } catch (error) {
             console.error('Error saving post:', error);
         }

@@ -8,8 +8,8 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <div class="card">
-                <div class="component-quotation-list" style="width:100%; height:585px;">
+
+                <div class="component-quotation-list" style="width:1200px; height:500px;">
                     <!-- Bordered Table -->
                     <table class="component-quotation-list-table" style="width:100%;">
                         <colgroup>
@@ -18,7 +18,7 @@
                             <col style="width: 45%">
                             <col style="width: 18%">
                             <col style="width: 18%">
-                            <col style="width: 5%">
+                            <col style="width: 8%">
                         </colgroup>
                         <thead>
                         <tr>
@@ -42,41 +42,37 @@
                                 <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.venderId}" >수정</a>
                             </td>
                         </tr>
-
-                        <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
-                            <ul class="pagination" style="justify-content: end;">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
-                                    <a class="page-link pageA"
-                                       th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
-                                       th:href="@{'/venderList?page=' + ${pageNumber - 1} + '&size=10'}"
-                                       th:text="${pageNumber}">
-                                    </a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
                         </tbody>
                     </table>
                     <!-- End Bordered Table -->
+                    <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+                        <ul class="pagination" style="justify-content: end;">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+                                <a class="page-link pageA"
+                                   th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                                   th:href="@{'/venderList?page=' + ${pageNumber - 1} + '&size=10'}"
+                                   th:text="${pageNumber}">
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
                     <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
                 </div>
             </div>
-
-        </div>
     </div>
     <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
     <!-- Registration Modal -->
@@ -221,11 +217,12 @@
             const note = document.getElementById('note-for-reg').value;
 
         try {
-            const response = await $.ajax({
-                type: 'POST',
-                url: '/vender',
-                contentType: 'application/json',
-                data: JSON.stringify({
+            const response = await fetch('/vender', {
+                method: 'POST',
+                headers: {
+                    'Content-type' : 'application/json',
+                    },
+                body: JSON.stringify({
                     companyNum,
                     venderName,
                     phone,
