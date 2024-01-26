@@ -18,7 +18,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Log4j2
 public class SecurityConfig {
-    private final String[] allowedUrls = {"/", "/login","/assets/**"};
+    private final String[] allowedUrls = {"/", "/login", "/partner", "/partner/partnerList", "/assets/**"};
+
     private final String[] needAuth = {"/main"};
     @Bean
     PasswordEncoder passwordEncoder() {

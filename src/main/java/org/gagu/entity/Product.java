@@ -22,13 +22,13 @@ public class Product {
     @Column(name = "product_material")//재질
     private String productMaterial;
     @Column(name = "product_type")//종류
-    private int productType;
+    private Integer  productType;
     @Column(name = "product_retailprice")//소비자 정가
-    private int productRetailprice;
+    private Integer  productRetailprice;
     @Column(name = "product_costprice")//생산원가
-    private int productCostprice;
+    private Integer  productCostprice;
     @Column(name = "product_sellingprice")//판매가
-    private int productSellingprice;
+    private Integer  productSellingprice;
     @Column(name = "product_img")//이미지
     private String productImg;
     @Column(name = "product_productionperiod")//평균생산 기간

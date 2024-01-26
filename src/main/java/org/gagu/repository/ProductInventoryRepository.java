@@ -5,8 +5,11 @@ import org.gagu.entity.ProductInventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ProductInventoryRepository extends JpaRepository<ProductInventory, Integer> {
+public interface ProductInventoryRepository extends JpaRepository<ProductInventory, String> {
 
-    List<Product> findByProductProductName(String productName);
+    List<Product> findByProductProductId(String productId);
+
+    Optional<ProductInventory> findById(String productId);
 }

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+	<style>
+		.quotation-modal-container {
+			display: fixed;
+			width: 1050px;
+			height: 750px;
+			border: 1px solid #000000;
+			border-radius: 10px;
+			background: #e7e7e7;
+		}
+		.quotation-modal-title{
+			display: flex;
+	    	justify-content: center;
+	    	margin-bottom: 30px;
+	    	border-radius: 10px 10px 0px 0px;
+	    	background: linear-gradient( to bottom, #1c329c 10%, #00188a 20%, #010c42 100%);
+		}
+		.quotation-modal-title span{
+			font-size: 15px;
+			color: white;
+		}
+		.quotation-modal-main {
+			padding: 0px 60px 40px 60px;
+		}
+		.quotation-modal-recipient {
+			display: flex;
+			height: 100px;
+			background: #e9f7ec;
+			padding-top: 15px;
+		    padding-bottom: 10px;
+		    margin-bottom: 10px;
+		    border: 1px solid #d8d8d8;
+		    border-radius: 5px;
+		}
+		.quotation-modal-recipient-title {
+			display: flex;
+		    width: 150px;
+		    justify-content: center;
+		    border-right:1px solid #000000;
+	    }
+		.quotation-modal-recipient-info {
+
+		}
+		.quotation-modal-recipient-info ul{
+			padding-left: 10px;
+			list-style: none;
+		}
+		.quotation-modal-recipient-info ul li:not(:last-child){
+			margin-bottom: 7px;
+		}
+		.quotation-modal-recipient-info ul li label {
+			width: 120px;
+		    margin-right: 10px;
+		    text-align: right;
+		}
+		.quotation-modal-recipient-info ul li input {
+			width: 200px;
+			border: 1px solid #cccccc;
+			border-radius: 3px;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		}
+		.quotation-modal-supplier {
+			display: flex;
+			height: 185px;
+			background: #e9f7ec;
+			padding-top: 15px;
+		    padding-bottom: 10px;
+		    margin-bottom: 10px;
+		    border: 1px solid #d8d8d8;
+		    border-radius: 5px;
+		}
+		.quotation-modal-supplier-title {
+			display: flex;
+		    width: 150px;
+		    justify-content: center;
+		    border-right:1px solid #000000;
+	    }
+		.quotation-modal-supplier-info {
+		}
+		.quotation-modal-supplier-info ul{
+			padding-left: 10px;
+			list-style: none;
+		}
+		.quotation-modal-supplier-info ul li:not(:last-child) {
+		    margin-bottom: 7px;
+		}
+		.quotation-modal-supplier-info ul li label {
+			width: 120px;
+		    margin-right: 10px;
+		    text-align: right;
+		}
+		.quotation-modal-supplier-info ul li input {
+			width: 200px;
+			border: 1px solid #cccccc;
+			border-radius: 3px;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		}
+		#quotation-modal-input-supplier-company-address {
+			width: 540px;
+		}
+		.quotation-modal-quotation-list-top {
+			background-color: #294868 !important;
+			color: white;
+		}
+		.quotation-modal-quotation-list{
+			overflow: auto;
+			box-sizing: border-box;
+			border: 1px solid #d8d8d8;
+			border-radius: 10px;
+			padding: 0;
+		}
+		.quotation-modal-quotation-list::-webkit-scrollbar {
+		  width: 10px;
+		}
+		.quotation-modal-quotation-list::-webkit-scrollbar-thumb {
+		  background-color: #0b002e;
+		  border-radius: 10px;
+		  background-clip: padding-box;
+		  border: 2px solid transparent;
+		}
+		.quotation-modal-quotation-list::-webkit-scrollbar-thumb:hover {
+		  background-color: #180063;
+		}
+		.quotation-modal-quotation-list::-webkit-scrollbar-track {
+		  background-color: #d4d4d4;
+		  border-radius: 5px;
+		  box-shadow: inset 0px 0px 5px white;
+		}
+		.quotation-modal-quotation-list > table{
+			table-layout: fixed;
+			position: relative;
+			border-collapse: separate !important;
+			border-spacing: 0;
+			padding: 0;
+			margin: 0;
+			width:100%;
+			border-width:0px;
+			overflow: visible;
+			background-color: #fff;
+		}
+		.quotation-modal-quotation-list td ,.quotation-modal-quotation-list th{
+			border: 1px solid #ccc;
+			padding: .4rem;
+		}
+		.quotation-modal-quotation-list{
+			width:928px;
+			height:230px;
+			margin:0 auto 15px auto;
+		}
+		.quotation-modal-quotation-list-top{
+			position: sticky;
+			top:0;
+			z-index: 20;
+			text-align: center;
+		}
+		.quotation-modal-quotation-list .quotation-modal-quotation-list-table tr:not(:first-child) td {
+			text-align: center;
+		}
+		.quotation-modal-quotation-list .quotation-modal-quotation-list-table tr td input {
+			width: 90%;
+			height: 90%;
+			border-width: 0;
+			text-align: center;
+		}
+		.quotation-modal-summary {
+			display: flex;
+		}
+		.quotation-modal-note {
+			margin-right: 20px;
+		}
+		.quotation-modal-note textarea{
+			width: 500px;
+			height: 100px;
+			resize: none;
+			border-radius: 5px;
+		}
+		.quotation-modal-total {
+			display: flex;
+	    	flex-direction: column;
+		}
+		.quotation-modal-total .quotation-modal-total-line{
+			margin-bottom: 3px;
+		}
+		.quotation-modal-total .quotation-modal-total-line label{
+			width: 60px;
+			margin-right: 10px;
+			text-align: right;
+		}			
+		.quotation-modal-total .quotation-modal-total-line input{
+			border-width: 0;
+			border-bottom-width: 1px;
+		}
+		.quotation-modal-submit-button {
+			display: flex;
+		    flex-direction: column;
+		    justify-content: flex-end;
+		    margin: 0 10px 10px auto;
+		}
+		.quotation-modal-submit-button a {
+			width: 80px;
+			height: 30px;
+			line-height: 20px;
+			text-align: center;
+		}
+		.quotation-modal-btn {
+		  text-decoration: none;
+		  color: white;
+		  padding: 10px 30px;
+		  margin: 5px;
+		  display: inline-block;
+		  position: relative;
+		  border: 1px solid rgba(0,0,0,0.21);
+		  border-bottom: 4px solid rgba(0,0,0,0.21);
+		  border-radius: 4px;
+		  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+		  padding: 4px 12px;  
+		  font-size: 14px;
+		}
+		.quotation-modal-btn.blue {
+		  background: #7ca5ce;
+		  background: -moz-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+		  background: -webkit-gradient(left top, left bottom, color-stop(0%, #7ca5ce), color-stop(100%, #3d70a0));
+		  background: -webkit-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+		  background: -o-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+		  background: -ms-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+		  background: linear-gradient(to bottom, #7ca5ce 0%, #3d70a0 100%);
+		  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ca5ce', endColorstr='#3d70a0', GradientType=0 );
+		}
+		.quotation-modal-btn.blue:hover {
+		  background: #88b3db;
+		  background: -moz-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+		  background: -webkit-gradient(left top, left bottom, color-stop(0%, #88b3db), color-stop(100%, #5a85ad));
+		  background: -webkit-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+		  background: -o-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+		  background: -ms-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+		  background: linear-gradient(to bottom, #88b3db 0%, #5a85ad 100%);
+		  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88b3db', endColorstr='#5a85ad', GradientType=0 );
+		  color:white; text-decoration: none; border-bottom: 0px solid rgba(61,112,160,0.21);
+		}
+		.quotation-modal-btn.blue:active   {background: #3d70a0;}
+	</style>
+</head>
+<body>
+	<div class="quotation-modal-container">
+		<div class="quotation-modal-title">
+			<span>견적서</span>
+		</div>
+		<div class="quotation-modal-main">
+			<div class="quotation-modal-recipient">
+				<div class="quotation-modal-recipient-title">
+					<h5>공급 받는 자</h5>
+				</div>
+				<div class="quotation-modal-recipient-info">
+					
+					<ul>
+						<li>
+							<label for="#quotation-modal-input-date">견적일</label>
+							<input type="date" id="quotation-modal-input-date">
+						</li>
+						<li>
+							<label for="#quotation-modal-input-member">담당자</label>
+							<input type="text" id="quotation-modal-input-member">
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="quotation-modal-supplier">
+				<div class="quotation-modal-supplier-title">
+					<h5>공급자</h5>
+				</div>
+				<div class="quotation-modal-supplier-info">
+					<ul>
+						<li>
+							<label for="#quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+							<input type="text" id="quotation-modal-input-supplier-company-number">
+							<label for="#quotation-modal-input-supplier-company-name">상호</label>
+							<input type="text" id="quotation-modal-input-supplier-company-name">
+						</li>
+						<li>
+							<label for="#quotation-modal-input-supplier-company-address">사업장 소재지</label>
+							<input type="text" id="quotation-modal-input-supplier-company-address">
+						</li>
+						<li>
+							<label for="#quotation-modal-input-supplier-sector">업태</label>
+							<input type="text" id="quotation-modal-input-supplier-sector">
+							<label for="#quotation-modal-input-supplier-business-type">업종</label>
+							<input type="text" id="quotation-modal-input-supplier-business-type">
+						</li>
+						<li>
+							<label for="#quotation-modal-input-supplier-representative">대표자</label>
+							<input type="text" id="quotation-modal-input-supplier-representative">
+							<label for="#quotation-modal-input-supplier-phone">연락처</label>
+							<input type="text" id="quotation-modal-input-supplier-phone">
+						</li>
+					</ul>
+				</div>
+			</div>
+		  	<div class="quotation-modal-quotation-list" data-quotation-modal-quotation-list-top="0" data-quotation-modal-quotation-list-left="0">
+				<table class="quotation-modal-quotation-list-table">
+					<colgroup>
+						<col style="width: 20%">
+						<col style="width: 12%">
+						<col style="width: 16%">
+						<col style="width: 16%">
+						<col style="width: 16%">
+						<col style="width: 20%">
+					</colgroup>
+					<tr>
+						<td class="quotation-modal-quotation-list-top">항목</td>
+						<td class="quotation-modal-quotation-list-top">수량</td>
+						<td class="quotation-modal-quotation-list-top">단가</td>
+						<td class="quotation-modal-quotation-list-top">공급가</td>
+						<td class="quotation-modal-quotation-list-top">부가세</td>
+						<td class="quotation-modal-quotation-list-top">비고</td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="quotation-modal-summary">
+				<div class="quotation-modal-note">
+					<textarea></textarea>
+				</div>
+				<div class="quotation-modal-total">
+					<div class="quotation-modal-total-line">
+						<label for="#quotation-modal-input-total-supply-value">공급가</label>
+						<input type="text" id="quotation-modal-input-total-supply-value" readonly>
+					</div>
+					<div class="quotation-modal-total-line">
+						<label for="#quotation-modal-input-total-value-added-tax">부가세</label>
+						<input type="text" id="#quotation-modal-input-total-value-added-tax" readonly>
+					</div>
+					<div class="quotation-modal-total-line">
+						<label for="#quotation-modal-input-total-subtotal">소계</label>
+						<input type="text" id="#quotation-modal-input-total-subtotal" readonly>
+					</div>
+				</div>
+				<div class="quotation-modal-submit-button">
+					<a href="#" class="quotation-modal-btn blue">등록</a>
+					<a href="#" class="quotation-modal-btn blue">취소</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

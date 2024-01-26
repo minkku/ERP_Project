@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+<main id="main" class="main" style="width: 100%;">
+    <div class="row">
+        <div class="col-lg-12">
+
+
+                <div class="component-quotation-list" style="width:1200px; height:500px;">
+                    <!-- Bordered Table -->
+                    <table class="component-quotation-list-table" style="width:100%;">
+                        <colgroup>
+                            <col style="width: 5%">
+                            <col style="width: 15%">
+                            <col style="width: 45%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                            <col style="width: 8%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col" class="component-quotation-list-top">No.</th>
+                            <th scope="col" class="component-quotation-list-top">거래처명</th>
+                            <th scope="col" class="component-quotation-list-top">주소</th>
+                            <th scope="col" class="component-quotation-list-top">사업자 번호</th>
+                            <th scope="col" class="component-quotation-list-top">전화번호</th>
+                            <th scope="col" class="component-quotation-list-top"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${list}" style="cursor:pointer;">
+                            <td th:text="${item.venderId}" class="venderId" style="text-align: center"></td>
+                            <td th:text="${item.venderName}" style="text-align: center"></td>
+                            <td th:text="${item.address}"></td>
+                            <td th:text="${item.companyNum}" style="text-align: center"></td>
+                            <td th:text="${item.phone}" style="text-align: center"></td>
+                            <td>
+                                <input type="hidden" name="venderId" value="{item.venderId}">
+                                <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.venderId}" >수정</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Bordered Table -->
+                    <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+                        <ul class="pagination" style="justify-content: end;">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+                                <a class="page-link pageA"
+                                   th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                                   th:href="@{'/venderList?page=' + ${pageNumber - 1} + '&size=10'}"
+                                   th:text="${pageNumber}">
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
+                    <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
+                </div>
+            </div>
+    </div>
+    <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
+    <!-- Registration Modal -->
+    <div class="component-quotation-modal-container wrap-component-quotation-modal js-component-quotation-modal">
+        <div class="component-quotation-modal-title">
+            <span>거래처 등록</span>
+        </div>
+        <div class="component-quotation-modal-main">
+            <div class="component-quotation-modal-recipient" style="height:226px">
+                <div class="component-quotation-modal-recipient-title">
+                    <h5>거래처</h5>
+                </div>
+                <div class="component-quotation-modal-recipient-info">
+                    <ul>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-number">
+                            <label for="component-quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-name">
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-address">
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-sector">
+                            <label for="component-quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-business-type">
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-representative">
+                            <label for="component-quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-phone">
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-fax">Fax no.</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-fax">
+                            <label for="component-quotation-modal-input-supplier-type">협력 종류</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-type">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="component-quotation-modal-summary">
+                <div class="component-quotation-modal-note">
+                    <textarea id="note-for-reg" placeholder="비고"></textarea>
+                </div>
+                <div class="component-quotation-modal-submit-button">
+                    <a href="#" class="gradient-color-btn blue" onclick="savePost()">등록</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal">취소</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Registration Modal -->
+
+    <!-- [ Update ] Modal by venderId -->
+    <div class="partner-quotation-modal-container wrap-partner-quotation-modal js-partner-quotation-modal">
+        <div class="partner-quotation-modal-title">
+            <span>거래처 수정</span>
+        </div>
+        <div class="partner-quotation-modal-main">
+            <div class="partner-quotation-modal-recipient" style="height:226px">
+                <div class="partner-quotation-modal-recipient-title">
+                    <h5>거래처</h5>
+                </div>
+                <div class="partner-quotation-modal-recipient-info">
+                    <ul>
+                        <li>
+                            <input type="hidden" id="modal-getVenderId" name="venderId">
+                            <label for="partner-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-number" name="companyNum">
+                            <label for="partner-quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-name" name="venderName">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-address" name="address">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-sector" name="smallType">
+                            <label for="partner-quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-business-type" name="bigType">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-representative" name="headName">
+                            <label for="partner-quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-phone" name="phone">
+                        </li>
+                        <li>
+                            <label for="partner-quotation-modal-input-supplier-fax">Fax no.</label>
+                            <input type="text" id="partner-quotation-modal-input-supplier-fax" name="fax">
+                            <label for="partner-modal-input-supplier-type">거래 종류</label>
+                            <input type="text" id="partner-modal-input-supplier-type" name="type">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="partner-quotation-modal-summary">
+                <div class="partner-quotation-modal-note">
+                    <textarea placeholder="비고" id="note-for-update" name="note"></textarea>
+                </div>
+                <div class="partner-quotation-modal-submit-button">
+                    <a href="#" class="gradient-color-btn blue" onclick="updatePost()">수정</a>
+                    <a href="#" class="gradient-color-btn blue" onclick="deletePost()">삭제</a>
+                    <a href="#" class="gradient-color-btn blue js-hide-partner-quotation-modal">취소</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modify modal -->
+
+</main><!-- End #main -->
+</body>
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script th:inline="javascript">
+    /*[ Show quotation modal ]*/
+    $('.js-show-component-quotation-modal').on('click',function(e){
+        e.preventDefault();
+        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+    });
+
+    $('.js-hide-component-quotation-modal').on('click',function(){
+        $('.js-component-quotation-modal input').val('');
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
+
+    const savePost = async () => {
+            const companyNum = document.getElementById('component-quotation-modal-input-supplier-company-number').value;
+            const venderName = document.getElementById('component-quotation-modal-input-supplier-company-name').value;
+            const address = document.getElementById('component-quotation-modal-input-supplier-company-address').value;
+            const type = document.getElementById('component-quotation-modal-input-supplier-sector').value;
+            const bigType = document.getElementById('component-quotation-modal-input-supplier-business-type').value;
+            const headName = document.getElementById('component-quotation-modal-input-supplier-representative').value;
+            const phone = document.getElementById('component-quotation-modal-input-supplier-phone').value;
+            const fax = document.getElementById('component-quotation-modal-input-supplier-fax').value;
+            const smallType = document.getElementById('component-quotation-modal-input-supplier-type').value;
+            const note = document.getElementById('note-for-reg').value;
+
+        try {
+            const response = await fetch('/vender', {
+                method: 'POST',
+                headers: {
+                    'Content-type' : 'application/json',
+                    },
+                body: JSON.stringify({
+                    companyNum,
+                    venderName,
+                    phone,
+                    fax,
+                    address,
+                    headName,
+                    type,
+                    note,
+                    bigType,
+                    smallType
+                }),
+            });
+            console.log("ajax------------------", response);
+
+            if(!response) {
+                console.log("Failed registration for businessVender");
+            } else {
+                console.log("Success to registration for businessVender");
+                location.href = "/venderList";
+            }
+
+        } catch (error) {
+            console.error('Error saving post:', error);
+        }
+    };
+
+    /*[ Show partner modal ]*/
+    $('.js-show-partner-quotation-modal').on('click',function(e){
+        e.preventDefault();
+
+        var venderId = $(this).data('id');
+        $.ajax({
+            type: 'GET',
+            url: '/updateVender?venderId=' + venderId,
+            success: function(response) {
+                console.log('Success:', response);
+                updateModalContent(response);
+            },
+            error: function() {
+                console.error('Can not resolve venderId or Wrong direction');
+            }
+        });
+    });
+
+    function updateModalContent(data) {
+        $('#partner-quotation-modal-input-supplier-company-number').val(data.companyNum);
+        $('#partner-quotation-modal-input-supplier-company-name').val(data.bpName);
+        $('#partner-quotation-modal-input-supplier-company-address').val(data.address);
+        $('#partner-quotation-modal-input-supplier-sector').val(data.smallType);
+        $('#partner-quotation-modal-input-supplier-business-type').val(data.bigType);
+        $('#partner-quotation-modal-input-supplier-representative').val(data.headName);
+        $('#partner-quotation-modal-input-supplier-phone').val(data.phone);
+        $('#partner-quotation-modal-input-supplier-fax').val(data.fax);
+        $('#partner-modal-input-supplier-type').val(data.type);
+        $('#note-for-update').val(data.note);
+        $('#modal-getVenderId').val(data.venderId);
+
+        $('.js-partner-quotation-modal').addClass('show-partner-quotation-modal');
+    };
+
+    $('.js-hide-partner-quotation-modal').on('click',function(){
+        $('.js-partner-quotation-modal input').val('');
+        $('.js-partner-quotation-modal').removeClass('show-partner-quotation-modal');
+    });
+
+     const updatePost = async () => {
+        const venderId = document.getElementById('modal-getVenderId').value;
+        const companyNum = document.getElementById('partner-quotation-modal-input-supplier-company-number').value;
+        const venderName = document.getElementById('partner-quotation-modal-input-supplier-company-name').value;
+        const address = document.getElementById('partner-quotation-modal-input-supplier-company-address').value;
+        const type = document.getElementById('partner-quotation-modal-input-supplier-sector').value;
+        const bigType = document.getElementById('partner-quotation-modal-input-supplier-business-type').value;
+        const headName = document.getElementById('partner-quotation-modal-input-supplier-representative').value;
+        const phone = document.getElementById('partner-quotation-modal-input-supplier-phone').value;
+        const fax = document.getElementById('partner-quotation-modal-input-supplier-fax').value;
+        const smallType = document.getElementById('partner-modal-input-supplier-type').value;
+        const note = document.getElementById('note-for-update').value;
+
+        console.log("------ updating -------");
+        try {
+            const response = await fetch('/updating?venderId=' + venderId , {
+                method: 'PUT',
+                headers: {
+                    'Content-type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    companyNum,
+                    venderName,
+                    address,
+                    type,
+                    bigType,
+                    headName,
+                    phone,
+                    fax,
+                    smallType,
+                    note
+                }),
+            });
+
+            if(!response.ok) {
+                throw new Error("Server is not response");
+            } else {
+                console.log("Success to updated a list");
+            }
+
+            location.href = "/venderList";
+        } catch(error) {
+            console.log("commit error : " + error);
+        }
+    };
+</script>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+<main id="main" class="main" style="width: 100%;">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Bordered Table -->
+                            <table class="table table-bordered" style="margin: 0 10px 10px auto; vertical-align: center;">
+                                <thead>
+                                <tr>
+                                    <th class="table-active" scope="col" style="text-align: center"></th>
+                                    <th class="table-active" scope="col" style="text-align: center">발주번호</th>
+                                    <th class="table-active" scope="col" style="text-align: center">발주요청일자</th>
+                                    <th class="table-active" scope="col" style="text-align: center">거래처명</th>
+                                    <th class="table-active" scope="col" style="text-align: center">품목(외)</th>
+                                    <th class="table-active" scope="col" style="text-align: center">합계금액</th>
+                                    <th class="table-active" scope="col" style="text-align: center">상태</th>
+                                    <th class="table-active" scope="col" style="text-align: center">조회</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item, stat : ${ProductOrderList}">
+                                    <td th:text="${stat.index + 1}"></td>
+                                    <td th:text="${item.productOrderNumber}"></td>
+                                    <td style="text-align: center" th:text="${#dates.format(item.productOrderOrderdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td style="text-align: center" th:text="${item.businessvenderName}"></td>
+                                    <td >
+                                        <span th:if="${item.productOrderItemQuantity == 0}" th:text="${item.productName}"></span>
+                                        <span th:if="${item.productOrderItemQuantity > 0}" th:text="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></span>
+                                    </td>
+                                    <td style="text-align: right" th:text="${item.productOrderPriceAmount}"></td>
+                                    <td style="text-align: center">
+                                        <span th:if="${item.productOrderStatus == 1}" th:text="진행중"></span>
+                                        <span th:if="${item.productOrderStatus == 2}" th:text="발주확인"></span>
+                                        <span th:if="${item.productOrderStatus == 3}" th:text="출고확정"></span>
+                                        <span th:if="${item.productOrderStatus == 4}" th:text="완료"></span>
+                                        <span th:if="${item.productOrderStatus == 5}" th:text="재검토?"></span>
+                                        <span th:if="${item.productOrderStatus == 99}" th:text="종료"></span>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <div class="quotation-modal-submit-button" style="margin: -7px;">
+                                            <button type="button" onclick="openWindow(this)" class="gradient-color-btn blue js-show-component-quotation-modal">
+                                                <input type="hidden" name="productOrderId" id="productOrderId" th:value="${item.productOrderId}">조회
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <!-- End Bordered Table -->
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=0)}" aria-label="First">
+                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage - 1})}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage ? 'page-item active' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage + 1})}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${totalPages - 1})}" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End Pagination -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
+</main><!-- End #main -->
+
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script th:inline="javascript">
+    function openWindow(button) {
+            var row = button.closest('tr');
+            var productOrderId = row.querySelector('input[name="productOrderId"]').value;
+            var url = "/ProductPurchaseOrder?productOrderId=" + productOrderId;
+            window.open(url, "_blank", "width=850,height=1000");
+        }
+</script>
+</body>
+</html>
