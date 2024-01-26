@@ -1,252 +1,252 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="sidebarFragment">
-<!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
+        <ul class="sidebar-nav" id="sidebar-nav">
 
-        <li class="nav-item">
-            <a class="nav-link " href="index.html">
-<!--                <i class="bi bi-grid"></i>-->
-                <span style="font-size: 23px;">ERP Project</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link " href="index.html">
+                    <!--                <i class="bi bi-grid"></i>-->
+                    <span style="font-size: 23px;">ERP Project</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
 
-        <li class="nav-item"> <!--분류 1**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#sell-product-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>판매</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="sell-product-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="/ProductOrderStatus">
-                        <i class="bi bi-circle"></i><span>주문현황</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/ProductOrderCheckoutConfirmation">
-                        <i class="bi bi-circle"></i><span>출고확정</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/ProductOrderList">
-                        <i class="bi bi-circle"></i><span>주문목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>판매내역</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>견적서발급</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Components Nav -->
+            <li class="nav-item"> <!--분류 1**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#sell-product-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>판매</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="sell-product-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/ProductOrderStatus">
+                            <i class="bi bi-circle"></i><span>주문현황</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ProductOrderCheckoutConfirmation">
+                            <i class="bi bi-circle"></i><span>출고확정</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ProductOrderList">
+                            <i class="bi bi-circle"></i><span>주문목록</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ProductSalesHistory">
+                            <i class="bi bi-circle"></i><span>판매내역</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle"></i><span>견적서발급</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
 
-        <li class="nav-item"> <!--분류 2**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>주문현황</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="orders-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>B - 1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>B - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>B - 3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="fhtml들어갈부분">
-                        <i class="bi bi-circle"></i><span>B - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Forms Nav -->
+            <li class="nav-item"> <!--분류 2**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>주문현황</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="orders-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>B - 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>B - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>B - 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fhtml들어갈부분">
+                            <i class="bi bi-circle"></i><span>B - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
 
-        <li class="nav-item"> <!--분류 3**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#place-an-order-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>발주넣기</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="place-an-order-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>C - 1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>C - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>C - 3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>C - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Tables Nav -->
+            <li class="nav-item"> <!--분류 3**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#place-an-order-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>발주넣기</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="place-an-order-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>C - 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>C - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>C - 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>C - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav -->
 
-        <li class="nav-item"><!--분류 4**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#component-quotation-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>견적</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="component-quotation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>D - 1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>D - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>D - 3</span>
-                    </a>
-                </li>                <li>
+            <li class="nav-item"><!--분류 4**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#component-quotation-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart"></i><span>견적</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="component-quotation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>D - 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>D - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>D - 3</span>
+                        </a>
+                    </li>                <li>
                     <a href="html들어갈부분">
                         <i class="bi bi-circle"></i><span>D - 4</span>
                     </a>
                 </li>
-            </ul>
-        </li><!-- End Charts Nav -->
+                </ul>
+            </li><!-- End Charts Nav -->
 
 
-        <li class="nav-item"> <!--분류 5**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#component-buy-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>부품구매</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="component-buy-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="ComponentQuotation">
-                        <i class="bi bi-circle"></i><span>견적 조회</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="ComponentOrder">
-                        <i class="bi bi-circle"></i><span>발주 조회</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="ComponentReceivingManagement">
-                        <i class="bi bi-circle"></i><span>입고 관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
-        <li class="nav-item"> <!--분류 5**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#production-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>생산</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="production-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
-        <li class="nav-item"> <!--분류 5**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#product-inventory-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>상품 º 재고</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="product-inventory-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
-        <li class="nav-item"> <!--분류 5**************************************************-->
-            <a class="nav-link collapsed" data-bs-target="#management-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>관리</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="management-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="/partnerList">
-                        <i class="bi bi-circle"></i><span>협력사</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="html들어갈부분">
-                        <i class="bi bi-circle"></i><span>E - 4</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
+            <li class="nav-item"> <!--분류 5**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#component-buy-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>부품구매</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="component-buy-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="ComponentQuotation">
+                            <i class="bi bi-circle"></i><span>견적 조회</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ComponentOrder">
+                            <i class="bi bi-circle"></i><span>발주 조회</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ComponentReceivingManagement">
+                            <i class="bi bi-circle"></i><span>입고 관리</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+            <li class="nav-item"> <!--분류 5**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#production-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>생산</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="production-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+            <li class="nav-item"> <!--분류 5**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#product-inventory-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>상품 º 재고</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="product-inventory-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+            <li class="nav-item"> <!--분류 5**************************************************-->
+                <a class="nav-link collapsed" data-bs-target="#management-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>관리</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="management-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/partnerList">
+                            <i class="bi bi-circle"></i><span>협력사</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="html들어갈부분">
+                            <i class="bi bi-circle"></i><span>E - 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
 
-        <!--        로그아웃**************************************************-->
-        <li class="nav-item-logout">
-            <a class="nav-link collapsed" href="/logout">
-                <i class="ri-logout-box-line"></i>
-                <span>로그아웃</span>
-            </a>
-        </li><!-- End Logout Page Nav  새로 추가된부분 **********************************-->
-    </ul>
+            <!--        로그아웃**************************************************-->
+            <li class="nav-item-logout">
+                <a class="nav-link collapsed" href="/logout">
+                    <i class="ri-logout-box-line"></i>
+                    <span>로그아웃</span>
+                </a>
+            </li><!-- End Logout Page Nav  새로 추가된부분 **********************************-->
+        </ul>
 
-</aside><!-- End Sidebar-->
+    </aside><!-- End Sidebar-->
 </th:block>

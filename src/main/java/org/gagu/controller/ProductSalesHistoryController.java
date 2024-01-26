@@ -18,33 +18,33 @@ import java.util.List;
 
 @Controller
 @Log4j2
-public class ProductOrderListController {
+public class ProductSalesHistoryController {
     private final ProductOrderService productOrderService;
     private final ProductOrderInfoService productOrderInfoService;
     private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
 
     @Autowired
-    public ProductOrderListController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
+    public ProductSalesHistoryController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
         this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
     }
 
-    @GetMapping("/ProductOrderList")
+    @GetMapping("/ProductSalesHistory")
     public String getOrderList(@RequestParam(defaultValue = "0", required = false) int page,
                                @RequestParam(defaultValue = "10", required = false) int pageSize,
                                Model model) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        List<ProductOrderListDTO> productOrderList = productOrderService.getProductOrderAllList(pageable);
+        List<ProductOrderListDTO> productOrderList = productOrderService.getProductSalesList(pageable);
         model.addAttribute("ProductOrderList", productOrderList);
 
         // Calculate total pages dynamically based on total item count
-        long totalItems = productOrderService.getProductOrderAllListCount(); // You need to implement this method
+        long totalItems = productOrderService.getProductSalesCount(); // You need to implement this method
         int totalPages = (int) Math.max(1, Math.ceil((double) totalItems / pageSize));
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
 
-        return "ProductOrderList";
+        return "ProductSalesHistory";
     }
 }
