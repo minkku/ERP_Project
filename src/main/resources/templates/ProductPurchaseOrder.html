@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout/default_layout">
+<head>
+	<title>purchase-order</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<!--<link rel="stylesheet" type="text/css" href="css/util.css">-->
+<!--===============================================================================================-->
+<style>
+		.purchase-order-container {
+			width: 21cm;
+		}
+		.purchase-order-top tr td:nth-child(2){
+			width: 150px;
+			border-bottom: 1px solid #000000;
+		}
+		.purchase-order-top tr:nth-child(2) td{
+			height: 5px;
+		}
+        .purchase-order-title {
+            text-decoration: underline;
+            text-align: center;
+        }
+        .purchase-order-company-info {
+        	display: flex;
+        	margin-bottom: 30px;
+        }
+		.purchase-order-page {
+		  min-height: 29.7cm;
+		  padding: 0.5cm 1.5cm 2cm 1.5cm;
+		  border: 1px solid #000000;
+		  box-sizing: border-box;
+		}
+
+		@purchase-order-page {
+		  size: A4;
+		  margin: 0;
+		}
+		
+		@media print {
+		  .purchase-order-page {
+		    margin: 0;
+		    border: initial;
+		    border-radius: initial;
+		    width: initial;
+		    min-height: initial;
+		    box-shadow: initial;
+		    background: initial;
+		    page-break-after: always;
+		  }
+		}
+		.purchase-order-category h3 {
+			margin-left:5px;
+		}
+		.purchase-order-category table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		.purchase-order-category table tr{
+			line-height: 1;
+		}
+
+        .purchase-order-supplier {
+        	width: 100%;
+        	margin-left: auto;
+        }
+        .purchase-order-supplier-table {
+        	border: 1px solid #000000;
+        	border-collapse: collapse;
+        }
+
+    	.purchase-order-supplier-table tr:first-child td:first-child {
+			height: 35px;
+        }
+        .purchase-order-supplier-table tr:nth-child(2) {
+        	height: 35px;
+        }
+        .purchase-order-supplier-table tr:nth-child(3) td:first-child {
+			height: 35px;
+        }
+        .purchase-order-supplier-table tr:nth-child(3) td:first-child span{
+			height: 20px;
+        }
+        .purchase-order-supplier-table tr:nth-child(4) {
+        	height: 64px;
+        }
+        .purchase-order-supplier-table tr:nth-child(5) {
+        	height: 35px;
+        }
+        .purchase-order-supplier-table tr:nth-child(6) {
+        	height: 35px;
+        }
+        .purchase-order-supplier-table td {
+        	border: 1px solid #000000;
+        }
+        .purchase-order-supplier-table td:first-child span{
+        	margin-left: 5px;
+        }
+		.purchase-order-supplier-table td:first-child {
+        	width: 20%;
+        }
+        .purchase-order-supplier-table td:nth-child(2) {
+        	width: 30%;
+        }
+        .purchase-order-supplier-table td:nth-child(3) {
+        	width: 20%;
+        }
+        .purchase-order-supplier-table td:nth-child(3) span{
+        	margin-left: 5px;
+        }
+        .purchase-order-supplier-table td:nth-child(4) {
+        	width: 30%;
+        }
+        .purchase-order-representative-seal {
+        	text-align: right;
+        }
+		.purchase-order-representative-seal span{
+        	text-align: right;
+        	margin-right: 5px;
+        }
+        .purchase-order-list {
+        	width: 100%;
+        	margin-bottom: 40px;
+        }
+        .purchase-order-list-table {
+        	width: 100%;
+			border: 1px solid #000000;
+			border-collapse: collapse;
+        }
+        .purchase-order-list-table th {
+        	border: 1px solid #000000;
+        }
+        .purchase-order-list-table th:first-child {
+        	width: 21%;
+        }
+        .purchase-order-list-table th:nth-child(2) {
+        	width: 12%;
+        }
+        .purchase-order-list-table th:nth-child(3) {
+        	width: 17%;
+        }
+        .purchase-order-list-table th:nth-child(4) {
+        	width: 18%;
+        }
+        .purchase-order-list-table th:nth-child(5) {
+        	width: 17%;
+        }
+        .purchase-order-list-table th:nth-child(6) {
+        	width: 15%;
+        }
+        .purchase-order-list-table tr{
+        	height: 30px;
+        }
+        .purchase-order-list-table tr td {
+        	border: 1px solid #000000;
+        }
+        .purchase-order-list-price-total {
+			text-align: center;
+        }
+        .purchase-order-list-price-total span{
+        	font-weight: bold;
+        }
+        .purchase-order-summary {
+        	display: flex;
+        }
+		.purchase-order-note {
+			border: 1px solid #000000;
+			width: 65%;
+			height: 100px;
+			margin-right: 30px;
+		}
+		.purchase-order-note-title {
+			height: 20px;
+			margin: 5px 10px 5px 10px;
+		}
+		.purchase-order-note-content {
+			height: 80px;
+		}
+		.purchase-order-total {
+			width: 35%;
+		}
+		.purchase-order-total-table {
+			width: 100%;
+			border-top: 1px solid #000000;
+			border-bottom: 1px solid #000000;
+		}
+		.purchase-order-total-table tr td{
+			height: 30px;
+		}
+		.purchase-order-total-table tr:first-child td {
+			border-bottom: 1px solid #cccccc;
+		}
+		.purchase-order-total-table tr:nth-child(2) td {
+			border-bottom: 1px solid #cccccc;
+		}
+</style>
+</head>
+<body>
+<input type="hidden" name="productOrderId" value="productOrderId">
+<div class="purchase-order-container">
+	<div class="purchase-order-page">
+		<table class="purchase-order-top">
+			<tr>
+				<td>발주번호</td>
+				<td>
+					<span th:text="${windowData.productOrder.productOrderNumber}"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>발주일자</td>
+				<td>
+					<span th:text="${#dates.format(windowData.productOrder.productOrderOrderdate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+				</td>
+			</tr>
+		</table>
+		<h1 class="purchase-order-title">명 세 서</h1>
+		<div>
+			<div class="purchase-order-company-info">
+				<div class="purchase-order-category purchase-order-supplier">
+					<table class="purchase-order-supplier-table">
+						<tr>
+							<td>
+								<span>납기일</span>
+							</td>
+							<td>
+								<span th:text="${#dates.format(windowData.productOrder.productOrderDeliverydate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+							</td>
+							<td>
+								<span>사업자</span>
+								<span>등록번호</span>
+							</td>
+							<td>
+								<span th:text="${windowData.businessVender.businessvenderCompanynumber}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>상호</span>
+							</td>
+							<td colspan="3">
+								<span th:text="${windowData.businessVender.businessvenderName}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>대표자</span>
+							</td>
+							<td class="purchase-order-representative-seal">
+								<span th:text="${windowData.businessVender.businessvenderRepresentativename} + '   (인)'"></span>
+							</td>
+							<td>
+								<span>연락처</span>
+							</td>
+							<td>
+								<span th:text="${windowData.businessVender.businessvenderPhone}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>사업장</span>
+								<span>소재지</span>
+							</td>
+							<td colspan="3">
+								<span th:text="${windowData.businessVender.businessvenderAddress}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>핀메담당자</span>
+							</td>
+							<td class="purchase-order-representative-seal">
+								<span th:text="${member.memberName}"></span>
+							</td>
+							<td>
+								<span>연락처</span>
+							</td>
+							<td>
+								<span>031-548-4664</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="purchase-order-list">
+				<table class="purchase-order-list-table">
+					<tr>
+						<th>항목</th>
+						<th>수량</th>
+						<th>단가</th>
+						<th>공급가</th>
+						<th>부가세</th>
+						<th>비고</th>
+					</tr>
+					<tr th:each="item, stat : ${windowData.productOrderItems}">
+						<td th:text="${item.productId}"></td>
+						<td th:text="${item.productOrderItemQuantity}"></td>
+						<td th:text="${item.productOrderItemPrice}"></td>
+						<td class="totalprice" th:text="${item.productOrderItemTotalprice}"></td>
+						<td class="totalpriceaddedtax" th:text="${item.productOrderItemTotalpriceaddedtax}"></td>
+						<td th:text="${item.productOrderItemNote}"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="purchase-order-summary">
+				<div class="purchase-order-note">
+					<div class="purchase-order-note-title">
+						<span>특이사항</span>
+						<hr>
+					</div>
+					<div class="purchase-order-note-content">
+						<span th:text="${windowData.productOrder.productOrderItemDetail}"></span>
+					</div>
+				</div>
+				<div class="purchase-order-total">
+					<table class="purchase-order-total-table">
+						<tr>
+							<td>
+								<span>공급가</span>
+							</td>
+							<td>
+								<span class="window-totalprice"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>부가세</span>
+							</td>
+							<td>
+								<span class="window-totalpriceaddedtax"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>소계</span>
+							</td>
+							<td>
+								<span th:text="${windowData.productOrder.productOrderPriceAmount}"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script th:inline="javascript">
+	$(document).ready(function() {
+        // 합계 계산
+        var totalpriceSum = 0;
+        var totalpriceaddedtaxSum = 0;
+        $('.totalprice').each(function() {
+            totalpriceSum += parseFloat($(this).text() || 0);
+        });
+        $('.totalpriceaddedtax').each(function() {
+            totalpriceaddedtaxSum += parseFloat($(this).text() || 0);
+        });
+
+        // 계산된 값을 화면에 표시
+        $('.window-totalprice').text(totalpriceSum.toFixed(0)); // 소수점 2자리까지 표시
+        $('.window-totalpriceaddedtax').text(totalpriceaddedtaxSum.toFixed(0)); // 소수점 2자리까지 표시
+    });
+</script>
+</body>
+</html>

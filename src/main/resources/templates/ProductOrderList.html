@@ -207,9 +207,11 @@
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script th:inline="javascript">
     /*[ Show component-quotation modal ]*/
+    var totalPrice = 0;
     $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
         e.preventDefault();
         deleteTableContent();
+        totalPrice = 0;
 
         var productOrderId = $(this).data('product-order-id');
         $.ajax({
@@ -230,7 +232,6 @@
 
 
     });
-    var totalPrice = 0;
 
     function updateModalContent(data, price) {
         // 날짜 형식 변환 함수

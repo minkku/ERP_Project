@@ -207,10 +207,13 @@
 
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script th:inline="javascript">
+    var totalPrice = 0;
+
     /*[ Show component-quotation modal ]*/
     $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
         e.preventDefault();
         deleteTableContent();
+        totalPrice = 0;
 
         var productOrderId = $(this).data('product-order-id');
         $.ajax({
@@ -231,7 +234,6 @@
 
 
     });
-    var totalPrice = 0;
 
     function updateModalContent(data, price) {
         // 날짜 형식 변환 함수
@@ -291,30 +293,31 @@
     }
     $('.gradient-color-btn.blue.js-complete-order').on('click', function(e) { // 발주완료
         e.preventDefault();
+        totalPrice = 0;
 
-            var productOrderId = $('#modal-productOrderId').val(); // 원하는 발주 번호로 수정
-            var statusValue = 2;
+        var productOrderId = $('#modal-productOrderId').val(); // 원하는 발주 번호로 수정
+        var statusValue = 2;
 
-            $.ajax({
-                type: 'POST',
-                url: '/ProductOrderInfoModal',
-                data: {
-                    productOrderId: productOrderId,
-                    updateStatus: statusValue
-                },
-                success: function() {
-                    $('.js-component-quotation-modal input').val('');
-                    $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
-                    $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+        $.ajax({
+            type: 'POST',
+            url: '/ProductOrderInfoModal',
+            data: {
+                productOrderId: productOrderId,
+                updateStatus: statusValue
+            },
+            success: function() {
+                $('.js-component-quotation-modal input').val('');
+                $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+                $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
 
-                    alert('발주완료되었습니다. 출고확정을 해주세요.');
+                alert('발주완료되었습니다. 출고확정을 해주세요.');
 
-                    location.reload();
-                },
-                error: function() {
-                    console.error('Failed to update status');
-                }
-            });
+                location.reload();
+            },
+            error: function() {
+                console.error('Failed to update status');
+            }
+        });
 
     });
 
