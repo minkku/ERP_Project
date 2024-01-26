@@ -3,9 +3,23 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout">
 
+<style>
+    /* 스타일링은 여기에 추가하세요 */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
 <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
 
-<div class="component-order-container" >
+<div class="component-order-container">
     <div class="component-order">
         <div class="component-order-page-top">
             <div class="component-order-title-div">
@@ -13,12 +27,12 @@
                 <h5 class="component-order-list-title">상품 재고</h5>
             </div>
         </div>
-        <table class="component-order-list-table resizableTable selectableTable" style="width: 1700px">
+        <table class="component-order-list-table resizableTable selectableTable" style="width: 1200px">
             <colgroup>
-                <col style="width: 20%">
+                <col style="width: 15%">
                 <col style="width: 50%">
-                <col style="width: 15%">
-                <col style="width: 15%">
+                <col style="width: 10%">
+                <col style="width: 10%">
             </colgroup>
             <thead>
             <tr>
@@ -29,17 +43,137 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="productInventory  : ${products}">
+            <th:block th:each="productInventory: ${products}">
+
                 <tr>
                     <td th:text="${productInventory.product.productId}" class="product_id"></td>
                     <td th:text="${productInventory.product.productName}" class="product_name"></td>
-                    <td th:text="${productInventory.product.productInventoryQuantity}" class="product_inventory_quantity"></td>
-                    <td th:text="${productInventory.product.productInventoryStock}" class="product_inventory_stock"></td>
+                    <td th:text="${productInventory.productInventoryQuantity}" class="product_inventory_quantity"></td>
+                    <td th:text="${productInventory.productInventoryStock}" class="product_inventory_stock"></td>
+                    <td>
+                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal"
+                           th:attr="data-product-order-id=${productInventory.product.productId}">상세</a>
+
+
+                        <div class="modal fade" th:id="'productModal' + ${productInventory.product.productId}" th:attr="data-backdrop='static', data-keyboard='false'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:text="${productInventory.product.productName}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <table class="component-order-list-table resizableTable selectableTable" style="width: 1200px">
+                                            <colgroup>
+                                                <col style="width: 15%">
+                                                <col style="width: 50%">
+                                                <col style="width: 10%">
+                                                <col style="width: 10%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" class="product_id">상품코드</th>
+                                                <th scope="col" class="product_name">상품명</th>
+                                                <th scope="col" class="product_inventory_quantity">수량</th>
+                                                <th scope="col" class="product_inventory_stock">창고</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <th:block th:each="productInventory: ${products}">
+                                                <table class="table" style="border: 1px solid black;">
+                                                    <tr>
+                                                        <th>상품코드</th>
+                                                        <td th:text="${productInventory.product.productId}"></td>
+                                                        <th>규격</th>
+                                                        <td th:text="${productInventory.product.productSpecification}"></td>
+                                                        <th>재질</th>
+                                                        <td th:text="${productInventory.product.productMaterial}"></td>
+                                                        <th rowspan="3">이미지</th>
+                                                        <td rowspan="3">
+                                                            <img th:src="${productInventory.product.productImg}" alt="Product Image" style="max-height:100%;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>상품명</th>
+                                                        <td th:text="${productInventory.product.productName}" colspan="5"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>정가</th>
+                                                        <td th:text="${productInventory.product.productRetailprice}"style="max-width:25%;"></td>
+                                                        <th>생산원가</th>
+                                                        <td th:text="${productInventory.product.productCostprice}" style="max-width:25%;"></td>
+                                                        <th>생산기간</th>
+                                                        <td th:text="${productInventory.product.productProductionperiod}"style="max-width:20%;"></td>
+                                                    </tr>
+
+                                                </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </th:block>
             </tbody>
         </table>
     </div>
 </div>
+
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    $('.js-show-component-quotation-modal').on('click', function(e) {
+    e.preventDefault();
+    deleteTableContent();
+
+    var productId = $(this).data('product-id');
+    $.ajax({
+        type: 'GET',
+        url: '/product-detail',
+        data: {
+            productId: productId
+        },
+        success: function(response) {
+            console.log('Success:', response);
+
+            // 모달에 받아온 데이터 표시
+            $('#modal-product-id').text(response.productId);
+            $('#modal-product-name').text(response.productName);
+            $('#modal-product-specification').text(response.productSpecification);
+            $('#modal-product-material').text(response.productMaterial);
+            $('#modal-product-type').text(response.productType);
+            $('#modal-product-retailprice').text(response.productRetailprice);
+            $('#modal-product-costprice').text(response.productCostprice);
+            $('#modal-product-sellingprice').text(response.productSellingprice);
+            $('#modal-product-img').attr('src', response.productImg);
+            $('#modal-product-productionperiod').text(response.productProductionperiod);
+
+            // 모달 열기
+            $('#your-modal-id').modal('show');
+        },
+        error: function() {
+            console.error('Failed to fetch Product details');
+        }
+    });
+});
+
+    function deleteTableContent() {
+        $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+    }
+
+    $('.js-hide-component-quotation-modal').on('click', function() { // 취소
+
+        $('.js-component-quotation-modal input').val('');
+        deleteTableContent();
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
+</script>
+
+
 </body>
 </html>
