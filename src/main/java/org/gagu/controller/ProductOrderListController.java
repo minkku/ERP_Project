@@ -32,14 +32,14 @@ public class ProductOrderListController {
 
     @GetMapping("/ProductOrderList")
     public String getOrderList(@RequestParam(defaultValue = "0", required = false) int page,
-                                 @RequestParam(defaultValue = "10", required = false) int pageSize,
-                                 Model model) {
+                               @RequestParam(defaultValue = "10", required = false) int pageSize,
+                               Model model) {
         Pageable pageable = PageRequest.of(page, pageSize);
         List<ProductOrderListDTO> productOrderList = productOrderService.getProductOrderAllList(pageable);
         model.addAttribute("ProductOrderList", productOrderList);
 
         // Calculate total pages dynamically based on total item count
-        long totalItems = productOrderService.getProductOrderListCount(); // You need to implement this method
+        long totalItems = productOrderService.getProductOrderAllListCount(); // You need to implement this method
         int totalPages = (int) Math.max(1, Math.ceil((double) totalItems / pageSize));
 
         model.addAttribute("totalPages", totalPages);

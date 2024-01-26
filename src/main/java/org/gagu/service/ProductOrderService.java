@@ -36,12 +36,23 @@ public class ProductOrderService {
         return productOrderRepository.findProductOrderAllList(pageable);
     }
 
+    public List<ProductOrderListDTO> getProductSalesList(Pageable pageable) {
+        return productOrderRepository.findProductSalesList(pageable);
+    }
+
     public long getProductOrderListCount() {
         return productOrderRepository.findProductOrderListCount();
     }
 
     public long getProductOrderCheckoutListCount() {
         return productOrderRepository.findProductOrderCheckoutListCount();
+    }
+    public long getProductOrderAllListCount() {
+        return productOrderRepository.findProductOrderAllListCount();
+    }
+
+    public long getProductSalesCount() {
+        return productOrderRepository.findProductSalesListCount();
     }
 
     public BusinessVender getBusinessVenderByProductOrderId(Integer productOrderId) {
