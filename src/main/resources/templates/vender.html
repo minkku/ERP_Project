@@ -7,70 +7,72 @@
 <main id="main" class="main" style="width: 100%;">
     <div class="row">
         <div class="col-lg-12">
-            <div class="component-quotation-list" style="width:1200px; height:500px;">
-                <!-- Bordered Table -->
-                <table class="component-quotation-list-table" style="width:100%;">
-                    <colgroup>
-                        <col style="width: 5%">
-                        <col style="width: 15%">
-                        <col style="width: 45%">
-                        <col style="width: 18%">
-                        <col style="width: 18%">
-                        <col style="width: 8%">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th scope="col" class="component-quotation-list-top">No.</th>
-                        <th scope="col" class="component-quotation-list-top">거래처명</th>
-                        <th scope="col" class="component-quotation-list-top">주소</th>
-                        <th scope="col" class="component-quotation-list-top">사업자 번호</th>
-                        <th scope="col" class="component-quotation-list-top">전화번호</th>
-                        <th scope="col" class="component-quotation-list-top"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${list}" style="cursor:pointer;">
-                        <td th:text="${item.partnerId}" class="partnerId" style="text-align: center"></td>
-                        <td th:text="${item.bpName}" style="text-align: center"></td>
-                        <td th:text="${item.address}"></td>
-                        <td th:text="${item.companyNumber}" style="text-align: center"></td>
-                        <td th:text="${item.phone}" style="text-align: center"></td>
-                        <td>
-                            <input type="hidden" name="partnerId" value="{item.partnerId}">
-                            <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.partnerId}" >수정</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- End Bordered Table -->
-                <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
-                    <ul class="pagination" style="justify-content: end;">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
-                            <a class="page-link pageA"
-                               th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
-                               th:href="@{'/partnerList?page=' + ${pageNumber - 1} + '&size=10'}"
-                               th:text="${pageNumber}">
-                            </a>
-                        </li>
 
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
 
-            <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
-                <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
+                <div class="component-quotation-list" style="width:1200px; height:500px;">
+                    <!-- Bordered Table -->
+                    <table class="component-quotation-list-table" style="width:100%;">
+                        <colgroup>
+                            <col style="width: 5%">
+                            <col style="width: 15%">
+                            <col style="width: 45%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                            <col style="width: 8%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col" class="component-quotation-list-top">No.</th>
+                            <th scope="col" class="component-quotation-list-top">거래처명</th>
+                            <th scope="col" class="component-quotation-list-top">주소</th>
+                            <th scope="col" class="component-quotation-list-top">사업자 번호</th>
+                            <th scope="col" class="component-quotation-list-top">전화번호</th>
+                            <th scope="col" class="component-quotation-list-top"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${list}" style="cursor:pointer;">
+                            <td th:text="${item.venderId}" class="venderId" style="text-align: center"></td>
+                            <td th:text="${item.venderName}" style="text-align: center"></td>
+                            <td th:text="${item.address}"></td>
+                            <td th:text="${item.companyNum}" style="text-align: center"></td>
+                            <td th:text="${item.phone}" style="text-align: center"></td>
+                            <td>
+                                <input type="hidden" name="venderId" value="{item.venderId}">
+                                <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.venderId}" >수정</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Bordered Table -->
+                    <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+                        <ul class="pagination" style="justify-content: end;">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+                                <a class="page-link pageA"
+                                   th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                                   th:href="@{'/venderList?page=' + ${pageNumber - 1} + '&size=10'}"
+                                   th:text="${pageNumber}">
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="component-quotation-registration-btn" style="margin-left: auto; margin-bottom: 0.75rem;">
+                    <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal" style="width:100px">거래처 등록</a>
+                </div>
             </div>
-        </div>
     </div>
     <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
     <!-- Registration Modal -->
@@ -129,7 +131,7 @@
     </div>
     <!-- End of Registration Modal -->
 
-    <!-- [ Update ] Modal by partnerId -->
+    <!-- [ Update ] Modal by venderId -->
     <div class="partner-quotation-modal-container wrap-partner-quotation-modal js-partner-quotation-modal">
         <div class="partner-quotation-modal-title">
             <span>거래처 수정</span>
@@ -142,11 +144,11 @@
                 <div class="partner-quotation-modal-recipient-info">
                     <ul>
                         <li>
-                            <input type="hidden" id="modal-getPartnerId" name="partnerId">
+                            <input type="hidden" id="modal-getVenderId" name="venderId">
                             <label for="partner-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-company-number" name="companyNumber">
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-number" name="companyNum">
                             <label for="partner-quotation-modal-input-supplier-company-name">상호</label>
-                            <input type="text" id="partner-quotation-modal-input-supplier-company-name" name="bpName">
+                            <input type="text" id="partner-quotation-modal-input-supplier-company-name" name="venderName">
                         </li>
                         <li>
                             <label for="partner-quotation-modal-input-supplier-company-address">사업장 소재지</label>
@@ -203,8 +205,8 @@
     });
 
     const savePost = async () => {
-            const companyNumber = document.getElementById('component-quotation-modal-input-supplier-company-number').value;
-            const bpName = document.getElementById('component-quotation-modal-input-supplier-company-name').value;
+            const companyNum = document.getElementById('component-quotation-modal-input-supplier-company-number').value;
+            const venderName = document.getElementById('component-quotation-modal-input-supplier-company-name').value;
             const address = document.getElementById('component-quotation-modal-input-supplier-company-address').value;
             const type = document.getElementById('component-quotation-modal-input-supplier-sector').value;
             const bigType = document.getElementById('component-quotation-modal-input-supplier-business-type').value;
@@ -215,14 +217,14 @@
             const note = document.getElementById('note-for-reg').value;
 
         try {
-            const response = await fetch('/businessPartner', {
+            const response = await fetch('/vender', {
                 method: 'POST',
                 headers: {
                     'Content-type' : 'application/json',
                     },
                 body: JSON.stringify({
-                    companyNumber,
-                    bpName,
+                    companyNum,
+                    venderName,
                     phone,
                     fax,
                     address,
@@ -231,18 +233,16 @@
                     note,
                     bigType,
                     smallType
-                })
-            })
+                }),
+            });
+            console.log("ajax------------------", response);
 
-            if(!response.ok) {
-                throw new Error("Server is not response");
-            } else if(response == null) {
-                alert("입력란을 채우주세요");
+            if(!response) {
+                console.log("Failed registration for businessVender");
+            } else {
+                console.log("Success to registration for businessVender");
+                location.href = "/venderList";
             }
-            else {
-                console.log("Success to updated a list");
-            }
-            location.href="/partnerList";
 
         } catch (error) {
             console.error('Error saving post:', error);
@@ -253,22 +253,22 @@
     $('.js-show-partner-quotation-modal').on('click',function(e){
         e.preventDefault();
 
-        var partnerId = $(this).data('id');
+        var venderId = $(this).data('id');
         $.ajax({
             type: 'GET',
-            url: '/updatePartner?partnerId=' + partnerId,
+            url: '/updateVender?venderId=' + venderId,
             success: function(response) {
                 console.log('Success:', response);
                 updateModalContent(response);
             },
             error: function() {
-                console.error('Can not resolve PartnerId or Wrong direction');
+                console.error('Can not resolve venderId or Wrong direction');
             }
         });
     });
 
     function updateModalContent(data) {
-        $('#partner-quotation-modal-input-supplier-company-number').val(data.companyNumber);
+        $('#partner-quotation-modal-input-supplier-company-number').val(data.companyNum);
         $('#partner-quotation-modal-input-supplier-company-name').val(data.bpName);
         $('#partner-quotation-modal-input-supplier-company-address').val(data.address);
         $('#partner-quotation-modal-input-supplier-sector').val(data.smallType);
@@ -278,7 +278,7 @@
         $('#partner-quotation-modal-input-supplier-fax').val(data.fax);
         $('#partner-modal-input-supplier-type').val(data.type);
         $('#note-for-update').val(data.note);
-        $('#modal-getPartnerId').val(data.partnerId);
+        $('#modal-getVenderId').val(data.venderId);
 
         $('.js-partner-quotation-modal').addClass('show-partner-quotation-modal');
     };
@@ -289,9 +289,9 @@
     });
 
      const updatePost = async () => {
-        const partnerId = document.getElementById('modal-getPartnerId').value;
-        const companyNumber = document.getElementById('partner-quotation-modal-input-supplier-company-number').value;
-        const bpName = document.getElementById('partner-quotation-modal-input-supplier-company-name').value;
+        const venderId = document.getElementById('modal-getVenderId').value;
+        const companyNum = document.getElementById('partner-quotation-modal-input-supplier-company-number').value;
+        const venderName = document.getElementById('partner-quotation-modal-input-supplier-company-name').value;
         const address = document.getElementById('partner-quotation-modal-input-supplier-company-address').value;
         const type = document.getElementById('partner-quotation-modal-input-supplier-sector').value;
         const bigType = document.getElementById('partner-quotation-modal-input-supplier-business-type').value;
@@ -303,14 +303,14 @@
 
         console.log("------ updating -------");
         try {
-            const response = await fetch('/api/updating?partnerId=' + partnerId , {
+            const response = await fetch('/updating?venderId=' + venderId , {
                 method: 'PUT',
                 headers: {
                     'Content-type' : 'application/json',
                 },
                 body: JSON.stringify({
-                    companyNumber,
-                    bpName,
+                    companyNum,
+                    venderName,
                     address,
                     type,
                     bigType,
@@ -328,7 +328,7 @@
                 console.log("Success to updated a list");
             }
 
-            location.href = "/partnerList";
+            location.href = "/venderList";
         } catch(error) {
             console.log("commit error : " + error);
         }
