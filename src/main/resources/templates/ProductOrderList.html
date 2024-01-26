@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+<main id="main" class="main" style="width: 100%;">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Bordered Table -->
+                        <table class="table table-bordered" style="margin: 0 10px 10px auto; vertical-align: center;">
+                            <thead>
+                            <tr>
+                                <th class="table-active" scope="col" style="text-align: center"></th>
+                                <th class="table-active" scope="col" style="text-align: center">발주번호</th>
+                                <th class="table-active" scope="col" style="text-align: center">발주요청일자</th>
+                                <th class="table-active" scope="col" style="text-align: center">거래처명</th>
+                                <th class="table-active" scope="col" style="text-align: center">품목(외)</th>
+                                <th class="table-active" scope="col" style="text-align: center">합계금액</th>
+                                <th class="table-active" scope="col" style="text-align: center">상태</th>
+                                <th class="table-active" scope="col" style="text-align: center">조회</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item, stat : ${ProductOrderList}">
+                                <td th:text="${stat.index + 1}"></td>
+                                <td th:text="${item.productOrderNumber}"></td>
+                                <td style="text-align: center" th:text="${#dates.format(item.productOrderOrderdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td style="text-align: center" th:text="${item.businessvenderName}"></td>
+                                <td >
+                                    <span th:if="${item.productOrderItemQuantity == 0}" th:text="${item.productName}"></span>
+                                    <span th:if="${item.productOrderItemQuantity > 0}" th:text="${item.productName + ' 외 ' + item.productOrderItemQuantity + '건'}"></span>
+                                </td>
+                                <td style="text-align: right" th:text="${item.productOrderPriceAmount}"></td>
+                                <td style="text-align: center">
+                                    <span th:if="${item.productOrderStatus == 1}" th:text="진행중"></span>
+                                    <span th:if="${item.productOrderStatus == 2}" th:text="발주확인"></span>
+                                    <span th:if="${item.productOrderStatus == 3}" th:text="출고확정"></span>
+                                    <span th:if="${item.productOrderStatus == 4}" th:text="완료"></span>
+                                    <span th:if="${item.productOrderStatus == 5}" th:text="재검토?"></span>
+                                    <span th:if="${item.productOrderStatus == 99}" th:text="종료"></span>
+                                </td>
+                                <td style="text-align: center">
+                                    <div class="quotation-modal-submit-button" style="margin: -7px;">
+                                        <input type="hidden" name="productOrderId" value="${item.productOrderId}">
+                                        <a href="#" class="gradient-color-btn blue js-show-component-quotation-modal"
+                                           th:attr="data-product-order-id=${item.productOrderId}">조회</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Bordered Table -->
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=0)}" aria-label="First">
+                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage > 0}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage - 1})}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage ? 'page-item active' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${currentPage + 1})}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                                    <a class="page-link" th:href="@{/ProductOrderStatus(page=${totalPages - 1})}" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End Pagination -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <th:block th:replace="~{fragments/footer:: footerFragment}"></th:block>
+    <!-- registration modal -->
+    <div class="component-quotation-modal-container wrap-component-quotation-modal js-component-quotation-modal">
+        <div class="component-quotation-modal-title">
+            <span>발주서</span>
+        </div>
+        <div class="component-quotation-modal-main">
+            <div class="component-quotation-modal-recipient">
+                <div class="component-quotation-modal-recipient-title">
+                    <h6>공급자</h6>
+                </div>
+                <div class="component-quotation-modal-recipient-info">
+
+                    <ul>
+                        <li>
+                            <label for="component-quotation-modal-input-order-number">발주번호</label>
+                            <input type="text" id="component-quotation-modal-input-order-number" readonly>
+                            <label for="component-quotation-modal-input-member">담당자</label>
+                            <input type="text" id="component-quotation-modal-input-member" readonly>
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-component-quotation-date">발주일</label>
+                            <input type="date" id="component-quotation-modal-input-component-quotation-date" readonly>
+                            <label for="component-quotation-modal-input-supplier-delivery-date" >납기일</label>
+                            <input type="date" id="component-quotation-modal-input-supplier-delivery-date" readonly>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="component-quotation-modal-supplier">
+                <div class="component-quotation-modal-supplier-title">
+                    <h6>공급 받는 자</h6>
+                </div>
+                <div class="component-quotation-modal-supplier-info">
+                    <ul>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-company-number">사업자 등록번호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-number" readonly>
+                            <label for="component-quotation-modal-input-supplier-company-name">상호</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-name" readonly>
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-company-address">사업장 소재지</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-company-address" readonly>
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-sector">업태</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-sector" readonly>
+                            <label for="component-quotation-modal-input-supplier-business-type">업종</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-business-type" readonly>
+                        </li>
+                        <li>
+                            <label for="component-quotation-modal-input-supplier-representative">대표자</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-representative" readonly>
+                            <label for="component-quotation-modal-input-supplier-phone">연락처</label>
+                            <input type="text" id="component-quotation-modal-input-supplier-phone" readonly>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="component-quotation-modal-component-quotation-list" data-component-quotation-modal-component-quotation-list-top="0" data-component-quotation-modal-component-quotation-list-left="0">
+                <table class="component-quotation-modal-component-quotation-list-table" id="component-quotation-modal-component-quotation-list-table">
+                    <colgroup>
+                        <col style="width: 18%">
+                        <col style="width: 10%">
+                        <col style="width: 6%">
+                        <col style="width: 14%">
+                        <col style="width: 6%">
+                        <col style="width: 14%">
+                        <col style="width: 14%">
+                        <col style="width: 18%">
+                    </colgroup>
+                    <tr>
+                        <td class="component-quotation-modal-component-quotation-list-top">항목</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">수량</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">단위</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">단가</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">통화</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">공급가</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">부가세</td>
+                        <td class="component-quotation-modal-component-quotation-list-top">비고</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="component-quotation-modal-summary">
+                <div class="component-quotation-modal-note">
+                    <textarea id="component-quotation-modal-total-note" readonly></textarea>
+                </div>
+                <div class="component-quotation-modal-total">
+                    <div class="component-quotation-modal-total-line">
+                        <label for="component-quotation-modal-input-total-supply-value">공급가</label>
+                        <input type="text" id="component-quotation-modal-input-total-supply-value" readonly>
+                    </div>
+                    <div class="component-quotation-modal-total-line">
+                        <label for="component-quotation-modal-input-total-value-added-tax">부가세</label>
+                        <input type="text" id="component-quotation-modal-input-total-value-added-tax" readonly>
+                    </div>
+                    <div class="component-quotation-modal-total-line">
+                        <label for="component-quotation-modal-input-total-subtotal">소계</label>
+                        <input type="text" id="component-quotation-modal-input-total-subtotal" readonly>
+                    </div>
+                </div>
+                <div class="component-quotation-modal-submit-button">
+                    <input type="hidden" id="modal-productOrderId" name="modal-productOrderId">
+                    <a href="#" class="gradient-color-btn blue js-hide-component-quotation-modal" style="width: 100px;">닫기</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- registration modal end-->
+</main><!-- End #main -->
+
+<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script th:inline="javascript">
+    /*[ Show component-quotation modal ]*/
+    var totalPrice = 0;
+    $('.js-show-component-quotation-modal').on('click', function(e) { // 조회
+        e.preventDefault();
+        deleteTableContent();
+        totalPrice = 0;
+
+        var productOrderId = $(this).data('product-order-id');
+        $.ajax({
+            type: 'GET',
+            url: '/ProductOrderInfoModal',
+            data: {
+                productOrderId: productOrderId
+            },
+            success: function(response) {
+                console.log('Success:', response);
+                updateProductOrderItems(response.productOrderItems);
+                updateModalContent(response, totalPrice);
+            },
+            error: function() {
+                console.error('Failed to fetch ProductOrderInfoDataDTO');
+            }
+        });
+
+
+    });
+
+    function updateModalContent(data, price) {
+        // 날짜 형식 변환 함수
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+    // 발주일 날짜 형식 변환
+        var orderDate = formatDate(data.productOrder.productOrderOrderdate);
+        $('#component-quotation-modal-input-component-quotation-date').val(orderDate);
+
+        // 납기일 날짜 형식 변환
+        var deliveryDate = formatDate(data.productOrder.productOrderDeliverydate);
+        $('#component-quotation-modal-input-supplier-delivery-date').val(deliveryDate);
+
+        // 나머지 데이터 갱신
+        $('#component-quotation-modal-input-member').val(data.productOrder.memberId);
+        $('#component-quotation-modal-input-order-number').val(data.productOrder.productOrderNumber);
+        $('#component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
+        $('#component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
+        $('#component-quotation-modal-input-supplier-company-address').val(data.businessVender.businessvenderAddress);
+        $('#component-quotation-modal-input-supplier-sector').val(data.businessVender.businessvenderSmalltype);
+        $('#component-quotation-modal-input-supplier-business-type').val(data.businessVender.businessvenderBigtype);
+        $('#component-quotation-modal-input-supplier-representative').val(data.businessVender.businessvenderRepresentativename);
+        $('#component-quotation-modal-input-supplier-phone').val(data.businessVender.businessvenderPhone);
+        $('#component-quotation-modal-input-total-supply-value').val(price);
+        $('#component-quotation-modal-input-total-value-added-tax').val(price * 0.1);
+        $('#component-quotation-modal-total-note').val(data.productOrder.productOrderItemDetail);
+        $('#component-quotation-modal-input-total-subtotal').val(data.productOrder.productOrderPriceAmount);
+        $('#component-quotation-modal-note').val(data.productOrder.productOrderItemDetail);
+        $('#modal-productOrderId').val(data.productOrder.productOrderId);
+
+        $('.js-component-quotation-modal').addClass('show-component-quotation-modal');
+    }
+
+    function updateProductOrderItems(productOrderItems) {
+        var tableBody = $('.component-quotation-modal-component-quotation-list-table tbody');
+        tableBody.append();
+
+        $.each(productOrderItems, function(index, item) {
+            var row = $('<tr class="product-order-item"></tr>');
+            row.append('<td><input type="text" value="' + item.productId + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemQuantity + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productSpecification + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemPrice + '" readonly></td>');
+            row.append('<td><input type="text" value="KOR" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemTotalprice + '" readonly></td>');
+            row.append('<td><input type="text" value="' + (item.productOrderItemTotalprice * 0.1) + '" readonly></td>');
+            row.append('<td><input type="text" value="' + item.productOrderItemNote + '" readonly></td>');
+            totalPrice += item.productOrderItemTotalprice;
+            tableBody.append(row);
+        });
+    }
+
+    function deleteTableContent() {
+        $('.component-quotation-modal-component-quotation-list-table tbody .product-order-item').remove();
+    }
+
+    $('.js-hide-component-quotation-modal').on('click', function() { // 취소
+        totalPrice = 0;
+        $('.js-component-quotation-modal input').val('');
+        deleteTableContent();
+        $('.js-component-quotation-modal').removeClass('show-component-quotation-modal');
+    });
+</script>
+</body>
+</html>

@@ -14,5 +14,4 @@ public interface ComponentQuotationRepository extends JpaRepository<ComponentQuo
     // 직접 SQL을 작성한 예제
     //@Query("SELECT m FROM Member m WHERE m.name = ?1")
     //List<component-quotationItem> findBycomponent-quotationId(int component-quotationId);
-
 }

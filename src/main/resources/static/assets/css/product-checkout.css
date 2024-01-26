@@ -1,0 +1,294 @@
+    .s-component-quotation-modal-container {
+        display: fixed;
+        width: 1050px;
+        height: 784px;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        background: #e7e7e7;
+    }
+    .s-component-quotation-modal-title{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        border-radius: 10px 10px 0px 0px;
+        background: linear-gradient( to bottom, #1c329c 10%, #00188a 20%, #010c42 100%);
+    }
+    .s-component-quotation-modal-title span{
+        font-size: 15px;
+        font-size: 15px;
+        color: white;
+    }
+    .s-component-quotation-modal-main {
+        padding: 0px 60px 40px 60px;
+    }
+    .s-component-quotation-modal-recipient {
+        display: flex;
+        height: 100px;
+        background: #e9f7ec;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #d8d8d8;
+        border-radius: 5px;
+    }
+    .s-component-quotation-modal-recipient-title {
+        display: flex;
+        width: 150px;
+        justify-content: center;
+        border-right:1px solid #000000;
+    }
+    .s-component-quotation-modal-recipient-info {
+
+    }
+    .s-component-quotation-modal-recipient-info ul{
+        padding-left: 10px;
+        list-style: none;
+    }
+    .s-component-quotation-modal-recipient-info ul li:not(:last-child){
+        margin-bottom: 7px;
+    }
+    .s-component-quotation-modal-recipient-info ul li label {
+        width: 120px;
+        margin-right: 10px;
+        text-align: right;
+    }
+    .s-component-quotation-modal-recipient-info ul li input {
+        width: 200px;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    .s-component-quotation-modal-supplier {
+        display: flex;
+        height: 185px;
+        background: #e9f7ec;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #d8d8d8;
+        border-radius: 5px;
+    }
+    .s-component-quotation-modal-supplier-title {
+        display: flex;
+        width: 150px;
+        justify-content: center;
+        border-right:1px solid #000000;
+    }
+    .s-component-quotation-modal-supplier-info {
+    }
+    .s-component-quotation-modal-supplier-info ul{
+        padding-left: 10px;
+        list-style: none;
+    }
+    .s-component-quotation-modal-supplier-info ul li:not(:last-child) {
+        margin-bottom: 7px;
+    }
+    .s-component-quotation-modal-supplier-info ul li label {
+        width: 120px;
+        margin-right: 10px;
+        text-align: right;
+    }
+    .s-component-quotation-modal-supplier-info ul li input {
+        width: 200px;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    #s-component-quotation-modal-input-supplier-company-address {
+        width: 540px;
+    }
+    .s-component-quotation-modal-quotation-list-top {
+        background-color: #294868 !important;
+        color: white;
+    }
+    .s-component-quotation-modal-quotation-list{
+        overflow: auto;
+        box-sizing: border-box;
+        border: 1px solid #d8d8d8;
+        border-radius: 10px;
+        padding: 0;
+    }
+    .s-component-quotation-modal-quotation-list::-webkit-scrollbar {
+      width: 10px;
+    }
+    .s-component-quotation-modal-quotation-list::-webkit-scrollbar-thumb {
+      background-color: #0b002e;
+      border-radius: 10px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    .s-component-quotation-modal-quotation-list::-webkit-scrollbar-thumb:hover {
+      background-color: #180063;
+    }
+    .s-component-quotation-modal-quotation-list::-webkit-scrollbar-track {
+      background-color: #d4d4d4;
+      border-radius: 5px;
+      box-shadow: inset 0px 0px 5px white;
+    }
+    .s-component-quotation-modal-quotation-list > table{
+        table-layout: fixed;
+        position: relative;
+        border-collapse: separate !important;
+        border-spacing: 0;
+        padding: 0;
+        margin: 0;
+        width:100%;
+        border-width:0px;
+        overflow: visible;
+        background-color: #fff;
+    }
+    .s-component-quotation-modal-quotation-list td ,.s-component-quotation-modal-quotation-list th{
+        border: 1px solid #ccc;
+        padding: .4rem;
+    }
+    .s-component-quotation-modal-quotation-list{
+        width:50%;
+        height:230px;
+        float:right;
+    }
+    .s-component-quotation-modal-quotation-list-top{
+        position: sticky;
+        top:0;
+        z-index: 20;
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-product-inventory-modal-quotation-list-table tr:not(:first-child) td {
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-product-inventory-modal-quotation-list-table tr td input {
+        width: 90%;
+        height: 90%;
+        border-width: 0;
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-component-inventory-modal-quotation-list-table tr:not(:first-child) td {
+        text-align: center;
+    }
+    .s-component-quotation-modal-quotation-list .s-component-inventory-modal-quotation-list-table tr td input {
+        width: 90%;
+        height: 90%;
+        border-width: 0;
+        text-align: center;
+    }
+    .s-component-quotation-modal-summary {
+        display: flex;
+        float:right;
+        margin-top:1rem;
+    }
+    .s-component-quotation-modal-note {
+        margin-right: 20px;
+    }
+    .s-component-quotation-modal-note textarea{
+        width: 500px;
+        height: 100px;
+        resize: none;
+        border-radius: 5px;
+    }
+    .s-component-quotation-modal-total {
+        display: flex;
+        flex-direction: column;
+    }
+    .s-component-quotation-modal-total .s-component-quotation-modal-total-line{
+        margin-bottom: 3px;
+    }
+    .s-component-quotation-modal-total .s-component-quotation-modal-total-line label{
+        width: 60px;
+        margin-right: 10px;
+        text-align: right;
+    }
+    .s-component-quotation-modal-total .s-component-quotation-modal-total-line input{
+        border-width: 0;
+        border-bottom-width: 1px;
+    }
+    .s-component-quotation-modal-submit-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin: 0 10px 10px auto;
+    }
+    .s-component-quotation-modal-submit-button a {
+        width: 80px;
+        height: 30px;
+        line-height: 20px;
+        text-align: center;
+    }
+    .s-component-quotation-modal-btn {
+      text-decoration: none;
+      color: white;
+      padding: 10px 30px;
+      margin: 5px;
+      display: inline-block;
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.21);
+      border-bottom: 4px solid rgba(0,0,0,0.21);
+      border-radius: 4px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+    .s-component-quotation-modal-btn.blue {
+      background: #7ca5ce;
+      background: -moz-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #7ca5ce), color-stop(100%, #3d70a0));
+      background: -webkit-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -o-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -ms-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: linear-gradient(to bottom, #7ca5ce 0%, #3d70a0 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ca5ce', endColorstr='#3d70a0', GradientType=0 );
+    }
+    .s-component-quotation-modal-btn.blue:hover {
+      background: #88b3db;
+      background: -moz-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #88b3db), color-stop(100%, #5a85ad));
+      background: -webkit-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -o-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -ms-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: linear-gradient(to bottom, #88b3db 0%, #5a85ad 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88b3db', endColorstr='#5a85ad', GradientType=0 );
+      color:white; text-decoration: none; border-bottom: 0px solid rgba(61,112,160,0.21);
+    }
+    .s-component-quotation-modal-btn.blue:active   {background: #3d70a0;}
+
+    .custom-button {
+      text-decoration: none;
+      color: white;
+      padding: 10px 30px;
+      margin: 5px;
+      display: inline-block;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.21);
+      border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+      border-radius: 4px;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+
+    .custom-button.blue {
+      background: #7ca5ce;
+      background: -moz-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #7ca5ce), color-stop(100%, #3d70a0));
+      background: -webkit-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -o-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: -ms-linear-gradient(top, #7ca5ce 0%, #3d70a0 100%);
+      background: linear-gradient(to bottom, #7ca5ce 0%, #3d70a0 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ca5ce', endColorstr='#3d70a0', GradientType=0 );
+    }
+
+    .custom-button.blue:hover {
+      background: #88b3db;
+      background: -moz-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -webkit-gradient(left top, left bottom, color-stop(0%, #88b3db), color-stop(100%, #5a85ad));
+      background: -webkit-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -o-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: -ms-linear-gradient(top, #88b3db 0%, #5a85ad 100%);
+      background: linear-gradient(to bottom, #88b3db 0%, #5a85ad 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88b3db', endColorstr='#5a85ad', GradientType=0 );
+      color: white;
+      text-decoration: none;
+      border-bottom: 0px solid rgba(61, 112, 160, 0.21);
+    }
+
+    .custom-button.blue:active {
+      background: #3d70a0;
+    }
