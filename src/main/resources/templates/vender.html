@@ -220,7 +220,6 @@
             const smallType = document.getElementById('component-quotation-modal-input-supplier-type').value;
             const note = document.getElementById('note-for-reg').value;
 
-
         try {
             const response = await $.ajax({
                 type: 'POST',
@@ -239,14 +238,15 @@
                     smallType
                 }),
             });
+            console.log("ajax------------------", response);
 
             if(!response) {
                 console.log("Failed registration for businessVender");
             } else {
                 console.log("Success to registration for businessVender");
+                location.href = "/venderList";
             }
 
-            location.href = "/venderList";
         } catch (error) {
             console.error('Error saving post:', error);
         }
@@ -259,7 +259,7 @@
         var venderId = $(this).data('id');
         $.ajax({
             type: 'GET',
-            url: '/updatePartner?venderId=' + venderId,
+            url: '/updateVender?venderId=' + venderId,
             success: function(response) {
                 console.log('Success:', response);
                 updateModalContent(response);
@@ -306,7 +306,7 @@
 
         console.log("------ updating -------");
         try {
-            const response = await fetch('/api/updating?venderId=' + venderId , {
+            const response = await fetch('/updating?venderId=' + venderId , {
                 method: 'PUT',
                 headers: {
                     'Content-type' : 'application/json',
