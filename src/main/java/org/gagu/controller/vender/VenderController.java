@@ -52,4 +52,11 @@ public class VenderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update : " + e.getMessage());
         }
     }
+
+    @DeleteMapping("/deleting/{venderId}")
+    public ResponseEntity<Integer> deleteList(@PathVariable int venderId) {
+        venderService.deleteList(venderId);
+
+        return new ResponseEntity<>(venderId, HttpStatus.OK);
+    }
 }
