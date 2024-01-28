@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.gagu.dto.business.BusinessPartnerDetailResponse;
 import org.gagu.dto.business.BusinessPartnerResponse;
+import org.gagu.dto.business.DeleteRequest;
 import org.gagu.dto.business.UpdateRequest;
+import org.gagu.entity.businessPartner.BusinessPartner;
 import org.gagu.service.businessPartner.PartnerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +38,12 @@ public class PartnerAPIController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Fail to update : " + e.getMessage());
         }
+    }
+
+    @DeleteMapping("/deleting/{partnerId}")
+    public ResponseEntity<Integer> deleteList(@PathVariable int partnerId) {
+        partnerService.deleteList(partnerId);
+
+        return new ResponseEntity<>(partnerId, HttpStatus.OK);
     }
 }
