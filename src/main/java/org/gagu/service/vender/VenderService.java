@@ -14,4 +14,6 @@ public interface VenderService {
     public Vender getVender(int venderId);
 
     void updateVender(int venderId, UpdateVender request);
+
+    void deleteList(int venderId);
 }

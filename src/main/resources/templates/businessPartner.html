@@ -333,5 +333,30 @@
             console.log("commit error : " + error);
         }
     };
+
+    const deletePost = async () => {
+    const partnerId = document.getElementById('modal-getPartnerId').value;
+
+    console.log("delete --------------------------------");
+
+    try {
+        const response = await fetch('/api/deleting/' + partnerId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if(!response.ok) {
+            throw new Error("Server is not responding");
+        } else {
+            console.log("Deleted list by partnerId");
+        }
+
+        location.href = "/partnerList";
+    } catch (error) {
+        console.log("Occurred Error : " + error);
+    }
+};
 </script>
 </html>

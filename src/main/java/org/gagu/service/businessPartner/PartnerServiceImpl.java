@@ -74,4 +74,9 @@ public class PartnerServiceImpl implements PartnerService {
     public void updatePartner(int partnerId, UpdateRequest request) {
         partnerRepository.updatePartner(partnerId, request);
     }
+
+    @Override
+    public void deleteList(int partnerId) {
+        partnerRepository.deleteById(partnerId);
+    }
 }

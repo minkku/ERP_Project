@@ -52,4 +52,9 @@ public class VenderServiceImpl implements VenderService{
     public void updateVender(int venderId, UpdateVender request) {
         venderRepository.updateVender(venderId, request);
     }
+
+    @Override
+    public void deleteList(int venderId) {
+        venderRepository.deleteById(venderId);
+    }
 }
