@@ -1,14 +1,15 @@
 package org.gagu.repository;
 
+import org.gagu.entity.Product;
 import org.gagu.entity.ProductInventory;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ProductInventoryRepository extends JpaRepository<org.gagu.entity.ProductInventory, Integer> {
-    @Query("SELECT pi " +
-             "FROM ProductInventory pi " +
-            "WHERE pi.productId = :productId")
-    public ProductInventory findProductInventoryByProductId(String productId);
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductInventoryRepository extends JpaRepository<ProductInventory, String> {
+
+    List<Product> findByProductProductId(String productId);
+
+    Optional<ProductInventory> findById(String productId);
 }

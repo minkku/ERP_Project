@@ -1,29 +1,33 @@
 package org.gagu.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Builder(toBuilder = true)
-@Table(name = "product_inventory")
 public class ProductInventory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_inventory_id")
-    private Integer productInventoryId;
+    private int productInventoryId;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id") //상품 코드
     private String productId;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name") //상품 이름
     private String productName;
 
     @Column(name = "product_inventory_quantity")
-    private Integer productInventoryQuantity;
-
+    private int productInventoryQuantity;
     @Column(name = "product_inventory_stock")
-    private Integer productInventoryStock;
+    private int productInventoryStock;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
+    private Product product;
 }
