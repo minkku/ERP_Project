@@ -1,6 +1,7 @@
 package org.gagu.entity.component;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -10,7 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @DynamicUpdate
 @Table(name = "component_order_item")
-public class componentItem {
+public class ComponentItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "component_order_item_id", updatable = false)
@@ -30,4 +31,19 @@ public class componentItem {
 
     @Column(name = "component_order_item_detail")
     private String detail;
+
+    @Builder
+    public ComponentItem(int componentOrderItemId,
+                         String componentId,
+                         int componentOrderId,
+                         int quantity,
+                         int price,
+                         String detail) {
+        this.componentOrderItemId = componentOrderItemId;
+        this.componentId = componentId;
+        this.componentOrderId = componentOrderId;
+        this.quantity = quantity;
+        this.price = price;
+        this.detail = detail;
+    }
 }

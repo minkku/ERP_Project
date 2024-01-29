@@ -29,8 +29,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${list}" style="cursor:pointer;">
-                        <td th:text="${item.partnerId}" class="partnerId" style="text-align: center"></td>
+                    <tr th:each="item, i : ${list}" style="cursor:pointer;">
+                        <td th:text="${i.index + 1}" class="" style="text-align: center"></td>
                         <td th:text="${item.bpName}" style="text-align: center"></td>
                         <td th:text="${item.address}"></td>
                         <td th:text="${item.companyNumber}" style="text-align: center"></td>
