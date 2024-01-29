@@ -1,11 +1,13 @@
 package org.gagu.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.gagu.dto.MemberCustomDTO;
 import org.gagu.dto.ProductOrderInfoDataDTO;
 import org.gagu.dto.ProductOrderListDTO;
 import org.gagu.service.ProductOrderCheckoutConfirmationService;
 import org.gagu.service.ProductOrderInfoService;
 import org.gagu.service.ProductOrderService;
+import org.gagu.service.ProductSalesHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -22,12 +26,14 @@ public class ProductOrderController {
     private final ProductOrderService productOrderService;
     private final ProductOrderInfoService productOrderInfoService;
     private final ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService;
+    private final ProductSalesHistoryService productSalesHistoryService;
 
     @Autowired
-    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService) {
+    public ProductOrderController(ProductOrderService productOrderService, ProductOrderInfoService productOrderDetailService, ProductOrderCheckoutConfirmationService productOrderCheckoutConfirmationService, ProductSalesHistoryService productSalesHistoryService) {
         this.productOrderService = productOrderService;
         this.productOrderInfoService = productOrderDetailService;
         this.productOrderCheckoutConfirmationService = productOrderCheckoutConfirmationService;
+        this.productSalesHistoryService = productSalesHistoryService;
     }
 
     @GetMapping("/ProductOrderStatus")
@@ -49,9 +55,13 @@ public class ProductOrderController {
     }
 
     @GetMapping("/ProductOrderInfoModal")
-    public ResponseEntity<ProductOrderInfoDataDTO> getModalData(@RequestParam("productOrderId") Integer productOrderId) {
-        ProductOrderInfoDataDTO modalData = productOrderService.ProductOrderInfoData(productOrderId);
-        return modalData != null ? ResponseEntity.ok(modalData) : ResponseEntity.notFound().build();
+    public ResponseEntity<Map<String, Object>> getModalData(@RequestParam("productOrderId") Integer productOrderId) {
+        ProductOrderInfoDataDTO productOrderInfoDataDTO = productOrderService.ProductOrderInfoData(productOrderId);
+        MemberCustomDTO memberCustomDTO = productSalesHistoryService.getMemberCustomDTO(productOrderId, productOrderInfoDataDTO.getProductOrder().getMemberId());
+        Map<String, Object> modalData = new HashMap<>();
+        modalData.put("response", productOrderInfoDataDTO);
+        modalData.put("member", memberCustomDTO);
+        return ResponseEntity.ok(modalData);
     }
 
     @PostMapping("/ProductOrderInfoModal")
