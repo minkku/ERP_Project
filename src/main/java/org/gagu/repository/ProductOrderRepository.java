@@ -31,4 +31,6 @@ public interface ProductOrderRepository {
     ProductOrder findByProductOrderId(Integer productOrderId);
 
     List<ProductOrderItemListDTO> findProductOrderItemsByProductOrderId(Integer productOrderId);
+
+    int findByProductOrderNumber(String productOrderNumber);
 }

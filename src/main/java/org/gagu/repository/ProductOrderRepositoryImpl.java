@@ -236,4 +236,22 @@ public class ProductOrderRepositoryImpl implements ProductOrderRepository {
 
         return result;
     }
+
+    @Override
+    public int findByProductOrderNumber(String productOrderNumber) {
+        int success;
+        QProductOrder qProductOrder = QProductOrder.productOrder;
+
+        ProductOrder result = jpaQueryFactory
+                .selectFrom(qProductOrder)
+                .where(qProductOrder.productOrderNumber.eq(productOrderNumber))
+                .fetchOne();
+
+        if (result == null) {
+            success = 0;
+        } else {
+            success = 1;
+        }
+        return success;
+    }
 }
