@@ -219,7 +219,7 @@
                 },
                 success: function(response) {
                     console.log('Success:', response);
-                    updateModalContent(response);
+                    updateModalContent(response.response, response.member);
                 },
                 error: function() {
                     console.error('Failed to fetch ProductOrderInfoDataDTO');
@@ -250,7 +250,7 @@
         }
         var totalPrice = 0;
 
-        function updateModalContent(data) {
+        function updateModalContent(data, member) {
             // 날짜 형식 변환 함수
             function formatDate(dateString) {
                 var date = new Date(dateString);
@@ -269,7 +269,7 @@
             $('#s-component-quotation-modal-input-supplier-delivery-date').val(deliveryDate);
 
             // 나머지 데이터 갱신
-            $('#s-component-quotation-modal-input-member').val(data.productOrder.memberId);
+            $('#s-component-quotation-modal-input-member').val(member.memberName);
             $('#s-component-quotation-modal-input-order-number').val(data.productOrder.productOrderNumber);
             $('#s-component-quotation-modal-input-supplier-company-number').val(data.businessVender.businessvenderCompanynumber);
             $('#s-component-quotation-modal-input-supplier-company-name').val(data.businessVender.businessvenderName);
