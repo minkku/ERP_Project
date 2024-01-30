@@ -24,6 +24,6 @@ public class Component {
     @Column(name = "component_material")
     private String componentMaterial;
 
-    @Column(name = "component_purchasecost")
+    @Column(name = "component_purchasecost", columnDefinition = "INTEGER")
     private Integer componentPurchasecost;
 }
