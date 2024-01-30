@@ -25,6 +25,6 @@ public class QuotationController {
 
         model.addAttribute("list", getQuotationList);
 
-        return "component-quotations";
+        return "components-quotations";
     }
 }
