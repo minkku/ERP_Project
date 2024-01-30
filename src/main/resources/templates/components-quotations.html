@@ -81,236 +81,50 @@
             <th scope="col" class="component-quotation-list-top">납기일</th>
             <th scope="col" class="component-quotation-list-top">총액</th>
             <th scope="col" class="component-quotation-list-top">비고</th>
-            <th scope="col" class="component-quotation-list-top">파일 첨부</th>
+            <th scope="col" class="component-quotation-list-top"></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>20240718MD149-1</td>
-            <td>이젠목공자재</td>
-            <td>MD149 메인 선반 합판 구매 건</td>
-            <td>2024/07/18</td>
-            <td>2024/10/18</td>
-            <td>40,000,000</td>
-            <td>부족분 내년 추가 구매 예정</td>
+          <tr th:each="item, i : ${list}">
+            <td th:text="${i.index + 1}"></td>
+            <td th:text="${item.vendorNmae}"></td>
+            <td th:text="${item.quotation}"></td>
+            <td th:text="${item.quotationDate}"></td>
+            <td th:text="${item.deliveryDate}"></td>
+            <td th:text="${item.priceAmount}"></td>
+            <td th:text="${item.note}"></td>
             <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-file-earmark-text"></i></a>
-                <a href="#"><i class="bi bi-file-earmark-excel"></i></a>
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-file-earmark-text"></i></a>
-                <a href="#"><i class="bi bi-file-earmark-excel"></i></a>
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-file-earmark-text"></i></a>
-                <a href="#"><i class="bi bi-file-earmark-excel"></i></a>
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-file-earmark-text"></i></a>
-                <a href="#"><i class="bi bi-file-earmark-excel"></i></a>
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="component-quotation-list-table-file">
-                <a href="#"><i class="bi bi-file-earmark-text"></i></a>
-                <a href="#"><i class="bi bi-file-earmark-excel"></i></a>
-                <a href="#"><i class="bi bi-arrow-bar-up"></i></a>
-              </div>
+              <input type="hidden" name="quotationId" value="{item.quotationId}">
+              <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.quotationId}">수정</a>
             </td>
           </tr>
           </tbody>
         </table>
         <!-- End Table with stripped rows -->
+        <nav id="pagination-container" aria-label="Page navigation example" style="padding:20px;">
+          <ul class="pagination" style="justify-content: end;">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li  class="page-item" th:each="pageNumber:${#numbers.sequence(1, list.totalPages)}">
+              <a class="page-link pageA"
+                 th:classappend="${pageNumber == (list.number + 1) ? 'btn-warning' : ''}"
+                 th:href="@{'/venderList?page=' + ${pageNumber - 1} + '&size=10'}"
+                 th:text="${pageNumber}">
+              </a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div class="component-quotation-list-remove-btn">
-        <a href="#" class="gradient-color-btn blue">수정</a>
         <a href="#" class="gradient-color-btn blue">삭제</a>
       </div>
     </div>
