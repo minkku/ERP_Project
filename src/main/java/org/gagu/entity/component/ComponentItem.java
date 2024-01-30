@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.gagu.entity.Component;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
@@ -17,8 +18,9 @@ public class ComponentItem {
     @Column(name = "component_order_item_id", updatable = false)
     private int componentOrderItemId;
 
-    @Column(name = "component_id")
-    private String componentId;
+    @OneToMany
+    @JoinColumn(name = "component_id")
+    private Component componentId;
 
     @Column(name = "component_order_id")
     private int componentOrderId;
@@ -34,7 +36,7 @@ public class ComponentItem {
 
     @Builder
     public ComponentItem(int componentOrderItemId,
-                         String componentId,
+                         Component componentId,
                          int componentOrderId,
                          int quantity,
                          int price,
