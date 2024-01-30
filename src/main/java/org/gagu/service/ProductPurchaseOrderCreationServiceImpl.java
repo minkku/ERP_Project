@@ -29,7 +29,6 @@ public class ProductPurchaseOrderCreationServiceImpl implements ProductPurchaseO
             }
 
             if (productOrderRepository.findByProductOrderNumber(orderNum.toString()) < 1) {
-                System.out.println(orderNum);
                 return orderNum.toString();
             }
         }

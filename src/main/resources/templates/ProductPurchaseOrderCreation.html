@@ -5,7 +5,7 @@
 
 <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
 <main id="main" class="main" style="width: 100%;">
-    <form action="/ProductPurchaseOrderCreation" method="post">
+    <form th:action="@{/ProductPurchaseOrderCreation}" method="post" th:object="${productOrderCustomDTO}" id="purchaseOrderForm">
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
@@ -22,13 +22,13 @@
                                         <ul>
                                             <li>
                                                 <label for="component-quotation-modal-input-order-number">발주번호</label>
-                                                <input type="text" id="component-quotation-modal-input-order-number" th:value="${ProductOrderNumber}" readonly>
+                                                <input type="text" id="component-quotation-modal-input-order-number" name="productOrderNumber" th:value="${productOrderNumber}" readonly>
                                                 <label for="component-quotation-modal-input-member">담당자</label>
                                                 <input type="text" id="component-quotation-modal-input-member" name="memberName" th:value="김미영" readonly>
                                             </li>
                                             <li>
                                                 <label for="component-quotation-modal-input-supplier-delivery-date">납기일</label>
-                                                <input type="date" id="component-quotation-modal-input-supplier-delivery-date" name="productOrderDeliverydate">
+                                                <input type="date" id="component-quotation-modal-input-supplier-delivery-date" name="productOrderDeliveryDate">
                                             </li>
                                         </ul>
                                     </div>
@@ -72,7 +72,7 @@
                                             <col style="width: 10%">
                                             <col style="width: 6%">
                                             <col style="width: 14%">
-                                            <col style="width: 6%">
+                                            <col style="width: 8%">
                                             <col style="width: 14%">
                                             <col style="width: 14%">
                                             <col style="width: 18%">
@@ -97,21 +97,7 @@
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button type="button" class="btn btn-primary add-row-btn">+</button>
-                                                <button type="button" class="btn btn-danger remove-row-btn">-</button>
-                                            </td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
+                                            <td><input type="text" th:value="KOR"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
@@ -125,21 +111,7 @@
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button type="button" class="btn btn-primary add-row-btn">+</button>
-                                                <button type="button" class="btn btn-danger remove-row-btn">-</button>
-                                            </td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
-                                            <td><input type="text"></td>
+                                            <td><input type="text" th:value="KOR"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
@@ -153,7 +125,35 @@
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
+                                            <td><input type="text" th:value="KOR"></td>
                                             <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-primary add-row-btn">+</button>
+                                                <button type="button" class="btn btn-danger remove-row-btn">-</button>
+                                            </td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text" th:value="KOR"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-primary add-row-btn">+</button>
+                                                <button type="button" class="btn btn-danger remove-row-btn">-</button>
+                                            </td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text"></td>
+                                            <td><input type="text" th:value="KOR"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
                                             <td><input type="text"></td>
@@ -179,8 +179,7 @@
                                         </div>
                                     </div>
                                     <div class="component-quotation-modal-submit-button">
-                                        <input type="hidden" id="modal-productOrderId" name="modal-productOrderId">
-                                        <a href="#" class="gradient-color-btn blue" style="width: 100px;">발주등록</a>
+                                        <button type="submit" onclick="submitForm()" class="gradient-color-btn blue" style="width: 100px;">발주등록</button>
                                     </div>
                                 </div>
 
@@ -198,6 +197,8 @@
 
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script th:inline="javascript">
+    var productOrderNumber = document.getElementById('component-quotation-modal-input-order-number').value;
+
     $(document).on('click', '.add-row-btn', function() {
         var currentRow = $(this).closest('tr');
         var newRow = currentRow.clone();
@@ -207,6 +208,55 @@
 
     $(document).on('click', '.remove-row-btn', function() {
         $(this).closest('tr').remove();
+    });
+
+    function collectData() {
+        var data = {};
+
+        data.productOrderNumber = productOrderNumber;
+
+        data.productOrderItemList = [];
+
+        $('table.component-quotation-modal-component-quotation-list-table tbody tr:not(:first)').each(function() {
+            var row = {};
+            row.productId = $(this).find('td:eq(0) input').val();
+            row.productOrderItemQuantity = $(this).find('td:eq(1) input').val();
+            row.productOrderItemPrice = $(this).find('td:eq(2) input').val();
+            row.productOrderItemTotalprice = $(this).find('td:eq(3) input').val();
+            row.productOrderItemTotalpriceaddedtax = $(this).find('td:eq(4) input').val();
+            row.productOrderItemNote = $(this).find('td:eq(8) input').val(); // 비고 필드 예시, 필요에 따라 추가
+
+            data.productOrderItemList.push(row);
+        });
+
+        return JSON.stringify(data);
+    }
+
+    function submitForm() {
+        document.getElementById("purchaseOrderForm").submit();
+        var productOrderItemList = collectData();
+
+        $.ajax({
+            type: "POST",
+            url: "/ProductPurchaseOrderItemCreation",
+            contentType: "application/json",
+            data: productOrderItemList,
+            success: function (result) {
+                console.log(result);
+                // 성공적으로 서버에 전송된 후 실행할 코드
+            },
+            error: function (e) {
+                console.log("Error:", e);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        // form submit 방지 및 submitForm 함수 실행
+        $("#purchaseOrderForm").submit(function(event) {
+            event.preventDefault();
+            submitForm();
+        });
     });
 </script>
 </body>
