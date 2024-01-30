@@ -18,7 +18,7 @@ public class ComponentItem {
     @Column(name = "component_order_item_id", updatable = false)
     private int componentOrderItemId;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "component_id")
     private Component componentId;
 
