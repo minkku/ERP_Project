@@ -95,16 +95,16 @@
           <tbody>
           <tr th:each="item, i : ${list}">
             <td scope="row" th:text="${i.index + 1}" class=""></td>
+            <td th:text="${item.componentId.componentId}"></td>
             <td th:text="${item.vendorName}"></td>
             <td th:text="${item.orderForm}"></td>
-            <td th:text="${item.orderDate}"></td>
             <td th:text="${item.deliveryDate}"></td>
             <td th:text="${item.receiptDate}"></td>
             <td th:text="${item.receiptDate}"></td>
             <td th:text="${item.amount}"></td>
             <td>
-              <input type="hidden" name="componentOrderItemId" value="{item.componentOrderItemId}">
-              <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.componentOrderItemId}">수정</a>
+              <input type="hidden" name="componentOrderItemId" value="{item.componentOrderId}">
+              <a href="#" class="gradient-color-btn blue js-show-partner-quotation-modal" th:attr="data-id=${item.componentOrderId}">수정</a>
             </td>
           </tr>
           </tbody>
