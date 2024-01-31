@@ -5,5 +5,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface NoticeService {
-    Page<Notice> findAll(Pageable pageable);
+    public Page<Notice> findAll(Pageable pageable);
 }

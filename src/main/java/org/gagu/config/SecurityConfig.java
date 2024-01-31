@@ -42,8 +42,7 @@ public class SecurityConfig {
 //                )
 
                 .formLogin(formLogin -> formLogin
-                        .defaultSuccessUrl("/main", true)
-                        .successForwardUrl("/main")
+                        .defaultSuccessUrl("/", true)
                 )
 
                 .logout(Customizer.withDefaults())
