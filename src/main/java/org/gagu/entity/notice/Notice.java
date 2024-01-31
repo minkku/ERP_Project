@@ -30,44 +30,24 @@ public class Notice {
     @Column(name = "notice_content")
     private String content;
 
-    @Column(name = "notice_hided")
-    private int hided;
-
-    @Column(name = "notice_deleted")
-    private int deleted;
-
     @Column(name = "notice_regdate")
     private Timestamp regDate;
 
-    @Column(name = "notice_hidedate")
-    private Timestamp hideDate;
-
     @Column(name = "notice_updatedate")
     private Timestamp updateDate;
-
-    @Column(name = "notice_deletedate")
-    private  Timestamp deleteDate;
 
     @Builder
     public Notice(int noticeId,
                   Member memberId,
                   String title,
                   String content,
-                  int hided,
-                  int deleted,
                   Timestamp regDate,
-                  Timestamp hideDate,
-                  Timestamp updateDate,
-                  Timestamp deleteDate) {
+                  Timestamp updateDate) {
         this.noticeId = noticeId;
         this.memberId = memberId;
         this.title = title;
         this.content = content;
-        this.hided = hided;
-        this.deleted = deleted;
         this.regDate = regDate;
-        this.hideDate = hideDate;
         this.updateDate = updateDate;
-        this.deleteDate = deleteDate;
     }
 }
