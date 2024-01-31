@@ -55,7 +55,10 @@ public class ProductPurchaseOrderCreationController {
             JsonNode productOrderItemListNode = jsonNode.get("productOrderItemList");
             List<ProductOrderItem> productOrderItemList = objectMapper.convertValue(productOrderItemListNode, new TypeReference<List<ProductOrderItem>>() {});
 
-
+            for(ProductOrderItem poi : productOrderItemList) {
+                log.info(poi);
+            }
+            log.info(productOrderNumber);
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
             log.error("Error processing product order items", e);
